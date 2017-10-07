@@ -51,12 +51,8 @@ class AdminDealController extends AdminBaseController
   	if($type != "xlsx" && $type != 'xls'){
   		$this->error('文件类型不符合');
   	}
-  	// if(file_exists("./upload/exceldeal/".date('Ymd',time()).".xlsx")){
-  	// 	$this->error('今天已经导入过了');
-  	// }
-    if(move_uploaded_file($_FILES["file"]["tmp_name"],"./upload/exceldeal/".date('Ymd',time()).".xlsx")){
-    	$newfile = "./upload/exceldeal/".date('Ymd',time()).".xlsx";
-    }
+  	
+    $newfile = $_FILES["file"]["tmp_name"];
     if($newfile != ""){
       $arr = cmf_excel2arr($newfile);
    		$values = '';
