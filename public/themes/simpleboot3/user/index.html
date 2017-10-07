@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>邀您免费使用拉卡拉手机收款宝</title>
+<meta name="keywords" content="" />
+<meta name="description" content="">
+<include file="public@head"/>
+<style>
+.control-label{
+	font-weight: bold;
+	float: left;
+	width: 70px;
+}
+.headimg img{ display: block; border-radius: 20px; margin:20px auto; }
+.sharecon h3{text-align: center;}
+</style>
+</head>
+<body class="body-white" id="top">
+<include file="public@nav" />
+
+		<div class="container tc-main">
+                <div class="row">
+                <div class="tabs col-md-offset-2 col-md-8">
+                               <div class="tab-content">
+                                   <div class="tab-pane active" id="one">
+                                   		<div class="col-md-3 headimg ">
+						                	<a href="javascript:;">
+												<if condition="empty($avatar)">
+													<img src="__TMPL__/public/assets/images/default_tupian4.png" class="headicon" width="128" />
+													<else />
+													<img src="__ROOT__/upload/{$avatar}" class="headicon" width="128"/>
+												</if>
+								          	</a>
+							          	</div>
+							          	<div class="col-md-9 sharecon">
+											<div class="form-group">
+												<h3 style="font-weight: bold;">邀请函</h3>
+											</div>
+											<div class="form-group" style="font-size:14px;">
+												<p>　　我是 {$user_nickname}, 我在拉布拉卡使用收款宝、这里还有详细的问题解答，更多推荐奖励等着你！</p>
+												<p>1、支付终端统一零售价199元/台。
+												<p>2、注册兼职业务员直接销售奖励为<b style="color:gold; font-size: 1.5em;">100</b>元/台(不含本人购买使用)</p>
+												<p>3、注册兼职业务员每吸纳一名下级（第二级）注册业务员 得<b style="color:gold; font-size: 1.5em;">50</b>元/人团队建设奖励，并享受第二级业务员所销售终端业绩<b style="color:gold; font-size: 1.5em;">50</b>元/台主管级管理奖励，二级业务员自购使用机具认定为一级业务员所销售。</p>
+												<p>4、下级业务员每吸纳一名下级（第三级）业务员第一级业务员得<b style="color:gold; font-size: 1.5em;">20</b>元/人团队建设奖励，并享受第三级业务员所销售终端业绩<b style="color:gold; font-size: 1.5em;">20</b>元/台经理级管理奖励。</p>
+												<p>5、三级内团队建设达100人以上130人以内，且团队总销量（有效激活）达200台以上，则晋升销售总监，不再享有以上所述奖励，转为享受自建三级销售团队内所销售的所有终端每月总交易量0.04‰的分润分红。</p>
+												<p>6、在本销售系统中，人人都是一级，以上奖励规则说明皆以每个注册用户为第一人称。</p>
+												<p style="color:red; font-size:16px;">感兴趣？点此查看新手入门 —— <a href="/notice/44">新手入门</a></p>
+												<p style="color:red; font-size:16px;">还在等什么？赶快点此加入我们 —— <a href="{:url('register/index',array('id'=>$mobile))}">加入我们</a></p>
+											
+												
+											</div>
+					               		</div>
+                                   </div>
+                               </div>							
+                 </div>
+                </div>
+			<include file="public@footer" />
+		</div>
+<!-- /container -->
+<include file="public@scripts" />
+</body>
+</html>

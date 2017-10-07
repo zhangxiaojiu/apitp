@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_name} - 财富中心</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+<style>
+.control-label {
+	font-weight: bold;
+	float: left;
+	width: 70px;
+}
+</style>
+</head>
+<body class="body-white" id="top">
+<include file="public@nav" />
+	<div class="container tc-main">
+		<div class="row">
+			<div class="col-md-3">
+				<include file="public@usernav" />
+			</div>
+			<div class="col-md-9">
+				<div class="tabs">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-rmb"></i> 财富中心</a></li>
+						<li ><a href="{:url('user/coin/log')}"><i class="fa fa-list-ol"></i> 资金记录</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="one">
+							<br>
+							
+							<div class="col-md-9">
+								<div class="form-group">
+									<label class="control-label" for="input-user_nicename">当前余额</label>
+									<div style="color:gold; font-weight: bold; font-size: 18px;">￥{$coin|default='0'}</div>
+								</div>
+								<form style="border:1px dashed gold; padding:20px;" class="js-ajax-form" action="{:url('user/coin/dotopup')}" method="post">
+									<h3 style="text-align:center; color:gold;">提现</h3>
+									<div style="color:red;">*当前余额满{$txcoin}即可提现,只能按{$txcoin}的整数倍提现</div>
+									<div class="form-group">
+										<input class="form-control" type="text" name="coin" placeholder="提现金额">
+									</div>
+									<div class="form-group">
+										<select class="form-control" name="type">
+											<option value="微信">微信</option>
+											<option value="支付宝">支付宝</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="text" name="account" placeholder="提现账号">
+									</div>
+									<div class="form-group">
+										<button class="form-control btn btn-warning js-ajax-submit" type="submit">提现</button>
+									</div>
+								</form>
+
+								<form style="border:1px dashed green; padding:20px; margin-top:20px;" class="js-ajax-form" action="{:url('user/coin/dotransfer')}" method="post">
+									<h3 style="text-align:center; color:green;">转账</h3>
+									<div style="color:red;">*只能按{$txcoin}的整数倍转账</div>
+									<div class="form-group">
+										<input class="form-control" type="text" name="coin" placeholder="转账金额">
+									</div>
+									
+									<div class="form-group">
+										<input class="form-control" type="text" name="account" placeholder="转账账号(手机号)">
+									</div>
+									<div class="form-group">
+										<button class="form-control btn btn-success js-ajax-submit" type="submit">转账</button>
+									</div>
+								</form>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<include file="public@footer" />
+	</div>
+<!-- /container -->
+<include file="public@scripts" />
+</body>
+</html>

@@ -1,0 +1,45 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('user/adminIndex/index')}">用户列表</a></li>
+        <li class="active"><a>编辑用户{$info.mobile}</a></li>
+    </ul>
+    <form method="post" class="form-horizontal  margin-top-20" action="{:url('adminIndex/editPost')}">
+        <div class="form-group">
+            <label for="input-user_name" class="col-sm-2 control-label">登录名<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user_name" name="user_login" value="{$info.user_login}" placeholder="高级用户填入机构编码">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-user_pwd" class="col-sm-2 control-label">密码<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-user_pwd" name="user_pass" placeholder="不修改密码不用填写">
+            </div>
+        </div>
+
+       <div class="form-group">
+            <label for="input-user_pid" class="col-sm-2 control-label">用户级别</label>
+            <div class="col-md-6 col-sm-10">
+                <select name="user_type" id="input-user_pid" <eq name='info.user_type' value='1'> disabled="disabled" </eq> >
+                    <option value="1" <eq name='info.user_type' value='1'> selected </eq> disabled="disabled" >管理员</option>
+                    <option value="2" <eq name='info.user_type' value='2'> selected </eq> >普通会员</option>
+                    <option value="3" <eq name='info.user_type' value='3'> selected </eq> >高级会员</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="hidden" name="id" value="{$info.id}"/>
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                <a class="btn btn-default" href="{:url('user/adminIndex/index')}">{:lang('BACK')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

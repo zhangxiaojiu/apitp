@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>{$site_info.site_name|default=''} {$site_info.site_seo_title|default=''}</title>
+        <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}">
+        <meta name="description" content="{$site_info.site_seo_description|default=''}">
+        <meta name="baidu-site-verification" content="O8P6skrBp3" />
+
+        <include file="public@head"/>
+        <!-- Vendor Styles -->
+
+        <!-- Theme Styles -->
+        <link href="__TMPL__/public/assets/lblk/files/style.css" rel="stylesheet" type="text/css">
+        <link href="__TMPL__/public/assets/lblk/files/global.css" rel="stylesheet" type="text/css">
+
+        <style>
+            body{padding-top:0px;}
+        </style>
+    </head>
+    <!-- End Head -->
+    <!-- Body -->
+    <body class=""> 
+        <!--========== HEADER ==========-->
+        <include file="public@nav"/>
+        <!--========== END HEADER ==========-->
+
+        <!--========== PROMO BLOCK ==========-->
+        <section class="s-video-v2__bg"  data-vidbg-options="loop: true, muted: true, overlay: false" style="z-index: 1;"><div class="vidbg-container" style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; background-size: cover; background-repeat: no-repeat; background-position: 50% 50%; background-image: url(__TMPL__/public/assets/lblk/images/nav.jpg);"></div>
+            <div class="container g-position--overlay g-text-center--xs">
+                <div class="g-margin-t-100--xs g-margin-b-100--xs g-margin-b-250--md main_content">
+                    <h1 class="g-font-size-36--xs g-font-size-50--sm g-font-size-60--md g-color--white">拉卡拉手机收款宝</h1>
+                    <div style="margin-top:5%;">
+                    
+                     <span class="g-text-center--xs">
+                         <a href="{:url('user/profile/center')}" class="text-uppercase s-btn s-btn--md s-btn--primary-bg g-radius--50 g-padding-x-80--xs try_flinkboard" data-name="">云销售系统</a>
+                    
+                    </span>
+                    
+                    <span class="g-display-block--xs g-display-inline-block--sm g-padding-x-5--xs g-margin-b-10--xs g-margin-b-0--sm">
+                        <!--<button type="button" class="text-uppercase s-btn s-btn-icon--md s-btn--white-brd g-radius--50 g-padding-x-80--xs" data-toggle="modal" data-target="#myModal">Talk to expert</button>-->
+                         <a href="" class="text-uppercase s-btn s-btn--white-brd s-btn--md  g-radius--50 g-padding-x-80--xs talkto_expert trackData" data-name="talktoExpert" data-toggle="modal" data-target="#myModal">联系我们</a>
+                    </span>
+                     </div>
+               
+                   <!-- <div style="margin-top:5%;">
+                       <a href="https://weidian.com/item.html?itemID=2135521686" target="_blank" style="color:#fff;padding-bottom:3px; border-bottom:1px solid #fff" target="_blank">点此免费领取</a>
+                   </div> -->
+              
+                </div>
+
+            </div>
+        </section>
+
+        <!--========== talk to expert model ==========-->
+        <div id="myModal" class="modal fade" role="dialog" style="display: none;">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content" style="margin-top: 60%;">
+        <form method="post" action="{:url('portal/index/doContacts')}" class="center-block s-promo-block-v2__form g-width-100-percent--xs g-bg-color--dark-light g-padding-x-50--xs g-radius--4">
+            <div class="g-text-center--xs g-margin-b-40--xs" style="padding-top: 10px;">
+                <h2 class="g-font-size-30--xs g-color--white">
+                    
+                </h2>
+            </div>
+            <div class="g-margin-b-40--xs">
+                <input type="text" class="form-control s-form-v3__input" name="name" placeholder="* 姓名" required="required">
+            </div>
+           
+            <div class="g-margin-b-40--xs">
+                <input type="text" class="form-control s-form-v3__input" name="tel" placeholder="* 电话" required="required">
+            </div>
+            <!-- <div class="g-margin-b-40--xs">
+                <input type="number" class="form-control s-form-v3__input" name="number" placeholder="* 数量">
+            </div>-->
+            <!-- <input type="hidden" name="your-method" value="Talk to an Expert"> -->
+            <div class="g-margin-b-80--xs">
+                <textarea class="form-control s-form-v3__input" rows="5" name="description" placeholder="* 留言,说出你的需求"></textarea>
+            </div> 
+            <div class="g-text-center--xs">
+                <input type="hidden" name="type" value="con">
+                <button type="submit" class="text-uppercase btn-block s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-50--xs g-margin-b-20--xs">提交</button>
+            </div>
+        </form>
+    </div>
+
+  </div>
+</div>
+        <!--========== END PROMO BLOCK ==========-->
+
+        <!--========== PAGE CONTENT ==========-->
+<div id="js__scroll-to-section" class="container g-padding-y-80--xs g-padding-y-125--xsm">
+            <div class="row" style="text-align: center;margin-top:30px;">
+                <h2>让收款更便捷</h2>
+                <h6>1000万小微商户的选择<br/>他们都在用 并推荐给更多的人</h6>
+                <div class="col-lg-4">
+                  <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle1.png" alt="Generic placeholder image" width="140" height="140">
+                  <h5>插卡</h5>
+                  <p>移动收款 有卡即付
+                  <br/>支持带有银联标识的借记卡，信用卡，芯片卡
+                  <br/>收款账户自主设定，直接进入个人储蓄账户
+                  </p>
+                  <p><a class="btn btn-default" href="#js__scroll-to-shuaka" role="button">了解更多 »</a></p>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                  <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle2.png" alt="Generic placeholder image" width="140" height="140">
+                  <h5>刷卡</h5>
+                  <p>移动收款 有卡即付
+                  <br/>支持带有银联标识的借记卡，信用卡，磁条卡
+                  <br/>收款账户自主设定，直接进入个人储蓄账户
+                  </p>
+                  <p><a class="btn btn-default" href="#js__scroll-to-shuaka" role="button">了解更多 »</a></p>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                  <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle3.png" alt="Generic placeholder image" width="140" height="140">
+                  <h5>扫码</h5>
+                  <p>扫码收款 覆盖主流平台
+                  <br/>无需辅助设备 APP内扫码收款
+                  <br/>支持微信等主流支付平台
+                  </p>
+                  <p><a class="btn btn-default" href="#js__scroll-to-saoma" role="button">了解更多 »</a></p>
+                </div><!-- /.col-lg-4 -->
+
+              </div>
+</div>
+<div class="site-wrapper">
+    <img src="__TMPL__/public/assets/lblk/images/bottom1.png" class="img-responsive">
+</div>
+<div class="container g-padding-y-80--xs g-padding-y-125--xsm">
+            <div class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+                <div class="col-sm-5 g-hor-centered-row__col">
+                    <ul>
+                        <li>自助设定 收款账户</li>
+                        <li>可刷信用卡</li>
+                        <li>随身携带 即开即用</li>
+                        <li>大额收款</li>
+                        <li>费率优</li>
+                        <li>单日收款 当日提款</li>
+                        <li>单日收款 当日提款</li>
+                        <li>免押金/免年费/免服务费</li>
+                        <li>蓝牙连接</li>
+                    </ul>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5 g-hor-centered-row__col">
+                    <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row0.png" alt="Flinkhub Image">
+                </div>
+            </div>
+
+            <div id="js__scroll-to-shuaka" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+                <div class="col-sm-5 col-sm-push-7 g-hor-centered-row__col">
+                    <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">刷卡、插卡</h2>
+                      <p>移动收款 有卡即付
+                      <br/>支持带有银联标识的借记卡，信用卡，磁条卡，芯片卡
+                      <br/>收款账户自主设定，直接进入个人储蓄账户
+                      </p>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5 col-sm-pull-7 g-hor-centered-row__col g-text-left--xs g-text-right--md">
+                    <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row1.png" alt="Flinkhub Image">
+                </div>
+            </div>
+
+             <div id="js__scroll-to-saoma" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+                <div class="col-sm-5 g-hor-centered-row__col">
+                    <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">扫码</h2>
+                     <p>扫码收款 覆盖主流平台
+                      <br/>无需辅助设备 APP内扫码收款
+                      <br/>支持微信等主流支付平台
+                      </p>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5 g-hor-centered-row__col">
+                    <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row2.png" alt="Flinkhub Image">
+                </div>
+            </div>
+
+            <div id="shuaka" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+                <div class="col-sm-5 col-sm-push-7 g-hor-centered-row__col">
+                    <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">标准D+1自然日到账<br/>交易明细一目了然</h2>
+                      <p>周末节假日正常结算，365天每天到账
+                      <br/>交易明细实时查询，随时到账，资金安全稳定
+                  
+                      </p>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5 col-sm-pull-7 g-hor-centered-row__col g-text-left--xs g-text-right--md">
+                    <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row3.png" alt="Flinkhub Image">
+                </div>
+            </div>
+        </div>
+<div class="site-wrapper">
+    <img src="__TMPL__/public/assets/lblk/images/d+0.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/dangtian.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/feilv.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/hexin.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/2xiaoshi.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/d+0text.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/feilvedutext.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/yijiankaitong.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/chanpincanshu.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/zfpz.jpg" class="img-responsive">
+</div>
+
+<!-- 公告弹窗-->
+<notempty name="notice">
+<style type="text/css">
+
+  .notice-back{position:fixed; width:100%; height:100%; background:#000; opacity: 0.5; top:0;left:0; z-index:9990;}
+  .notice{position:fixed; width:100%; height:100%; background:#fff; opacity:0.8; margin:auto; top:0; left:0; right:0; bottom:0; z-index: 9991; width:80%; height:400px; border-radius: 10px; overflow: scroll;}
+  .notice-tit{position:fixed; width:80%;z-index:9992;}
+  .notice-button{font-size:2em; font-weight: bold; transform: rotate(45deg);  text-align: center; float:right; cursor:pointer; z-index:9993; line-height: 15px;}
+  .notice-con{position:relative; padding:20px;}
+</style>
+
+<div class="notice-back"></div>
+<div class="notice">
+    <div class="notice-tit"><span class="notice-button">+</span></div>
+    <div class="notice-con">{$notice}</div>
+</div>
+
+
+</notempty>
+
+
+
+<include file="public@footer"/>
+
+
+      
+
+       
+        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
+        <!-- Vendor -->
+        <include file="public@scripts"/>
+
+
+      
+
+        <!-- General Components and Settings -->
+        <script type="text/javascript" src="__TMPL__/public/assets/lblk/files/global.min.js"></script>
+
+       
+        <!--========== END JAVASCRIPTS ==========-->
+
+<script type="text/javascript">
+  $(function(){
+    $(".notice-button").click(function(){
+      $('.notice-back').hide();
+      $('.notice').hide();
+    });
+  });
+</script>
+
+    
+    <!-- End Body -->
+
+</body></html>

@@ -1,0 +1,23 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('user/adminPos/index')}">POS列表</a></li>
+        <li class="active"><a href="{:url('user/adminPos/add')}">添加机具</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('user/adminPos/doAdd')}">
+        起始机具号：
+        <input class="form-control" type="text" name="begin_code" style="width: 200px;" value="{:input('request.begin_code')}"
+               placeholder="请输入起始机具号" required="required">
+        结束机具号：
+        <input class="form-control" type="text" name="end_code" style="width: 200px;" value="{:input('request.end_code')}"
+               placeholder="不填写默认只添加一个">
+        <input type="submit" class="btn btn-primary" value="添加"/>
+        <a class="btn btn-danger" href="{:url('user/adminPos/add')}">取消</a>
+    </form>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

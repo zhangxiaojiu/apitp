@@ -1,0 +1,28 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li ><a href="{:url('user/adminDeal/add')}">添加记录</a></li>
+        <li class="active"><a href="{:url('user/adminDeal/import')}">导入记录</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('user/adminDeal/doImport')}" novalidate="novalidate" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="input-file" class="col-sm-2 control-label"><span class="form-required">*</span>上传excel数据</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="file" class="form-control" id="input-file" name="file">
+            </div>
+        </div>
+       
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submi">添加</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

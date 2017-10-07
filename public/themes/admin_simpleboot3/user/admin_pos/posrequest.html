@@ -1,0 +1,57 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('user/adminPos/posrequest')}">申请列表</a></li>
+    </ul>
+   
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>机具号</th>
+                <th>用户ID</th>
+                <th>申请时间</th>
+                <th>状态</th>
+                <th>类型</th>
+                
+                <th>{:lang('ACTIONS')}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <php>
+                $user_statuses=array("0"=>"未审核","1"=>"审核通过");
+                $user_type=array("active"=>"激活","bind"=>"绑定");
+            </php>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.code}
+                    </td>
+                    <td>
+                        {$vo.uid}
+                    </td>
+                    <td>{:date('Y-m-d H:i:s',$vo['time'])}</td>
+                    <td>{$user_statuses[$vo['status']]}</td>
+                    <td>{$user_type[$vo['type']]}</td>
+    
+                    <td>
+                
+                        <a href="{:url('adminPos/doDelRequest',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="确定要删除么？">删除</a>
+
+                        <eq name="vo.status" value="0">
+                         | 
+                        <a href="{:url('adminPos/doPassRequest',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="确定要审核通过么？">审核通过</a>
+                        </eq>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <div class="pagination">{$page}</div>
+    
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

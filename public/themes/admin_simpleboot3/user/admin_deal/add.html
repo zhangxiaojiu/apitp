@@ -1,0 +1,96 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('user/adminDeal/add')}">添加记录</a></li>
+        <li><a href="{:url('user/adminDeal/import')}">导入记录</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('user/adminDeal/doAdd')}" novalidate="novalidate">
+        <div class="form-group">
+            <label for="input-lsid" class="col-sm-2 control-label"><span class="form-required">*</span>流水号</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-lsid" name="lsid">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-qyjg" class="col-sm-2 control-label"><span class="form-required">*</span>签约机构</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-qyjg" name="qyjg">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-shid" class="col-sm-2 control-label"><span class="form-required">*</span>商户号</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-shid" name="shid">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-shname" class="col-sm-2 control-label"><span class="form-required">*</span>商户注册名</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-shname" name="shname">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-zdid" class="col-sm-2 control-label"><span class="form-required">*</span>终端号</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-zdid" name="zdid">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-dealtime" class="col-sm-2 control-label"><span class="form-required">*</span>交易日期</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-dealtime" name="dealtime">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-dealcoin" class="col-sm-2 control-label"><span class="form-required">*</span>交易金额</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-dealcoin" name="dealcoin">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-dealfee" class="col-sm-2 control-label"><span class="form-required">*</span>商户手续费</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-dealfee" name="dealfee">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-cardtype" class="col-sm-2 control-label"><span class="form-required">*</span>借贷记标记</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" id="input-cardtype" name="cardtype">
+                 <option value="贷记卡">贷记卡</option>
+                 <option value="借记卡">借记卡</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-paytime" class="col-sm-2 control-label"><span class="form-required">*</span>支付时间</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-paytime" name="paytime">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-postype" class="col-sm-2 control-label"><span class="form-required">*</span>卡应用类型</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-postype" name="postype">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-code" class="col-sm-2 control-label"><span class="form-required">*</span>PSAM卡号</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-code" name="code">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">添加</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

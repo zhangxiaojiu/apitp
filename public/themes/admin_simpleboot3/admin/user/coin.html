@@ -1,0 +1,52 @@
+<include file="public@header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:url('user/userInfo')}">当前余额</a></li>
+		</ul>
+		<form class="form-horizontal js-ajax-form margin-top-20" role="form" method="post" action="{:url('User/coinPost')}">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">机构号：</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" value="{$user_login}" readonly="readonly">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="input-user_url" class="col-sm-2 control-label">当前余额</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" value="{$coin}" placeholder="0元" readonly="readonly">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="input-coin" class="col-sm-2 control-label">提现金额</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" id="input-coin" name="coin" value="{$coin}" placeholder="请输入提现金额">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="input-type" class="col-sm-2 control-label">提现方式</label>
+				<div class="col-md-6 col-sm-10">
+					<select class="form-control" name="type" id="input-type">
+						<option value="微信" >微信</option>
+						<option value="支付宝" >支付宝</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="input-coin" class="col-sm-2 control-label">提现账号</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" id="input-account" name="account" value="{$mobile}" placeholder="请输入提现账号">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary js-ajax-submit">提交</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

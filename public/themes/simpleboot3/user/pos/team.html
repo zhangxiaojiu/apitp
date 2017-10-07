@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_name}  - 资金记录</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+</head>
+
+<body class="body-white" id="top">
+<include file="public@nav" />
+
+	<div class="container tc-main">
+		<div class="row">
+			<div class="col-md-3">
+				<include file="public@usernav" />
+			</div>
+			<div class="col-md-9">
+				<div class="tabs">
+					<ul class="nav nav-tabs">
+						<li><a href="{:url('user/pos/center')}" ><i class="fa fa-child"></i> 个人业绩</a></li>
+						<li class="active"><a><i class="fa fa-group"></i> 团队业绩</a></li>
+						<li ><a href="{:url('user/index/index',array('id'=>$user.id))}"><i class="fa fa-send"></i> 推荐好友</a></li>
+					</ul>
+					<div class="tab-content" style="width:100%; overflow: scroll;">
+						<div class="tab-pane active" style="">
+							<br>
+							<table class="table table-bordered table-striped table-hover">
+								<thead>
+									<tr>
+										<th>编号</th>
+										<th>级别</th>
+										<th>手机号</th>
+										<!-- <th>机具号</th> -->
+										<th>状态</th>
+										<!-- <th>时间</th> -->
+									</tr>
+								</thead>
+								<tbody>
+									<foreach name="lists" item="vo" key="k">
+									<tr style="font-weight: bold;">
+										<td>LBLK{$vo.pid}568{$vo.id}</td>
+										<td>{$vo.level}</td>
+										<td>{$vo.mobile}</td>
+										<!-- <td>{$vo.code}</td> -->
+										<td>{$vo.is_active}(<a href="{:url('pos/teamdetail',array('id'=>$vo.id))}">{$vo.active_num}</a>)</td>				
+									</tr>
+									<foreach name="vo.group" item="vot">
+										<tr>
+											<td>LBLK{$vot.pid}568{$vot.id}</td>
+											<td>{$vot.level}</td>
+											<td>{$vot.mobile}</td>
+											<!-- <td>{$vot.code}</td> -->
+											<td>{$vot.is_active}(<a href="{:url('pos/teamdetail',array('id'=>$vot.id))}">{$vot.active_num}</a>)</td>				
+										</tr>
+									</foreach>
+									</foreach>
+								</tbody>
+							</table>
+							<div class="pagination" style="color:red;">*加粗行为直接下级,加粗下面三级为加粗行下级</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<include file="public@footer" />
+	</div>
+<!-- /container -->
+<include file="public@scripts" />
+</body>
+</html>

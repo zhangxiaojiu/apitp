@@ -1,0 +1,113 @@
+<include file="public@header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#A" data-toggle="tab">普通用户</a></li>
+			<li><a href="#B" data-toggle="tab">高级用户</a></li>
+			
+		</ul>
+		<form class="form-horizontal js-ajax-form margin-top-20" role="form" action="{:url('setting/coinPost')}" method="post">
+			<fieldset>
+				<div class="tabbable">
+					<div class="tab-content">
+						<div class="tab-pane active" id="A">
+							<div class="form-group">
+								<label for="input-fx" class="col-sm-2 control-label"><span class="form-required">*</span>激活返现</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-fx" name="options[fx]" value="{$ptuser.fx}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="input-pfx" class="col-sm-2 control-label"><span class="form-required">*</span>二级返现</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-pfx" name="options[pfx]" value="{$ptuser.pfx}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="input-ptj" class="col-sm-2 control-label"><span class="form-required">*</span>二级团建</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-ptj" name="options[ptj]" value="{$ptuser.ptj}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="input-ppfx" class="col-sm-2 control-label"><span class="form-required">*</span>三级返现</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-ppfx" name="options[ppfx]" value="{$ptuser.ppfx}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="input-pptj" class="col-sm-2 control-label"><span class="form-required">*</span>三级团建</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-pptj" name="options[pptj]" value="{$ptuser.pptj}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="input-tx" class="col-sm-2 control-label"><span class="form-required">*</span>提现限制</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-tx" name="options[tx]" value="{$ptuser.tx}">
+								</div>
+							</div>
+							
+						
+							
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="1">{:lang('SAVE')}</button>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="B">
+							<div class="form-group">
+								<label for="input-fx" class="col-sm-2 control-label"><span class="form-required">*</span>销售提成</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-fx" name="goptions[fx]" value="{$gjuser.fx}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="input-pfx" class="col-sm-2 control-label"><span class="form-required">*</span>二级提成</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-pfx" name="goptions[pfx]" value="{$gjuser.pfx}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="input-ptj" class="col-sm-2 control-label"><span class="form-required">*</span>二级团建</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-ptj" name="goptions[ptj]" value="{$gjuser.ptj}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="input-ppfx" class="col-sm-2 control-label"><span class="form-required">*</span>三级提成</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-ppfx" name="goptions[ppfx]" value="{$gjuser.ppfx}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="input-pptj" class="col-sm-2 control-label"><span class="form-required">*</span>三级团建</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-ptj" name="goptions[pptj]" value="{$gjuser.pptj}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="input-tx" class="col-sm-2 control-label"><span class="form-required">*</span>提现限制</label>
+								<div class="col-md-6 col-sm-10">
+									<input type="text" class="form-control" id="input-tx" name="goptions[tx]" value="{$gjuser.tx}">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0">{:lang('SAVE')}</button>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</fieldset>
+		</form>
+
+	</div>
+	<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

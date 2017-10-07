@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_name} - 财富中心</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+<style>
+.control-label {
+	font-weight: bold;
+	float: left;
+	width: 70px;
+}
+</style>
+</head>
+<body class="body-white" id="top">
+<include file="public@nav" />
+	<div class="container tc-main">
+		<div class="row">
+			<div class="col-md-3">
+				<include file="public@usernav" />
+			</div>
+			<div class="col-md-9">
+				<div class="tabs">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-child"></i> 个人业绩</a></li>
+						<li ><a href="{:url('user/pos/team')}"><i class="fa fa-group"></i> 团队业绩</a></li>
+						<li ><a href="{:url('user/index/index',array('id'=>$user.id))}"><i class="fa fa-send"></i> 推荐好友</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="one">
+							<br>
+							
+							<div class="col-md-9">
+								<div class="form-group">
+									<label class="control-label" for="input-user_nicename">当前状态：</label>
+									<div style="font-weight: bold;">{$sta_bak}</div>
+								</div>
+								<form style="border:1px dashed green; padding:20px;" class="js-ajax-form" action="{:url('user/pos/dorequest')}" method="post">
+									<div class="form-group" style="font-size:20px;">{$req_bak}</div>
+
+									<eq name="status" value="0">
+										<div class="form-group">
+											输入您的推荐人给您的机具号：
+											
+											<input class="form-control" type="text" name="code" placeholder="机具号">
+										
+											
+										</div>
+										<div class="form-group">
+											请确认您的朋友已经把机具号激活成功再输入  <a href="{:url('/faq/35')}">点此查看开通刷卡教程</a> 告知
+											<input type="hidden" name="type" value="docid">
+										</div>
+										<div class="form-group">
+											
+											<button class="form-control btn btn-warning js-ajax-submit" type="submit">申请成为业务员</button>
+										
+										</div>
+									</eq>
+
+								
+								</form>
+							</div>
+						
+							<eq name="status" value="1">
+							<div class="col-md-9">
+								<div class="form-group">
+									
+									<div style="font-weight: bold; margin-top:20px;">添加机器</div>
+								</div>
+								<form style="border:1px dashed gold; padding:20px;" class="js-ajax-form" action="{:url('user/pos/dorequest')}" method="post">
+										<div class="form-group">
+											<input class="form-control" type="text" name="code" placeholder="机具号">
+										</div>
+										<div class="form-group">
+											<input class="form-control" type="hidden" name="type" value="bind">
+										</div>
+										<div class="form-group">
+											<button class="form-control btn btn-warning js-ajax-submit" type="submit">添加机器</button>
+										</div>
+								</form>
+							</div>
+							
+							<php>
+								$status=array('0'=>'审核中','1'=>'已绑定','2'=>'已激活');
+							</php>
+							<div class="col-md-9">
+							<div class="form-group">
+								<div style="font-weight: bold; margin-top:20px;">我的机器</div>
+							</div>
+							<div class="tab-content" style="width:100%; overflow: scroll;">
+								<div class="tab-pane active" style="">
+									<br>
+									<table class="table table-bordered table-striped table-hover">
+										<thead>
+											<tr>
+												<th>机具号</th>
+												<!-- <th>用户id</th> -->
+												
+												
+												<th>状态</th>
+												<th>操作</th>
+												
+											</tr>
+										</thead>
+										<tbody>
+											<foreach name="re_list" item="vo" key="k">
+											<tr style="font-weight: bold;">
+												<td>{$vo.code}</td>
+												<!-- <td>{$vo.uid}</td> -->
+												<td>{$status[$vo.status]}</td>
+												<td><eq name='vo.status' value='1'><a href="{:url('user/pos/doactive',array('code'=>$vo.code))}">提交激活</a></eq></td>
+											</tr>
+											</foreach>
+											<foreach name="pos_list" item="vo" key="k">
+											<tr style="font-weight: bold;">
+												<td>{$vo.code}</td>
+												<!-- <td>{$vo.uid}</td> -->
+												<td>{$status[$vo.status]}</td>
+												<td><eq name='vo.status' value='1'><a href="{:url('user/pos/doactive',array('code'=>$vo.code))}">提交激活</a></eq></td>
+											</tr>
+											</foreach>
+										</tbody>
+									</table>
+									
+								</div>
+							</div>
+
+							</div>
+
+							</eq>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<include file="public@footer" />
+	</div>
+<!-- /container -->
+<include file="public@scripts" />
+</body>
+</html>

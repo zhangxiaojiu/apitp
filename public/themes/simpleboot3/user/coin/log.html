@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_name}  - 资金记录</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+</head>
+
+<body class="body-white" id="top">
+<include file="public@nav" />
+
+	<div class="container tc-main">
+		<div class="row">
+			<div class="col-md-3">
+				<include file="public@usernav" />
+			</div>
+			<div class="col-md-9">
+				<div class="tabs">
+					<ul class="nav nav-tabs">
+						<li><a href="{:url('user/coin/center')}"><i class="fa fa-rmb"></i> 财富中心</a></li>
+						<li class="active"><a href=""><i class="fa fa-list-ol"></i> 资金记录</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="one">
+							<br>
+							<table class="table table-bordered table-striped table-hover">
+								<thead>
+									<tr>
+										<th>类型</th>
+										<th>金额</th>
+										<th>详情</th>
+										<th>状态</th>
+										<th>时间</th>
+									</tr>
+								</thead>
+								<tbody>
+									<foreach name="lists" item="vo">
+									<tr>
+										<td>{$vo.type|cmf_get_coin_type}</td>
+										<td>{$vo.coin}</td>
+										<td>{$vo.detail}</td>
+										<td>
+											{$vo.status|cmf_get_coin_status}
+										</td>
+										<td>{:date('Y-m-d',$vo.create_time)}</td>
+									</tr>
+									</foreach>
+								</tbody>
+							</table>
+							<div class="pagination">{$lists->render()|default=''}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<include file="public@footer" />
+	</div>
+<!-- /container -->
+<include file="public@scripts" />
+</body>
+</html>
