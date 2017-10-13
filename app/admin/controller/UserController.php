@@ -14,6 +14,7 @@ use cmf\controller\AdminBaseController;
 use app\user\model\CoinModel;
 use think\Validate;
 use think\Db;
+use app\user\model\AdminUserModel;
 
 /**
  * Class UserController
@@ -164,7 +165,9 @@ class UserController extends AdminBaseController
         $this->assign("role_ids", $role_ids);
 
         $user = DB::name('user')->where(["id" => $id])->find();
+        $userConf = AdminUserModel::getConf($id);
         $this->assign($user);
+        $this->assign('user_conf',$userConf);
         return $this->fetch();
     }
 
@@ -185,10 +188,12 @@ class UserController extends AdminBaseController
     {
         if ($this->request->isPost()) {
             if (!empty($_POST['role_id']) && is_array($_POST['role_id'])) {
+                $data['id'] = $_POST['id'];
+                $data['user_login'] = $_POST['user_login'];
                 if (empty($_POST['user_pass'])) {
                     unset($_POST['user_pass']);
                 } else {
-                    $_POST['user_pass'] = cmf_password($_POST['user_pass']);
+                    $data['user_pass'] = cmf_password($_POST['user_pass']);
                 }
                 $role_ids = $this->request->param('role_id/a');
                 unset($_POST['role_id']);
@@ -198,7 +203,7 @@ class UserController extends AdminBaseController
                     // 验证失败 输出错误信息
                     $this->error($result);
                 } else {
-                    $result = DB::name('user')->update($_POST);
+                    $result = DB::name('user')->update($data);
                     if ($result !== false) {
                         $uid = $this->request->param('id', 0, 'intval');
                         DB::name("RoleUser")->where(["user_id" => $uid])->delete();
@@ -208,6 +213,12 @@ class UserController extends AdminBaseController
                             }
                             DB::name("RoleUser")->insert(["role_id" => $role_id, "user_id" => $uid]);
                         }
+                        $dataConf['user_id'] = $_POST['id'];
+                        if(isset($_POST['jie_fee'])){$dataConf['jie_fee'] = $_POST['jie_fee'];}
+                        if(isset($_POST['die_fee'])){$dataConf['die_fee'] = $_POST['die_fee'];}
+                        if(isset($_POST['d_fee'])){$dataConf['d_fee'] = $_POST['d_fee'];}
+                        if(isset($_POST['all_fee'])){$dataConf['all_fee'] = $_POST['all_fee'];}
+                        AdminUserModel::saveConf($dataConf);
                         $this->success("保存成功！");
                     } else {
                         $this->error("保存失败！");

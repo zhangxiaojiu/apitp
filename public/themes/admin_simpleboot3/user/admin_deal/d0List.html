@@ -3,21 +3,17 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('user/adminDeal/index')}">交易列表</a></li>
-        <li class=""><a href="{:url('user/adminDeal/d0List')}">D0列表</a></li>
+        <li class=""><a href="{:url('user/adminDeal/index')}">交易列表</a></li>
+        <li class="active"><a href="{:url('user/adminDeal/d0List')}">D0列表</a></li>
     </ul>
-    <form class="well form-inline margin-top-20" method="post" action="{:url('user/adminDeal/index')}">
+    <form class="well form-inline margin-top-20" method="post" action="{:url('user/adminDeal/d0List')}">
         签约机构：
         <input class="form-control" type="text" name="qyjg" style="width: 200px;" value="{:input('request.qyjg')}"
                placeholder="请输入机构号">
-        PSAM卡号：
-        <input class="form-control" type="text" name="code" style="width: 200px;" value="{:input('request.code')}"
-               placeholder="机具号">
         日期：
         <input type="text" class="form-control js-bootstrap-date" name="date" value="{:date('Y-m-d',time())}">
-       
         <input type="submit" class="btn btn-primary" value="搜索"/>
-        <a class="btn btn-danger" href="{:url('user/adminDeal/index')}">清空</a>
+        <a class="btn btn-danger" href="{:url('user/adminDeal/d0List')}">清空</a>
     </form>
    
         <table class="table table-hover table-bordered">
@@ -25,18 +21,16 @@
             <tr>
                 <th>流水号</th>
                 <th>签约机构</th>
+                <th>分类</th>
                 <th>商户号</th>
                 <th>商户注册名</th>
-                <th>终端号</th>
-                <th>交易日期</th>
-                <th>交易金额</th>
-                <th>商户手续费</th>
-                <th>借贷记标记</th>
-                <th>支付时间</th>
-                <!-- <th>卡应用类型</th> -->
-                <th>PSAM卡号</th>
+                <th>提款日期</th>
+                <th>提款金额</th>
+                <th>提款手续费</th>
+                <th>实扣金额</th>
+                <th>交易类型</th>
+                <th>交易状态</th>
                 <th>使用状态</th>
-                <!-- <th>{:lang('ACTIONS')}</th> -->
             </tr>
             </thead>
             <tbody>
@@ -47,16 +41,16 @@
                 <tr>
                     <td>{$vo.lsid}</td>
                     <td>{$vo.qyjg}</td>
+                    <td>{$vo.postype}</td>
                     <td>{$vo.shid}</td>
                     <td>{$vo.shname}</td>
-                    <td>{$vo.zdid}</td>
-                    <td>{$vo.dealtime}</td>
-                    <td>{$vo.dealcoin}</td>
-                    <td>{$vo.dealfee}</td>
-                    <td>{$vo.cardtype}</td>
-                    <td>{$vo.paytime}</td>
+                    <td>{$vo.time}</td>
+                    <td>{$vo.coin}</td>
+                    <td>{$vo.fee}</td>
+                    <td>{$vo.realcoin}</td>
+                    <td>{$vo.transtype}</td>
                    <!--  <td>{$vo.postype} -->
-                    <td>{$vo.code}</td>
+                    <td>{$vo.transstate}</td>
                     <td>{$statuses[$vo.state]}</td>
                     
                     <!-- <td>                     

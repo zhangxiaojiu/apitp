@@ -1,0 +1,55 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('user/adminDeal/total')}">交易统计</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('user/adminDeal/total')}">
+        签约机构：
+        <input class="form-control" type="text" name="qyjg" style="width: 200px;" value="{:input('request.qyjg')}"
+               placeholder="请输入机构号">
+        
+        日期：
+        <input type="text" class="form-control js-bootstrap-date" name="date" value="{:input('request.date')}">
+       
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('user/adminDeal/total')}">清空</a>
+    </form>
+        <h4>公式：分润总额=（贷记卡总额*贷记卡结算+借记卡总额*借记卡结算+D0总额-（D0结算*D0笔数））* 分润比例</h4>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>分润日期</th>
+                <th>分润总额</th>
+                <th>贷记卡总额</th>
+                <th>贷记卡结算</th>
+                <th>借记卡总额</th>
+                <th>借记卡结算</th>
+                <th>D0总额</th>
+                <th>D0笔数</th>
+                <th>D0结算</th>
+                <th>分润比例</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{$info.date}</td>
+                    <td>{$info.total}</td>
+                    <td>{$info.jie_total}</td>
+                    <td>{$info.jie_fee}</td>
+                    <td>{$info.die_total}</td>
+                    <td>{$info.die_fee}</td>
+                    <td>{$info.d_total}</td>
+                    <td>{$info.d_num}</td>
+                    <td>{$info.d_fee}</td>
+                    <td>{$info.all_fee}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h3>未变现分润：{$un_cash} <a href="/user/admin_deal/cashCoin"><button>变现</button></a></h3>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

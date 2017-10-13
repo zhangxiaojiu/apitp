@@ -88,14 +88,17 @@ class PublicController extends AdminBaseController
                 $groups = Db::name('RoleUser')
                     ->alias("a")
                     ->join('__ROLE__ b', 'a.role_id =b.id')
-                    ->where(["user_id" => $result["id"], "status" => 1])
-                    ->value("role_id");
+                    ->where(["a.user_id" => $result["id"], "status" => 1])
+                    ->field('a.role_id,b.name')
+                    ->find();
                 if ($result["id"] != 1 && (empty($groups) || empty($result['user_status']))) {
                     $this->error(lang('USE_DISABLED'));
                 }
                 //登入成功页面跳转
                 session('ADMIN_ID', $result["id"]);
                 session('name', $result["user_login"]);
+                session('roleName', $groups["name"]);
+                session('roleId', $groups["role_id"]);
                 $result['last_login_ip']   = get_client_ip(0, true);
                 $result['last_login_time'] = time();
                 $token                     = cmf_generate_user_token($result["id"], 'web');
@@ -120,6 +123,6 @@ class PublicController extends AdminBaseController
     public function logout()
     {
         session('ADMIN_ID', null);
-        $this->redirect(cmf_get_root() . '/');
+        $this->redirect(cmf_get_root() . '/admin');
     }
 }
