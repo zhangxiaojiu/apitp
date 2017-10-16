@@ -34,8 +34,8 @@ class AdminDealModel extends Model
 			}
 		}
 
-		$res['jie_total'] = $sumJie;
-		$res['die_total'] = $sumDie;
+		$res['jie_total'] = round($sumJie,2);
+		$res['die_total'] = round($sumDie,2);
 
 		return $res;
 	}
@@ -92,7 +92,7 @@ class AdminDealModel extends Model
 			$sum += $val['fee'];
 		}
 
-		$res['total'] = $sum;
+		$res['total'] = round($sum,2);
 		$res['num'] = count($arr);
 
 		return $res;
