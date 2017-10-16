@@ -1,6 +1,5 @@
 <?php
 return array (
-  'ADMIN_CONTACTS_DELETE' => '删除留言联系人',
   'ADMIN_CONTACTS_INDEX' => '留言联系人',
   'ADMIN_HOOK_INDEX' => '钩子管理',
   'ADMIN_HOOK_PLUGINLISTORDER' => '钩子插件排序',
@@ -161,12 +160,11 @@ return array (
   'USER_ADMININDEX_CANCELBAN' => '本站用户启用',
   'USER_ADMININDEX_DEFAULT' => '用户管理',
   'USER_ADMININDEX_DEFAULT1' => '用户组',
-  'USER_ADMININDEX_INDEX' => '用户列表',
+  'USER_ADMININDEX_INDEX' => '本站用户',
   'USER_ADMININDEX_TXLIST' => '提现记录',
   'USER_ADMINOAUTH_DELETE' => '删除第三方用户绑定',
   'USER_ADMINOAUTH_INDEX' => '第三方用户',
   'USER_ADMINPOS_DEFAULT' => '产品管理',
   'USER_ADMINPOS_INDEX' => 'POS列表',
   'USER_ADMINPOS_POSREQUEST' => '申请列表',
-  'USER_ADMINUSERACTION_INDEX' => '用户操作管理',
 );
