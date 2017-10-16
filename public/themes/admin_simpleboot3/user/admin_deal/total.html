@@ -6,9 +6,9 @@
         <li class="active"><a href="{:url('user/adminDeal/total')}">交易统计</a></li>
     </ul>
     <form class="well form-inline margin-top-20" method="post" action="{:url('user/adminDeal/total')}">
-        签约机构：
+        <!-- 签约机构：
         <input class="form-control" type="text" name="qyjg" style="width: 200px;" value="{:input('request.qyjg')}"
-               placeholder="请输入机构号">
+               placeholder="请输入机构号"> -->
         
         日期：
         <input type="text" class="form-control js-bootstrap-date" name="date" value="{:input('request.date')}">
@@ -48,7 +48,7 @@
             </tbody>
         </table>
         <hr>
-        <h3>未变现分润：{$un_cash} <a href="/user/admin_deal/cashCoin"><button>变现</button></a></h3>
+        <h3>未变现分润：{$un_cash} <eq name='tag_bx' value='1'><a href="/user/admin_deal/cashCoin"><button>变现</button></a></eq></h3>
 </div>
 <script src="__STATIC__/js/admin.js"></script>
 </body>

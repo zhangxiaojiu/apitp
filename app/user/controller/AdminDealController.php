@@ -181,6 +181,13 @@ class AdminDealController extends AdminBaseController
     $res['total'] = round(($res['die_total']*$res['die_fee']/100+$res['jie_total']*$res['jie_fee']/100+$res['d_total']-($res['d_num']*$res['d_fee']))*$res['all_fee'],2);   
     $res['date'] = isset($request['date'])?$request['date']:date("Y-m-d",time()-60*60*24);
     $unCash = AdminDealModel::getUnCash();
+
+    $role = AdminUserModel::getRole($adminId);
+    $bianXian = 0;
+    if($role['name'] == "代理商"){
+      $bianXian = 1;
+    }
+    $this->assign('tag_bx',$bianXian);
     $this->assign('un_cash', $unCash);
     $this->assign('info', $res);
     return $this->fetch();
