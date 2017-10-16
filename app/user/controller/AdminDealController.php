@@ -171,16 +171,15 @@ class AdminDealController extends AdminBaseController
     $res['d_num'] = $d0Res['num'];
     $user_conf = AdminUserModel::getConf($adminId);
     if(empty($user_conf)){
-      $res['jie_fee'] = $res['die_fee'] = $res['d_fee'] = $res['all_fee'] = '未设置';
+      $res['jie_fee'] = $res['die_fee'] = $res['d_fee'] = $res['all_fee'] = 0;
     }else{
       $res['jie_fee'] = $user_conf['jie_fee'];
       $res['die_fee'] = $user_conf['die_fee'];
       $res['d_fee'] = $user_conf['d_fee'];
       $res['all_fee'] = $user_conf['all_fee'];
-      $res['total'] = round(($res['die_total']*$res['die_fee']/100+$res['jie_total']*$res['jie_fee']/100+$res['d_total']-($res['d_num']*$res['d_fee']))*$res['all_fee'],2);
-    }   
+    }
+    $res['total'] = round(($res['die_total']*$res['die_fee']/100+$res['jie_total']*$res['jie_fee']/100+$res['d_total']-($res['d_num']*$res['d_fee']))*$res['all_fee'],2);   
     $res['date'] = isset($request['date'])?$request['date']:date("Y-m-d",time()-60*60*24);
-    
     $unCash = AdminDealModel::getUnCash();
     $this->assign('un_cash', $unCash);
     $this->assign('info', $res);
@@ -188,6 +187,11 @@ class AdminDealController extends AdminBaseController
   }
   //变现
   public function cashCoin(){
+    $adminId = session('ADMIN_ID');
+    $role = AdminUserModel::getRole($adminId);
+    if($role['name'] == "大代理"){
+      $this->error('大代理不能变现');
+    }
     if(AdminDealModel::cashCoin()){
       $this->success('变现成功');
     }
