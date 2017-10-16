@@ -130,43 +130,44 @@ class AdminDealModel extends Model
 	    return $total;
 	}
 	//变现
-	public static function cashCoin(){
-		$where['state'] = 0;
-		$adminId = session('ADMIN_ID');
-		$role = AdminUserModel::getRole($adminId);
-		if($role['name'] == "大代理"){
-	      	$where['admin_id']  = $adminId;
-	    }
-	    if($role['name'] == "代理商"){
-	      	$where['qyjg']  = session('name');;
-	    }
-
-	    $dealRec = self::getDb()->where($where)->select();
-	    $deal_in = self::getInArr('id',$dealRec);
-	    $deal_num = count($dealRec);    
-
-	    $dRec = self::getD0()->where($where)->select();
-	    $d_in = self::getInArr('id',$dRec);
-	    $d_num = count($dRec);
-	    
+	public static function cashCoin(){	
 	    $coin = self::getUnCash();
-	    $data_f = [
-            'uid' => $adminId,
-            'coin' => $coin,
-            'type' => 'bx',
-            'detail' => "分润变现：交易列表".$deal_num."条，D0列表".$d_num."条",
-            'status' => 1,
-        ];
-        self::getDb()->where(array('id'=>array('in',$deal_in)))->update(array('state'=>1));
-        self::getD0()->where(array('id'=>array('in',$d_in)))->update(array('state'=>1));
-        $m_coin = new CoinModel();
+	    if($coin > 0){
+	    	$where['state'] = 0;
+			$adminId = session('ADMIN_ID');
+			$role = AdminUserModel::getRole($adminId);
+			if($role['name'] == "大代理"){
+		      	$where['admin_id']  = $adminId;
+		    }
+		    if($role['name'] == "代理商"){
+		      	$where['qyjg']  = session('name');;
+		    }
 
-        $id = $m_coin->addCoinLog($data_f);
-        if($id > 0 && $coin>0){
-            return true;
-        }
-        return false;
-	    
+	    	$dealRec = self::getDb()->where($where)->select();
+		    $deal_in = self::getInArr('id',$dealRec);
+		    $deal_num = count($dealRec);    
+
+		    $dRec = self::getD0()->where($where)->select();
+		    $d_in = self::getInArr('id',$dRec);
+		    $d_num = count($dRec);
+
+	    	$data_f = [
+	            'uid' => $adminId,
+	            'coin' => $coin,
+	            'type' => 'bx',
+	            'detail' => "分润变现：交易列表".$deal_num."条，D0列表".$d_num."条",
+	            'status' => 1,
+	        ];
+	        self::getDb()->where(array('id'=>array('in',$deal_in)))->update(array('state'=>1));
+	        self::getD0()->where(array('id'=>array('in',$d_in)))->update(array('state'=>1));
+	        $m_coin = new CoinModel();
+
+	        $id = $m_coin->addCoinLog($data_f);
+	        if($id > 0 && $coin>0){
+	            return true;
+	        }
+	    }
+	    return false;
 	}
 	private static function getInArr($field,$arr){
 		$in = '';

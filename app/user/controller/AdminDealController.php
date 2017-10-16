@@ -201,6 +201,8 @@ class AdminDealController extends AdminBaseController
     }
     if(AdminDealModel::cashCoin()){
       $this->success('变现成功');
+    }else{
+      $this->error("没有可变现记录");
     }
   }
 }
