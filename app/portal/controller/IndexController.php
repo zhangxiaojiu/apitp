@@ -19,7 +19,7 @@ class IndexController extends HomeBaseController
 {
     public function index()
     {
-        $notice = Db::name('portal_post')->alias('p')->join("cmf_portal_category_post c","p.id=c.post_id")->where(["c.category_id"=>'9','p.is_top'=>'1','p.delete_time'=>'0'])->find();
+        $notice = Db::name('portal_post')->alias('p')->join("portal_category_post c","p.id=c.post_id")->where(["c.category_id"=>'9','p.is_top'=>'1','p.delete_time'=>'0'])->find();
         $notice = html_entity_decode($notice['post_content']);
         $this->assign('notice',$notice);
         return $this->fetch(':index');

@@ -21,7 +21,7 @@ class AdminUserModel extends Model
    public static function getRole($id){
       $groups = Db::name('RoleUser')
                 ->alias("a")
-                ->join('cmf_role b', 'a.role_id =b.id')
+                ->join('at_role b', 'a.role_id =b.id')
                 ->where(["a.user_id" => $id, "b.status" => 1])
                 ->field('a.role_id,b.name,a.user_id')
                 ->find();

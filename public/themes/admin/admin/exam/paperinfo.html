@@ -1,0 +1,38 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active">姓名：{$info.name} 　　电话：{$info.tel} 　　{$info.title}答题信息　　</li>
+        <a class="btn btn-danger" href="{:url('admin/exam/index')}">返回</a>
+    </ul>
+
+
+
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>题目标题</th>
+            <th>题目答案</th>
+            <th>其他备注</th>
+        </tr>
+        </thead>
+        <tbody>
+        <php>
+        </php>
+        <foreach name="list" item="vo">
+            <tr>
+                <td>{$vo.question_id}</td>
+                <td>{$vo.question_title}</td>
+                <td>{$vo.question_answer}</td>
+                <td>{$vo.question_answer_remark}</td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

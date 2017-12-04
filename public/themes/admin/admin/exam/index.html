@@ -1,0 +1,51 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('user/adminDeal/index')}">问卷列表</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('admin/exam/index')}">
+        类型：
+        <select name="type" class="form-control">
+            <option value="0">选择试卷类型</option>
+            <option value="1">产品调研问卷（消费者）</option>
+            <option value="2">产品调研问卷（商户）</option>
+        </select>
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('admin/exam/index')}">清空</a>
+    </form>
+   
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>试卷类型</th>
+                <th>标题</th>
+                <th>答题姓名</th>
+                <th>答题电话</th>
+                <th>答题微信</th>
+                <th>查看答案</th>
+            </tr>
+            </thead>
+            <tbody>
+            <php>
+                $types=array("1"=>"产品调研问卷（消费者）","2"=>"产品调研问卷（商户）");
+            </php>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td>{$types[$vo.type]}</td>
+                    <td>{$vo.title}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.tel}</td>
+                    <td>{$vo.weixin}</td>
+                    <td><a href="paperInfo?id={$vo['id']}">查看答案</a></td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <div class="pagination">{$page}</div>
+    
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

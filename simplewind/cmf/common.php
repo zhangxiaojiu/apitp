@@ -304,7 +304,7 @@ function cmf_save_var($path, $var)
 
 /**
  * 设置动态配置
- * @param array $data <br>如：["cmf_default_theme"=>'simpleboot3'];
+ * @param array $data <br>如：["cmf_default_theme"=>'apitp'];
  * @return boolean
  */
 function cmf_set_dynamic_config($data)

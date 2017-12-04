@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>{$title|default=''}</title>
+        <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}">
+        <meta name="description" content="{$site_info.site_seo_description|default=''}">
+        <meta name="baidu-site-verification" content="O8P6skrBp3" />
+
+        <include file="public@head"/>
+        <!-- Vendor Styles -->
+
+        <!-- Theme Styles -->
+        <link href="__TMPL__/public/assets/lblk/files/style.css" rel="stylesheet" type="text/css">
+        <link href="__TMPL__/public/assets/lblk/files/global.css" rel="stylesheet" type="text/css">
+
+        <style>
+            body{padding-top:0px;}
+        </style>
+    </head>
+    <!-- End Head -->
+    <body class=""> 
+
+
+    <div>
+        <form method="post" action="{:url('wtfree/exam/submitPaper')}" class="center-block g-width-100-percent--xs g-bg-color--dark-light g-padding-x-50--xs g-radius--4">
+            <div class="g-text-center--xs g-margin-b-40--xs" style="padding-top: 10px;">
+                <h2 class="g-font-size-30--xs g-color--white">
+                    {$title}
+                </h2>
+                <div class="g-color--white">
+                    　　非常欢迎您参与我司的新产品研发调研问卷，共计22个问题大概需要占用您5分钟时间，在此仅代表我司全体员工以及我司产品的忠实使用者，对于您所付出热情以及宝贵时间在此表示感谢，谢谢！
+                </div>
+            </div>
+            <foreach name="list" item="vo" key="key">
+                <php>
+                    $array = explode(',', $vo['answers']);
+                    $answers = [];
+                    foreach($array as $k=>$v){
+                        $answers[$k]['other'] = '';
+                        $answers[$k]['value'] = $v;
+                        if(strpos($v, ':')){
+                            $answers[$k]['other'] = '<input onclick="checkBefore(this)" style="color:#000;" name="qother_'.$vo['id'].'_'.$v.'" type="text">';
+                        }
+                    }
+                </php>
+                <div class="g-margin-b-40--xs">
+                    <h6 class="g-color--white">Q{$key+1}:{$vo.title}</h6>
+                    <div>
+                    <foreach name="answers" item="v">
+                        <label class="g-color--white">
+                            <eq name='vo.type' value='2'>
+                            <input name="q_{$vo.id}_{$vo.title}[]" value="{$v.value}" type="checkbox" />{$v.value}{$v.other}
+                            <else/>
+                            <input name="q_{$vo.id}_{$vo.title}" value="{$v.value}" type="radio"  required="required"/>{$v.value}{$v.other}
+                            </eq>
+                        </label><br/>
+                    </foreach>
+                    </div>
+                    <hr style="color:#fff;"/>
+                </div>
+            </foreach>
+            <div class="g-margin-b-40--xs">
+                <input type="text" class="form-control s-form-v3__input" name="name" placeholder="* 姓名" required="required">
+            </div>
+           
+            <div class="g-margin-b-40--xs">
+                <input type="text" class="form-control s-form-v3__input" name="tel" placeholder="* 电话" required="required">
+            </div>
+            <div class="g-margin-b-40--xs">
+                <input type="text" class="form-control s-form-v3__input" name="weixin" placeholder="* 微信">
+            </div>
+
+            <div class="g-text-center--xs">
+                <input type="hidden" name="type" value="{$type}"/>
+                <input type="hidden" name="title" value="{$title}"/>
+                <button type="submit" class="text-uppercase btn-block s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-50--xs g-margin-b-20--xs">提交</button>
+            </div>
+        </form>
+    </div>
+
+</body></html>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    function checkBefore(obj){
+        $(obj).prev('input').attr("checked","true");
+    }
+</script>

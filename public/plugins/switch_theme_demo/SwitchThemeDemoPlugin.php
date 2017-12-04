@@ -43,7 +43,7 @@ class SwitchThemeDemoPlugin extends Plugin
     {
         $config = $this->getConfig();
 
-        return 'simpleboot3';
+        return 'apitp';
     }
 
 }
