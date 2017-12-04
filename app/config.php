@@ -15,6 +15,7 @@ if (file_exists(CMF_ROOT . "data/conf/config.php")) {
 }
 \think\Route::domain('www.wtfree.com','wtfree');
 \think\Route::domain('wtfree.com','wtfree');
+\think\Route::domain('admin.wtfree.com','admin');
 $configs = [
     // +----------------------------------------------------------------------
     // | 应用设置
