@@ -25,10 +25,10 @@ class ExamController extends HomeBaseController
         $type = isset($_GET['type'])?$_GET['type']:1;
         $title = '欢迎来到调研答题系统';
         if($type == 1){
-            $title = '产品调研问卷（消费者版网络问卷）';
+            $title = '产品调研问卷（消费者版）';
         }
         if($type == 2){
-            $title = '产品调研问卷（商户版网络问卷）';
+            $title = '产品调研问卷（商户版）';
         }
         $list = QuestionModel::tb()->where('paper_type',$type)->select();
         $this->assign('list',$list);

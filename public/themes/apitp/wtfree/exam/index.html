@@ -24,13 +24,14 @@
     <div>
         <form method="post" action="{:url('wtfree/exam/submitPaper')}" class="center-block g-width-100-percent--xs g-bg-color--dark-light g-padding-x-50--xs g-radius--4">
             <div class="g-text-center--xs g-margin-b-40--xs" style="padding-top: 10px;">
-                <h2 class="g-font-size-30--xs g-color--white">
+                <h4 class=" g-color--white">
                     {$title}
-                </h2>
-                <div class="g-color--white">
-                    　　非常欢迎您参与我司的新产品研发调研问卷，共计22个问题大概需要占用您5分钟时间，在此仅代表我司全体员工以及我司产品的忠实使用者，对于您所付出热情以及宝贵时间在此表示感谢，谢谢！
-                </div>
+                </h4>
             </div>
+            <div class="g-color--white text">
+                　　非常欢迎您参与我司的新产品研发调研问卷，共计<eq name="type" value="1">22</eq><eq name="type" value="2">23</eq>个问题大概需要占用您5分钟时间，在此仅代表我司全体员工以及我司产品的忠实使用者，对于您所付出热情以及宝贵时间在此表示感谢，谢谢！
+            </div>
+            <hr>
             <foreach name="list" item="vo" key="key">
                 <php>
                     $array = explode(',', $vo['answers']);
@@ -56,9 +57,15 @@
                         </label><br/>
                     </foreach>
                     </div>
-                    <hr style="color:#fff;"/>
+
                 </div>
             </foreach>
+            <hr>
+            <div class="g-margin-b-40--xs ">
+                <p>　　我司致力于研发一款能覆盖全行业、全体消费者的生活APP，以支付为出发点，让每一个商家和每一位消费者都能在其中享受到便捷与实惠，参与调研问卷的您在此功不可没。</p>
+                <p>　　如果您愿意，请填写您的姓名、电话、微信等联系方式，<b class="g-color--white">参与到我司产品的研发过程中</b>，在产品完成研发且成功上市后，我司将给予您<b class="g-color--white">丰厚的礼品</b>，感谢！</p>
+            </div>
+            <hr>
             <div class="g-margin-b-40--xs">
                 <input type="text" class="form-control s-form-v3__input" name="name" placeholder="* 姓名" required="required">
             </div>
