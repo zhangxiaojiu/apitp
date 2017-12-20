@@ -13,7 +13,7 @@
   ),
   'notice/:id' => 
   array (
-    0 => 'portal/Article/index?cid=9',
+    0 => 'portal/Article/index?cid=0',
     1 => 
     array (
     ),

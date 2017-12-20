@@ -3,4 +3,5 @@
 *.DS_Store
 /data/runtime
 /data/conf/database.php
+/data/conf/route.php
 /sftp-config.json
