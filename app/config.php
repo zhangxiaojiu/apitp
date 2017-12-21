@@ -13,9 +13,6 @@ if (file_exists(CMF_ROOT . "data/conf/config.php")) {
 } else {
     $runtimeConfig = [];
 }
-\think\Route::domain('www.wtfree.com','wtfree');
-\think\Route::domain('wtfree.com','wtfree');
-\think\Route::domain('admin.wtfree.com','admin');
 $configs = [
     // +----------------------------------------------------------------------
     // | 应用设置
@@ -86,7 +83,7 @@ $configs = [
     // 是否强制使用路由
     'url_route_must'          => false,
     // 域名部署
-    'url_domain_deploy'       => true,
+    'url_domain_deploy'       => false,
     // 域名根，如thinkphp.cn
     'url_domain_root'         => '',
     // 是否自动转换URL中的控制器和操作名

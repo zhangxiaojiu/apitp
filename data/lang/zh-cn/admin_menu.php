@@ -170,4 +170,5 @@ return array (
   'USER_ADMINPOS_DEFAULT' => '产品管理',
   'USER_ADMINPOS_INDEX' => 'POS列表',
   'USER_ADMINPOS_POSREQUEST' => '申请列表',
+  'USER_ADMINUSERACTION_INDEX' => '用户操作管理',
 );
