@@ -1,0 +1,55 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('api/index')}">所有接口</a></li>
+        <li class="active"><a href="{:url('api/apiinfo')}">添加接口</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('api/runapiinfo',array('id'=>$info['id']))}">
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>分类:</label>
+            <div class="col-md-6 col-sm-10">
+                <select name="sort" class="form-control">
+                    <option value="0">请选择分类</option>
+                    <foreach name="sort" item="vo">
+                        <option value="{$vo.id}" <eq name="info.sort" value="$vo.id">selected</eq>>{$vo.name}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>标记:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="mark" value="{$info.mark}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>名称:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="name" value="{$info.name}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>URL:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="url" value="{$info.url}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>请求类型:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="type" value="{$info.type}">
+            </div>
+        </div>
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="hidden" name="id" value="{$info.id}">
+            <button type="submit" class="btn btn-primary   js-ajax-submit">{:lang("SAVE")}</button>
+            <a class="btn btn-default" href="{:url('api/index')}">返回</a>
+        </div>
+    </form>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

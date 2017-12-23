@@ -1,0 +1,42 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('api/index')}">所有接口</a></li>
+        <li><a href="{:url('api/apiinfo',array('id'=>$info['id'],'op'=>'edit'))}">编辑信息</a></li>
+    </ul>
+    <form id="param-form" method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('api/runapioption',array('id'=>$info['id'],'op'=>$op))}">
+        <foreach name="param" item="vo" key="k">
+            <div class="form-group">
+                <div class="col-sm-2"><input type="text" class="form-control" name="key[{$k}]" placeholder="参数" value="{$vo.key}"></div>
+                <div class="col-md-6 col-sm-10">
+                    <input type="text" class="form-control" name="value[{$k}]" placeholder="值" value="{$vo.value}">
+                </div>
+            </div>
+        </foreach>
+        <div class="col-sm-offset-3 col-sm-12">
+            <input type="hidden" name="id" value="{$info.id}">
+            <a class="btn btn-info" onclick="addParam()">添加</a>
+            <button type="submit" class="btn btn-primary   js-ajax-submite">{:lang("SAVE")}</button>
+            <a class="btn btn-default" href="{:url('api/index')}">返回</a>
+        </div>
+    </form>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script>
+    k = {$k};
+    function addParam() {
+        k++;
+        var obj = '<div class="form-group">\n' +
+            '<div class="col-sm-2"><input type="text" class="form-control" name="key['+k+']" placeholder="参数"></div>\n' +
+            '<div class="col-md-6 col-sm-10">\n' +
+            '<input type="text" class="form-control" name="value['+k+']" placeholder="值">\n' +
+            '</div>\n' +
+            '</div>';
+        $('#param-form').prepend(obj);
+    }
+</script>
+</body>
+</html>
