@@ -1,0 +1,60 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('api/index')}">所有接口</a></li>
+        <li><a href="{:url('api/apiinfo')}">添加接口</a></li>
+    </ul>
+    <form action="{:url('Rbac/listorders')}" method="post" class="margin-top-20">
+        <php>
+            $states=array("1"=>'可用',"0"=>'不可用');
+            foreach($sort as $v){
+                $sort[$v['id']] = $v['name'];
+            }
+        </php>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th width="40">ID</th>
+                <th>分类</th>
+                <th>标记</th>
+                <th>名称</th>
+                <th>url</th>
+                <th>请求类型</th>
+                <th>参数</th>
+                <th>header</th>
+                <th>状态</th>
+                <th width="160">{:lang('ACTIONS')}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$sort[$vo.sort]}</td>
+                    <td>{$vo.mark}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.url}</td>
+                    <td>{$vo.type}</td>
+                    <td><a href="{:url('api/apioption',array('id'=>$vo['id'],'op'=>'option'))}">修改参数</a></td>
+                    <td><a href="{:url('api/apioption',array('id'=>$vo['id'],'op'=>'header'))}">修改header</a></td>
+                    <td>{$states[$vo.state]}</td>
+                    <td>
+                        <a href="{:url('api/apiinfo',array('id'=>$vo['id'],'op'=>'edit'))}">{:lang('EDIT')}</a> |
+                        <eq name="vo.state" value="1">
+                        <a class="js-ajax-delete" href="{:url('api/apiinfo',array('id'=>$vo['id'],'op'=>'del'))}">{:lang('DELETE')}</a>
+                        </eq>
+                        <eq name="vo.state" value="0">
+                            <a class="js-ajax-delete" data-msg="确定启用么？" href="{:url('api/apiinfo',array('id'=>$vo['id'],'op'=>'up'))}">启用</a>
+                        </eq>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
