@@ -68,6 +68,7 @@ class ApiController extends AdminBaseController
     public function runApiInfo(){
         $data = input('post.');
         if(empty($data['id'])){
+            $data['create_time'] = date('Y-m-d H:i:s');
             ApiModel::tb()->insert($data);
             $this->success('添加成功','index');
         }else{
@@ -110,14 +111,18 @@ class ApiController extends AdminBaseController
             $this->error('参数错误');
         }
         $post = input('post.');
-        $key = $post['key'];
-        $value = $post['value'];
-        foreach ($key as $k=>$v){
-            $param['key'] = $v;
-            $param['value'] = $value[$k];
-            $params[] = $param;
+        if(!empty($post['key']) && $post['key'] != '') {
+            $key = $post['key'];
+            $value = $post['value'];
+            foreach ($key as $k => $v) {
+                $param['key'] = $v;
+                $param['value'] = $value[$k];
+                $params[] = $param;
+            }
+            $jsonParams = json_encode($params);
+        }else{
+            $jsonParams = '';
         }
-        $jsonParams = json_encode($params);
         $data['id'] = $id;
         if($op == 'option'){
             $data['params'] = $jsonParams;

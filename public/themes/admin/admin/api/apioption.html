@@ -10,15 +10,16 @@
         <foreach name="param" item="vo" key="k">
             <div class="form-group">
                 <div class="col-sm-2"><input type="text" class="form-control" name="key[{$k}]" placeholder="参数" value="{$vo.key}"></div>
-                <div class="col-md-6 col-sm-10">
+                <div class="col-md-6 col-sm-9">
                     <input type="text" class="form-control" name="value[{$k}]" placeholder="值" value="{$vo.value}">
                 </div>
+                <div class="col-sm-1 ret-bold-btn" onclick="deleteOption(this)">X</div>
             </div>
         </foreach>
         <div class="col-sm-offset-3 col-sm-12">
             <input type="hidden" name="id" value="{$info.id}">
             <a class="btn btn-info" onclick="addParam()">添加</a>
-            <button type="submit" class="btn btn-primary   js-ajax-submite">{:lang("SAVE")}</button>
+            <button type="submit" class="btn btn-primary   js-ajax-submit">{:lang("SAVE")}</button>
             <a class="btn btn-default" href="{:url('api/index')}">返回</a>
         </div>
     </form>
@@ -36,6 +37,9 @@
             '</div>\n' +
             '</div>';
         $('#param-form').prepend(obj);
+    }
+    function deleteOption(obj) {
+        $(obj).parent().remove();
     }
 </script>
 </body>

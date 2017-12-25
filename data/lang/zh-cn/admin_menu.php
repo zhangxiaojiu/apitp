@@ -1,5 +1,7 @@
 <?php
 return array (
+  'ADMIN_API_DEFAULT' => '接口管理',
+  'ADMIN_API_INDEX' => '接口列表',
   'ADMIN_CONTACTS_INDEX' => '留言联系人',
   'ADMIN_EXAM_DEFAULT' => '问卷管理',
   'ADMIN_EXAM_INDEX' => '问卷列表',
