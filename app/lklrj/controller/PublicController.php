@@ -13,27 +13,14 @@ namespace app\lklrj\controller;
 
 use cmf\controller\HomeBaseController;
 
-class IndexController extends HomeBaseController
+class PublicController extends HomeBaseController
 {
     /*
-     * 首页
+     * 登录页面
      */
-    public function index()
+    public function login()
     {
         return $this->fetch();
     }
-    /*
-     * 功能页
-     */
-    public function menu()
-    {
-        return $this->fetch();
-    }
-    /*
-     * 个人中心
-     */
-    public function user()
-    {
-        return $this->fetch();
-    }
+
 }
