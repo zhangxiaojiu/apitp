@@ -19,7 +19,7 @@ body{background: #eee;}
 .carpet .top-line{border-top:1px solid #ddd;}
 .carpet .right-line{border-right:1px solid #ddd; padding-right:10px;}
 .carpet .one-from-two{width:49%; display:inline-block; padding:10px 0px; font-size:18px;}
-.carpet .one-from-three{width:32.6%; display:inline-block; padding:10px 0px; font-size:18px;}
+.carpet .one-from-three{width:32.5%; display:inline-block; padding:10px 0px; font-size:18px;}
 .carpet .icon-money{color: gold; border:1px solid; margin-right:10px; padding:2px;}
 .carpet .icon-time{color: #00afec; border:1px solid; margin-right:10px; padding:2px;}
 .carpet .icon-inm{color: #00afec; border:1px solid; margin-right:10px; padding:5px;}
@@ -33,5 +33,5 @@ body{background: #eee;}
 .user-top img{width:20%; margin:15px auto; border-radius: 50%; background: #fff;}
 
 /*功能*/
-.carpet .menu{display: inline-block; width:24%; text-align: center;  border:1px solid #eee; padding:15px;}
+.carpet .menu{display: inline-block; width:24%; text-align: center;  border:1px solid #eee; padding:10px;}
 .carpet .menu span{font-size:30px;}
