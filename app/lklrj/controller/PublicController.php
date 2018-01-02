@@ -22,5 +22,9 @@ class PublicController extends HomeBaseController
     {
         return $this->fetch();
     }
+    //登录
+    public function doLogin(){
+        p(input('post.'));
+    }
 
 }
