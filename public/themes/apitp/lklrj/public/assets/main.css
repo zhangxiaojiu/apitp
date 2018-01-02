@@ -9,6 +9,8 @@ body{background: #eee;}
 .mt50{margin-top:50px;}
 .pr30{padding-right:30px;}
 .fs18{font-size:18px;}
+
+.carousel-control.right,.carousel-control.left{background-image:none;}
 /*底部导航*/
 .navbar-default .navbar-brand{color:#00afec; padding: 15px 0px; width:33%; text-align:center;}
 /*地毯*/
