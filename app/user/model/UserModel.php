@@ -16,6 +16,9 @@ use app\user\model\CoinModel;
 
 class UserModel extends Model
 {
+    public static function tb(){
+        return Db::name('user');
+    }
     public function getInfoById($id){
         $m_user = Db::name("user");
         $info = $m_user->where('id',$id)->find();

@@ -9,12 +9,25 @@
 namespace app\lklrj\controller;
 
 
-use think\Request;
+use app\user\model\UserModel;
+use cmf\controller\HomeBaseController;
 
-class BaseController extends \cmf\controller\BaseController
+class BaseController extends HomeBaseController
 {
-    public function __construct(Request $request = null)
+    public function _initialize()
     {
-        parent::__construct($request);
+        parent::_initialize();
+        $session_user = session('lkl_user');
+        if (!empty($session_user)) {
+            $user = UserModel::tb()->where(['lkl_org_code' => $session_user['org_code']])->find();
+            $this->assign("user", $user);
+        } else {
+            if ($this->request->isPost()) {
+                $this->error("您还没有登录！", url("lklrj/public/login"));
+            } else {
+                header("Location:" . url("lklrj/public/login"));
+                exit();
+            }
+        }
     }
 }

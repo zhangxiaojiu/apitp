@@ -11,9 +11,7 @@
 namespace app\lklrj\controller;
 
 
-use cmf\controller\HomeBaseController;
-
-class IndexController extends HomeBaseController
+class IndexController extends BaseController
 {
     /*
      * 首页
