@@ -7,35 +7,10 @@
  */
 namespace app\lklrj\service;
 
-use app\admin\model\ApiModel;
 use app\user\model\UserModel;
 
 class UserService
 {
-    public static function getApi($where){
-        $info = ApiModel::tb()->where($where)->find();
-        $ret['url'] = $info['url'];
-        $ret['type'] = $info['type'];
-        $header = json_decode($info['header'], true);
-        $ret['header'] = self::getParams($header);
-        $params = json_decode($info['params'], true);
-        $ret['params'] = self::getParams($params);
-        return $ret;
-    }
-    /*
-     * 获取参数
-     */
-    private static function getParams($arr){
-        $ret = [];
-        if(!empty($arr)) {
-            foreach ($arr as $v) {
-                if (!empty($v['key'])) {
-                    $ret[$v['key']] = $v['value'];
-                }
-            }
-        }
-        return $ret;
-    }
     /*
      * 存储登录信息
      */
@@ -68,5 +43,41 @@ class UserService
             'org_code' => $input['org_code'],
         ];
         session('lkl_user', $lklUser);
+    }
+    /*
+     * 获取商户、终端、代理统计
+     */
+    public static function getTotalInfo($sid){
+        $where = [
+            'mark' => 'queryMessageTermina',
+        ];
+        $params = [
+            'sessionId' => $sid,
+        ];
+        $ret = ApiService::getApi($where,$params);
+        if($ret['retCode'] == '000000'){
+            $data['lkl_termina'] = $ret['retData']['totalNum'];
+        }
+        $where = [
+            'mark' => 'queryMessageMerchant',
+        ];
+        $params = [
+            'sessionId' => $sid,
+        ];
+        $ret = ApiService::getApi($where,$params);
+        if($ret['retCode'] == '000000'){
+            $data['lkl_merchant'] = $ret['retData']['totalNum'];
+        }
+        $where = [
+            'mark' => 'getSubAgentList',
+        ];
+        $params = [
+            'sessionId' => $sid,
+        ];
+        $ret = ApiService::getApi($where,$params);
+        if($ret['retCode'] == '000000'){
+            $data['lkl_agent'] = count($ret['retData']);
+        }
+        UserModel::tb()->where(['lkl_org_code'=>session('lkl_user')['org_code']])->update($data);
     }
 }

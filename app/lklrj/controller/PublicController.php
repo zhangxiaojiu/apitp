@@ -11,6 +11,7 @@
 namespace app\lklrj\controller;
 
 
+use app\lklrj\service\ApiService;
 use app\lklrj\service\UserService;
 use cmf\controller\HomeBaseController;
 
@@ -29,26 +30,31 @@ class PublicController extends HomeBaseController
         $where = [
             'mark' => 'login'
         ];
-        $ret = UserService::getApi($where);
         $params = [
             'loginName' => $data['username'],
             'userPwd' => $data['passpword'],
             'code' => $data['code']
         ];
+        $res = ApiService::getApi($where,$params);
 
-        $ret = http_curl($ret['url'],array_merge($params,$ret['params']),$ret['type'],$ret['header']);
-        $res = json_decode($ret,true);
         if($res['retCode'] == 000000){
             $msg = $res['retMsg'];
             $data['sid'] = $res['retData']['sessionId'];
             $data['org_name'] = $res['retData']['compOrgName'];
             $data['org_code'] = $res['retData']['compOrgCode'];
             UserService::doLoginUser($data);
-            $this->success($msg);
+            $this->success($msg,'Index/index');
         }else{
             $msg = $res['retMsg'];
         }
         $this->error($msg);
+    }
+    /*
+     * 退出登录
+     */
+    public function logout(){
+        session('lkl_user', null);
+        $this->redirect('Public/login');
     }
 
 }

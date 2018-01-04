@@ -7,13 +7,13 @@
 <div class="mt50"></div>
 <div class="user-top">
     <img class="head" src="__TMPL__/lklrj/public/assets/home/head.png"><br/>
-    13320990009
+    {$user.user_nickname}
 </div>
 <!-- end top bar -->
 <div class="carpet">
-    <div class="one-from-three right-line tac"><a href="">0</a><br>我的商户</div>
-    <div class="one-from-three right-line tac"><a href="">0</a><br>我的机具</div>
-    <div class="one-from-three tac"><a href="">0</a><br>我的代理</div>
+    <div class="one-from-three right-line tac"><a href="{:url('merchant/index')}">{$user.lkl_merchant}</a><br>发展商户</div>
+    <div class="one-from-three right-line tac"><a href="{:url('termina/index')}">{$user.lkl_termina}</a><br>发展终端</div>
+    <div class="one-from-three tac"><a href="">{$user.lkl_agent}</a><br>我的代理</div>
 </div>
 <div class="carpet">
     <h4 class=""><span class="glyphicon glyphicon-user icon-time"></span>账号管理</h4>

@@ -1,0 +1,27 @@
+<include file="public/head"/>
+<div class="top-bar pr30"><a href="{:url('index/user')}"><span class="glyphicon glyphicon-menu-left fl"></span></a>发展商户</div>
+<div class="mt60"></div>
+<div class="carpet">
+    <h4><span class="icon-inm glyphicon glyphicon-save-file"></span>发展商户</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>商户名</th>
+            <th>姓名</th>
+            <th>手机号</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="list" item="vo">
+            <tr>
+                <td width="40%">{$vo.merchantName}</td>
+                <td>{$vo.contactName}</td>
+                <td>{$vo.contactMobile}</td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <a class="btn btn-xs btn-info" href="{:url('merchant/index',array('page'=>$page-1))}">上一页</a>
+    <a class="btn btn-xs btn-info" href="{:url('merchant/index',array('page'=>$page+1))}">下一页</a>
+</div>
+<include file="public/foot"/>
