@@ -1,0 +1,24 @@
+<include file="public/head"/>
+<div class="top-bar pr30"><a href="{:url('index/user')}"><span class="glyphicon glyphicon-menu-left fl"></span></a>我的代理</div>
+<div class="mt60"></div>
+<div class="carpet">
+    <h4><span class="icon-inm glyphicon glyphicon-save-file"></span>我的代理</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>机构号</th>
+            <th>名称</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="list" item="vo">
+            <tr>
+                <td>{$vo.lkl_org_code}</td>
+                <td>{$vo.user_nickname}</td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<include file="public/foot"/>

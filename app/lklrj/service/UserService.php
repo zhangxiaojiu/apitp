@@ -31,13 +31,15 @@ class UserService
             $data['last_login_time'] = time();
             $data['last_login_ip'] = get_client_ip(0, true);
             UserModel::tb()->update($data);
+            $lklId = $info['id'];
         }else{
             $data['create_time'] = time();
             $data['last_login_time'] = time();
             $data['last_login_ip'] = get_client_ip(0, true);
-            UserModel::tb()->insert($data);
+            $lklId = UserModel::tb()->insertGetId($data);
         }
         $lklUser = [
+            'id' => $lklId,
             'name' => $input['org_name'],
             'sid' => $input['sid'],
             'org_code' => $input['org_code'],
@@ -48,6 +50,7 @@ class UserService
      * 获取商户、终端、代理统计
      */
     public static function getTotalInfo($sid){
+        //获取终端统计
         $where = [
             'mark' => 'queryMessageTermina',
         ];
@@ -58,6 +61,7 @@ class UserService
         if($ret['retCode'] == '000000'){
             $data['lkl_termina'] = $ret['retData']['totalNum'];
         }
+        //获取商户统计
         $where = [
             'mark' => 'queryMessageMerchant',
         ];
@@ -68,6 +72,7 @@ class UserService
         if($ret['retCode'] == '000000'){
             $data['lkl_merchant'] = $ret['retData']['totalNum'];
         }
+        //获取下级代理
         $where = [
             'mark' => 'getSubAgentList',
         ];
@@ -77,7 +82,30 @@ class UserService
         $ret = ApiService::getApi($where,$params);
         if($ret['retCode'] == '000000'){
             $data['lkl_agent'] = count($ret['retData']);
+            self::updateAgent($ret['retData']);
         }
         UserModel::tb()->where(['lkl_org_code'=>session('lkl_user')['org_code']])->update($data);
+    }
+    /*
+     * 更新代理商信息
+     */
+    public static function updateAgent($list){
+        foreach ($list as $v){
+            if($v['compOrgCode'] == session('lkl_user')['org_code']){
+                continue;
+            }
+            $data = [
+                'user_nickname' => $v['crName'],
+                'lkl_org_code' => $v['compOrgCode'],
+                'pid' => session('lkl_user')['id']
+            ];
+            $info = UserModel::tb()->where(['lkl_org_code' => $v['compOrgCode']])->find();
+            if($info){
+                $data['id'] = $info['id'];
+                UserModel::tb()->update($data);
+            }else{
+                UserModel::tb()->insert($data);
+            }
+        }
     }
 }

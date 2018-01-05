@@ -13,6 +13,7 @@ body{background: #eee;}
 .carousel-control.right,.carousel-control.left{background-image:none;}
 /*底部导航*/
 .navbar-default .navbar-brand{color:#00afec; padding: 15px 0px; width:33%; text-align:center;}
+.navbar-default .active{color:#777 !important;}
 /*地毯*/
 .carpet{background:#fff; width:98%; border-radius:5px; border:1px solid #ddd; margin:10px auto; padding:10px; box-shadow: 0 1px 1px rgba(0,0,0,.05);}
 /*地毯毛*/

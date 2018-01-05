@@ -2,13 +2,13 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
         <div class="foot-menu">
-            <a class="navbar-brand" href="{:url('index/index')}">
+            <a class="navbar-brand<notempty name='menu'><eq name='menu' value='index'> active</eq></notempty>" href="{:url('index/index')}">
                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span>首页
             </a>
-            <a class="navbar-brand" href="{:url('index/menu')}">
+            <a class="navbar-brand<notempty name='menu'><eq name='menu' value='menu'> active</eq></notempty>" href="{:url('index/menu')}">
                 <span class="glyphicon glyphicon-th" aria-hidden="true"></span>功能
             </a>
-            <a class="navbar-brand" href="{:url('index/user')}">
+            <a class="navbar-brand<notempty name='menu'><eq name='menu' value='user'> active</eq></notempty>" href="{:url('index/user')}">
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>我的
             </a>
         </div>

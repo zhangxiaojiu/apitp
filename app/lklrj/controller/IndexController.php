@@ -11,8 +11,6 @@
 namespace app\lklrj\controller;
 
 
-use app\lklrj\service\UserService;
-
 class IndexController extends BaseController
 {
     /*
@@ -20,6 +18,7 @@ class IndexController extends BaseController
      */
     public function index()
     {
+        $this->assign('menu','index');
         return $this->fetch();
     }
     /*
@@ -27,6 +26,7 @@ class IndexController extends BaseController
      */
     public function menu()
     {
+        $this->assign('menu','menu');
         return $this->fetch();
     }
     /*
@@ -34,8 +34,7 @@ class IndexController extends BaseController
      */
     public function user()
     {
-        $sid = session('lkl_user')['sid'];
-        UserService::getTotalInfo($sid);
+        $this->assign('menu','user');
         return $this->fetch();
     }
 }
