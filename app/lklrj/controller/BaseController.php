@@ -30,7 +30,7 @@ class BaseController extends HomeBaseController
             if ($this->request->isPost()) {
                 $this->error("您还没有登录！", url("lklrj/public/login"));
             } else {
-                header("Location:" . url("lklrj/public/login"));
+                header("Location:" . url("public/login"));
                 exit();
             }
         }

@@ -1,0 +1,82 @@
+<include file="public/head"/>
+</head>
+<body>
+<nav class="navbar navbar-default kmn-nav">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" onclick="changeColor()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img class="logo" src="__TMPL__/sckmn/public/assets/home/logo.png"> | 科美诺</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">首页</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">合作品牌<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">拉卡拉</a></li>
+                        <li><a href="#">中汇</a></li>
+                        <li><a href="#">瀚银</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">寻求合作</li>
+                        <li><a href="#">地址：成都市金牛区环球广场3212</a></li>
+                        <li><a href="#">电话联系：</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<img class="home-head-img" src="__TMPL__/sckmn/public/assets/home/homescreen.jpg">
+<div class="container marketing">
+    <div class="row" id="about">
+        <div class="tac mt50 pd20">
+            <h3>关于四川科美诺<br/>ABOUT US</h3>
+            <p class="tal fs14">
+                　　四川科美诺信息技术有限公司（简称“科美诺”）是乐富、中汇、汇付天下、易宝支付、瀚银、付临门、拉卡拉等多家知名支付平台共同选择的专业承接第三方支付平台市场运营外包企业，自2011年科美诺团队诞生至今，凭借行业领先的品牌市场渠道建设体系和优秀的售后保障能力，在国内市场享有着良好的口碑和较高的知名度，并且在业内率先推出让每一位客户投资放心，运营省心，收益开心的“三心服务”，坚持诚信为本、服务至上的原则，为十几家知名支付平台建立了由遍布全国各地的数千家代理商组成的庞大市场渠道，并得到了上下游客户的一致好评！
+            </p>
+        </div>
+        <hr/>
+        <div class="col-lg-4 tac">
+            <img class="img-circle" src="__TMPL__/sckmn/public/assets/home/pay_load.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>多年的第三方支付之路</h2>
+            <p class="tal">在第三方支付领域，我们的团队从始建之初到现在一直坚定不移的向前走，我们的第三方支付行业服务在国内同类服务中具有非常成熟的业务路线和技术基础为客户的各种需求提供更专业更贴心的服务</p>
+
+        </div>
+        <div class="col-lg-4 tac">
+            <img class="img-circle" src="__TMPL__/sckmn/public/assets/home/service.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>专注于服务的精神</h2>
+            <p class="tal">富有经验的客服人员，为客户提供详细的咨询服务，辅助客户操作运转，包括日常运作，提供长期的技术支持服务，保障客户起步阶段顺利实施，提供全委托运维服务，为客户提供全方位技术保障服务</p>
+
+        </div>
+        <div class="col-lg-4 tac">
+            <img class="img-circle" src="__TMPL__/sckmn/public/assets/home/holdon.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>坚持支付行业的情怀</h2>
+            <p class="tal">曾经有人问我们“支付行业到底能做到什么时候”，对于这个问题我们无从回答，我们只能说“过去我们在做支付，现在我们也在做支付，未来我们一样会做支付”，我们在，支付在，没错，就是这种情怀</p>
+        </div>
+    </div>
+</div>
+<footer class="navbar-nav-color mt50">
+    <p class="fr tac"><img class="img-responsive" style="width:150px;" src="__TMPL__/sckmn/public/assets/home/ercode.jpg" /></p>
+    <p>© 2018 蜀ICP备17043501号-1 Ke Mei Nuo Information Technology CO.,LTD </p>
+</footer>
+<include file="public/foot"/>
+<script>
+    $(window).scroll(function ()
+    {
+        if ($(this).scrollTop() >= 80) {
+            $(".navbar").addClass('navbar-nav-color');
+        }else{
+            $(".navbar").removeClass('navbar-nav-color');
+        }
+    });
+
+    function changeColor(){
+        $('.navbar-nav').addClass('navbar-nav-color');
+    }
+</script>

@@ -17,6 +17,15 @@ if (file_exists(CMF_ROOT . "data/conf/route.php")) {
 $myRoutes = array
 (
 	'old' => 'portal/Index/old',
-	'share/:id' => 'user/index/index'
+	'share/:id' => 'user/index/index',
+    '__domain__'=>[
+        'admin.wtfree.com' => 'admin',
+        'www.sckemeinuo.com' => 'sckmn',
+        'sckemeinuo.com' => 'sckmn',
+        'www.mylabulak.com' => 'portal',
+        'mylabulak.com' => 'portal',
+        'scjlzf.com'      => 'lklrj',
+        'www.scjlzf.com'      => 'lklrj',
+    ],
 );
 return array_merge($runtimeRoutes,$myRoutes);
