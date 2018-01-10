@@ -26,6 +26,7 @@ $myRoutes = array
         'mylabulak.com' => 'portal',
         'scjlzf.com'      => 'lklrj',
         'www.scjlzf.com'      => 'lklrj',
+        'lakala.sckemeinuo.com' => 'sckmn/lakala'
     ],
 );
 return array_merge($runtimeRoutes,$myRoutes);

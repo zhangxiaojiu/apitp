@@ -13,6 +13,7 @@ class IndexController extends HomeBaseController
 {
     //首页
     public function index(){
+        $this->assign('seo','【官网】');
         return $this->fetch();
     }
 }

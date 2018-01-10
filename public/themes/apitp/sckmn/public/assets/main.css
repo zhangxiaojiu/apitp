@@ -12,10 +12,10 @@ body{background: #fff;}
 .fs14{font-size:14px;}
 
 .kmn-nav{background-color:rgba(0,0,0,0); border-color:rgba(0,0,0,0); position: fixed; margin:auto;left:0; right:0; top:0px; z-index: 9;}
+.kmn-nav a{font-size:20px;}
 .kmn-nav .active a{background-color:rgba(0,0,0,0) !important;}
 .navbar .logo{height:30px; display:inline-block;}
 .navbar-brand{float:none; line-height: 50px;}
-.navbar-nav{font-size: 16px;}
 .navbar-nav-color{background: #222;}
 .home-head-img{width:100%;}
 .home-tit{position:absolute; top:60px;}
