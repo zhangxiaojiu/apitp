@@ -1,5 +1,5 @@
 body{background: #fff;}
-.fr{float: right; margin-right:10px;}
+.fr{float: right !important; margin-right:10px;}
 .fl{float: left; margin-left:10px;}
 .tac{text-align:center;}
 .tal{text-align:left;}
@@ -11,6 +11,8 @@ body{background: #fff;}
 .color-white{color:#fff;}
 .fs14{font-size:14px;}
 
+.img-responsive{width:100%;}
+.zs-tel{line-height: 50px; font-size: 14px;}
 .kmn-nav{background-color:rgba(0,0,0,0); border-color:rgba(0,0,0,0); position: fixed; margin:auto;left:0; right:0; top:0px; z-index: 9;}
 .kmn-nav a{font-size:20px;}
 .kmn-nav .active a{background-color:rgba(0,0,0,0) !important;}
@@ -19,6 +21,7 @@ body{background: #fff;}
 .navbar-nav-color{background: #222;}
 .home-head-img{width:100%;}
 .home-tit{position:absolute; top:60px;}
+#backtotop{position:fixed; bottom:60px; right:5px;background: #fff; width:40px; height:40px; font-size: 25px; text-align: center; cursor:pointer; line-height: 40px; border-radius: 20px;}
 
 footer{color:#fff; height:200px; padding:25px;text-align: center;}
 footer img{height:100px;}

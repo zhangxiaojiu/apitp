@@ -24,4 +24,11 @@ class LakalaController extends HomeBaseController
         $this->assign('seo','拉卡拉手机收款宝');
         return $this->fetch();
     }
+    /*
+     * 智能POS
+     */
+    public function znpos(){
+        $this->assign('seo','拉卡拉智能POS');
+        return $this->fetch();
+    }
 }

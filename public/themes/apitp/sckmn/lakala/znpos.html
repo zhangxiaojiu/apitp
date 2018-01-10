@@ -1,0 +1,67 @@
+<include file="public/head"/>
+<link href="__TMPL__/public/assets/lblk/files/style.css" rel="stylesheet" type="text/css">
+<link href="__TMPL__/public/assets/lblk/files/global.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<include file="public/nav"/>
+<section class="s-video-v2__bg"  data-vidbg-options="loop: true, muted: true, overlay: false" style="z-index: 1;">
+    <div class="vidbg-container" style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; background-size: cover; background-repeat: no-repeat; background-position: 50% 50%; background-image: url(__TMPL__/sckmn/public/assets/lakala/znposnav.jpg);"></div>
+    <div class="container g-position--overlay g-text-center--xs">
+        <div class="g-margin-t-100--xs g-margin-b-100--xs g-margin-b-250--md main_content">
+
+        </div>
+
+    </div>
+</section>
+
+
+<!--========== PAGE CONTENT ==========-->
+<div id="js__scroll-to-section" class="container g-padding-y-80--xs g-padding-y-125--xsm">
+    <div class="row" style="text-align: center;margin-top:30px;">
+        <h2>支付无限</h2>
+        <h6>银行卡一机受理 借记卡信用卡全覆盖<br/>扫码支付新时尚 小额支付挥手买</h6>
+        <img src="__TMPL__/sckmn/public/assets/lakala/function.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show1.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show2.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show3.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show4.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show5.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show6.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show7.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show8.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show9.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show10.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show11.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show12.jpg" class="img-responsive">
+        <img src="__TMPL__/sckmn/public/assets/lakala/show13.jpg" class="img-responsive">
+    </div>
+</div>
+
+<div id="backtotop">
+    <span class="glyphicon glyphicon-arrow-up"></span>
+</div>
+<footer class="navbar-nav-color mt50">
+    <p class="fr tac"><img class="img-responsive" style="width:150px;" src="__TMPL__/sckmn/public/assets/home/ercode.jpg" /></p>
+    <p>© 2018 蜀ICP备17043501号 Ke Mei Nuo Information Technology CO.,LTD </p>
+</footer>
+<include file="public/foot"/>
+<script>
+    $(window).scroll(function ()
+    {
+        if($(window).scrollTop() > 100) {
+            $("#backtotop").fadeIn(100);
+        } else {
+            $("#backtotop").fadeOut(100);
+        }
+    });
+    $("#backtotop").on("click", function() {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 1000);
+        return false;
+    });
+
+    function changeColor(){
+        $('.navbar-nav').addClass('navbar-nav-color');
+    }
+</script>

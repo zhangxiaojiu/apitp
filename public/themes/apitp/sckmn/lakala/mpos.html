@@ -1,55 +1,135 @@
 <include file="public/head"/>
+<link href="__TMPL__/public/assets/lblk/files/style.css" rel="stylesheet" type="text/css">
+<link href="__TMPL__/public/assets/lblk/files/global.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<nav class="navbar navbar-default kmn-nav navbar-nav-color">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" onclick="changeColor()">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"><img class="logo" src="__TMPL__/sckmn/public/assets/lakala/logo.png"> | 拉卡拉</a>
+<include file="public/nav"/>
+<section class="s-video-v2__bg"  data-vidbg-options="loop: true, muted: true, overlay: false" style="z-index: 1;">
+    <div class="vidbg-container" style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; background-size: cover; background-repeat: no-repeat; background-position: 50% 50%; background-image: url(__TMPL__/sckmn/public/assets/lakala/mposnav.jpg);"></div>
+    <div class="container g-position--overlay g-text-center--xs">
+        <div class="g-margin-t-100--xs g-margin-b-100--xs g-margin-b-250--md main_content">
+
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">首页</a></li>
-                <li><a href="#about">拉卡拉手机收款宝</a></li>
-                <li><a href="#about">拉卡拉智能POS</a></li>
-                <li><a href="#about">拉卡拉卡果</a></li>
+
+    </div>
+</section>
+
+
+<!--========== PAGE CONTENT ==========-->
+<div id="js__scroll-to-section" class="container g-padding-y-80--xs g-padding-y-125--xsm">
+    <div class="row" style="text-align: center;margin-top:30px;">
+        <h2>让收款更便捷</h2>
+        <h6>1000万小微商户的选择<br/>他们都在用 并推荐给更多的人</h6>
+        <div class="col-lg-4">
+            <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle1.png" alt="Generic placeholder image" width="140" height="140">
+            <h5>插卡</h5>
+            <p>移动收款 有卡即付
+                <br/>支持带有银联标识的借记卡，信用卡，芯片卡
+                <br/>收款账户自主设定，直接进入个人储蓄账户
+            </p>
+            <p><a class="btn btn-default" href="#js__scroll-to-shuaka" role="button">了解更多 »</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle2.png" alt="Generic placeholder image" width="140" height="140">
+            <h5>刷卡</h5>
+            <p>移动收款 有卡即付
+                <br/>支持带有银联标识的借记卡，信用卡，磁条卡
+                <br/>收款账户自主设定，直接进入个人储蓄账户
+            </p>
+            <p><a class="btn btn-default" href="#js__scroll-to-shuaka" role="button">了解更多 »</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle3.png" alt="Generic placeholder image" width="140" height="140">
+            <h5>扫码</h5>
+            <p>扫码收款 覆盖主流平台
+                <br/>无需辅助设备 APP内扫码收款
+                <br/>支持微信等主流支付平台
+            </p>
+            <p><a class="btn btn-default" href="#js__scroll-to-saoma" role="button">了解更多 »</a></p>
+        </div><!-- /.col-lg-4 -->
+
+    </div>
+</div>
+<div class="site-wrapper">
+    <img src="__TMPL__/public/assets/lblk/images/bottom1.png" class="img-responsive">
+</div>
+<div class="container g-padding-y-80--xs g-padding-y-125--xsm">
+    <div class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+        <div class="col-sm-5 g-hor-centered-row__col">
+            <ul>
+                <li>自助设定 收款账户</li>
+                <li>可刷信用卡</li>
+                <li>随身携带 即开即用</li>
+                <li>大额收款</li>
+                <li>费率优</li>
+                <li>单日收款 当日提款</li>
+                <li>单日收款 当日提款</li>
+                <li>免押金/免年费/免服务费</li>
+                <li>蓝牙连接</li>
             </ul>
         </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 g-hor-centered-row__col">
+            <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row0.png" alt="Flinkhub Image">
+        </div>
     </div>
-</nav>
-<img class="home-head-img" src="__TMPL__/sckmn/public/assets/lakala/homescreen.jpg">
-<div class="container marketing">
-    <div class="row" id="about">
-        <div class="tac mt50 pd20">
-            <h3>关于拉卡拉<br/>ABOUT US</h3>
-            <p class="tal fs14">
-                　　拉卡拉是综合普惠科技金融平台。拉卡拉成立于2005年，秉承普惠、科技、创新、综合的理念，打造了底层统一，用户导向的共生系统，为个人和企业用户提供支付、征信、融资、社区金融等服务。其在国内第三方移动支付领域和线下银行卡收单行业长期保持交易规模前三。
+
+    <div id="js__scroll-to-shuaka" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+        <div class="col-sm-5 col-sm-push-7 g-hor-centered-row__col">
+            <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">刷卡、插卡</h2>
+            <p>移动收款 有卡即付
+                <br/>支持带有银联标识的借记卡，信用卡，磁条卡，芯片卡
+                <br/>收款账户自主设定，直接进入个人储蓄账户
             </p>
         </div>
-        <hr/>
-        <div class="col-lg-4 tac">
-            <img class="img-circle" src="__TMPL__/sckmn/public/assets/home/pay_load.jpg" alt="Generic placeholder image" width="140" height="140">
-            <h2>拉卡拉手机收款宝</h2>
-            <p class="tal">在第三方支付领域，我们的团队从始建之初到现在一直坚定不移的向前走，我们的第三方支付行业服务在国内同类服务中具有非常成熟的业务路线和技术基础为客户的各种需求提供更专业更贴心的服务</p>
-
-        </div>
-        <div class="col-lg-4 tac">
-            <img class="img-circle" src="__TMPL__/sckmn/public/assets/home/service.jpg" alt="Generic placeholder image" width="140" height="140">
-            <h2>拉卡拉智能POS</h2>
-            <p class="tal">富有经验的客服人员，为客户提供详细的咨询服务，辅助客户操作运转，包括日常运作，提供长期的技术支持服务，保障客户起步阶段顺利实施，提供全委托运维服务，为客户提供全方位技术保障服务</p>
-
-        </div>
-        <div class="col-lg-4 tac">
-            <img class="img-circle" src="__TMPL__/sckmn/public/assets/home/holdon.jpg" alt="Generic placeholder image" width="140" height="140">
-            <h2>拉卡拉卡果</h2>
-            <p class="tal">曾经有人问我们“支付行业到底能做到什么时候”，对于这个问题我们无从回答，我们只能说“过去我们在做支付，现在我们也在做支付，未来我们一样会做支付”，我们在，支付在，没错，就是这种情怀</p>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 col-sm-pull-7 g-hor-centered-row__col g-text-left--xs g-text-right--md">
+            <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row1.png" alt="Flinkhub Image">
         </div>
     </div>
+
+    <div id="js__scroll-to-saoma" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+        <div class="col-sm-5 g-hor-centered-row__col">
+            <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">扫码</h2>
+            <p>扫码收款 覆盖主流平台
+                <br/>无需辅助设备 APP内扫码收款
+                <br/>支持微信等主流支付平台
+            </p>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 g-hor-centered-row__col">
+            <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row2.png" alt="Flinkhub Image">
+        </div>
+    </div>
+
+    <div id="shuaka" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+        <div class="col-sm-5 col-sm-push-7 g-hor-centered-row__col">
+            <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">标准D+1自然日到账<br/>交易明细一目了然</h2>
+            <p>周末节假日正常结算，365天每天到账
+                <br/>交易明细实时查询，随时到账，资金安全稳定
+
+            </p>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 col-sm-pull-7 g-hor-centered-row__col g-text-left--xs g-text-right--md">
+            <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row3.png" alt="Flinkhub Image">
+        </div>
+    </div>
+</div>
+<div class="site-wrapper">
+    <img src="__TMPL__/public/assets/lblk/images/d+0.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/dangtian.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/feilv.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/hexin.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/2xiaoshi.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/d+0text.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/feilvedutext.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/yijiankaitong.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/chanpincanshu.jpg" class="img-responsive">
+    <img src="__TMPL__/public/assets/lblk/images/zfpz.jpg" class="img-responsive">
+</div>
+<div id="backtotop">
+    <span class="glyphicon glyphicon-arrow-up"></span>
 </div>
 <footer class="navbar-nav-color mt50">
     <p class="fr tac"><img class="img-responsive" style="width:150px;" src="__TMPL__/sckmn/public/assets/home/ercode.jpg" /></p>
@@ -57,6 +137,20 @@
 </footer>
 <include file="public/foot"/>
 <script>
+    $(window).scroll(function ()
+    {
+        if($(window).scrollTop() > 100) {
+            $("#backtotop").fadeIn(100);
+        } else {
+            $("#backtotop").fadeOut(100);
+        }
+    });
+    $("#backtotop").on("click", function() {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 1000);
+        return false;
+    });
 
     function changeColor(){
         $('.navbar-nav').addClass('navbar-nav-color');
