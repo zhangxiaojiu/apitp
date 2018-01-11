@@ -16,4 +16,12 @@ class IndexController extends HomeBaseController
         $this->assign('seo','【官网】');
         return $this->fetch();
     }
+    public function about(){
+        $this->assign('seo','【官网】');
+        return $this->fetch('index');
+    }
+    public function lianxi(){
+        $this->assign('seo','【官网】');
+        return $this->fetch('index');
+    }
 }
