@@ -28,6 +28,7 @@ $myRoutes = array
         'www.scjlzf.com'      => 'lklrj',
         'lakala.sckemeinuo.com' => 'sckmn/lakala',
         'zhonghui.sckemeinuo.com' => 'sckmn/zhonghui',
+        'hanyin.sckemeinuo.com' => 'sckmn/hanyin',
     ],
 );
 return array_merge($runtimeRoutes,$myRoutes);
