@@ -1,0 +1,53 @@
+<include file="public/head"/>
+<link href="__TMPL__/public/assets/lblk/files/style.css" rel="stylesheet" type="text/css">
+<link href="__TMPL__/public/assets/lblk/files/global.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<include file="public/nav_lkl"/>
+<section class="s-video-v2__bg"  data-vidbg-options="loop: true, muted: true, overlay: false" style="z-index: 1;">
+    <div class="vidbg-container" style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; background-size: cover; background-repeat: no-repeat; background-position: 50% 50%; background-image: url(__TMPL__/sckmn/public/assets/lakala/homescreen.jpg);"></div>
+    <div class="container g-position--overlay g-text-center--xs">
+        <div class="g-margin-t-100--xs g-margin-b-100--xs g-margin-b-250--md main_content">
+
+        </div>
+
+    </div>
+</section>
+
+
+<!--========== PAGE CONTENT ==========-->
+<div id="js__scroll-to-section" class="container g-padding-y-80--xs g-padding-y-125--xsm">
+    <div class="row" style="text-align: center;margin-top:30px;">
+        <h2>敬请期待</h2>
+        <h6>卡果儿安全稳定，目前安全性能占据100%，优化性能占据行业内98.5% 拉卡拉总部官方认证，卡果儿一级代理代理咨询加盟，拉卡拉无卡支付招商 拉卡拉卡果儿，开启您的梦想。 卡果儿总部直签包括一级代理商旗下所有代理商平台，很大程度上解决了代理商分润拿不到的问题。</h6>
+    </div>
+</div>
+
+<div id="backtotop">
+    <span class="glyphicon glyphicon-arrow-up"></span>
+</div>
+<footer class="navbar-nav-color mt50">
+    <p class="fr tac"><img class="img-responsive" style="width:150px;" src="__TMPL__/sckmn/public/assets/home/ercode.jpg" /></p>
+    <p>© 2018 蜀ICP备17043501号 Ke Mei Nuo Information Technology CO.,LTD </p>
+</footer>
+<include file="public/foot"/>
+<script>
+    $(window).scroll(function ()
+    {
+        if($(window).scrollTop() > 100) {
+            $("#backtotop").fadeIn(100);
+        } else {
+            $("#backtotop").fadeOut(100);
+        }
+    });
+    $("#backtotop").on("click", function() {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 1000);
+        return false;
+    });
+
+    function changeColor(){
+        $('.navbar-nav').addClass('navbar-nav-color');
+    }
+</script>

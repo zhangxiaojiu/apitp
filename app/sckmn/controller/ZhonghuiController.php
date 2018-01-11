@@ -11,31 +11,24 @@ namespace app\sckmn\controller;
 
 use cmf\controller\HomeBaseController;
 
-class LakalaController extends HomeBaseController
+class ZhonghuiController extends HomeBaseController
 {
     public function index(){
-        $this->assign('seo','拉卡拉');
+        $this->assign('seo','中汇');
         return $this->fetch();
     }
     /*
      * 手机收款宝
      */
     public function mpos(){
-        $this->assign('seo','拉卡拉手机收款宝');
+        $this->assign('seo','中汇掌富通');
         return $this->fetch();
     }
     /*
      * 智能POS
      */
-    public function znpos(){
-        $this->assign('seo','拉卡拉智能POS');
-        return $this->fetch();
-    }
-    /*
-     * 卡果儿
-     */
-    public function kaguoer(){
-        $this->assign('seo','拉卡拉卡果儿');
+    public function npos(){
+        $this->assign('seo','中汇大POS');
         return $this->fetch();
     }
 }
