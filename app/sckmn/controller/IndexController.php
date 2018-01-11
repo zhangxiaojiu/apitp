@@ -24,4 +24,8 @@ class IndexController extends HomeBaseController
         $this->assign('seo','【官网】');
         return $this->fetch('index');
     }
+    public function jiaru(){
+        $this->assign('seo','【官网】');
+        return $this->fetch('index');
+    }
 }
