@@ -22,7 +22,7 @@ class BaseController extends HomeBaseController
         if (!empty($session_user)) {
             $ret = self::checkLogin($session_user['sid']);
             if($ret['retCode'] !== '000000'){
-                $this->error('登录信息过期', url("lklrj/public/logout"));
+                $this->error('登录信息过期', url("public/logout"));
             }
             $user = UserModel::tb()->where(['lkl_org_code' => $session_user['org_code']])->find();
             $this->assign("user", $user);

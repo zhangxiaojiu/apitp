@@ -8,12 +8,12 @@
 // +----------------------------------------------------------------------
 // | Author: Powerless < wzxaini9@gmail.com>
 // +----------------------------------------------------------------------
-namespace app\user\controller;
+namespace app\admin\controller;
 
 use cmf\controller\AdminBaseController;
 use think\Db;
 
-class AdminOauthController extends AdminBaseController
+class ThirdMemberController extends AdminBaseController
 {
 
     /**

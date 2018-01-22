@@ -3,10 +3,10 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li><a href="{:url('user/adminIndex/index')}">用户列表</a></li>
+        <li><a href="{:url('admin/member/index')}">用户列表</a></li>
         <li class="active"><a>编辑用户{$info.mobile}</a></li>
     </ul>
-    <form method="post" class="form-horizontal  margin-top-20" action="{:url('adminIndex/editPost')}">
+    <form method="post" class="form-horizontal  margin-top-20" action="{:url('member/editPost')}">
         <div class="form-group">
             <label for="input-user_name" class="col-sm-2 control-label">登录名<span class="form-required">*</span></label>
             <div class="col-md-6 col-sm-10">
@@ -35,7 +35,7 @@
             <div class="col-sm-offset-2 col-sm-10">
                 <input type="hidden" name="id" value="{$info.id}"/>
                 <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
-                <a class="btn btn-default" href="{:url('user/adminIndex/index')}">{:lang('BACK')}</a>
+                <a class="btn btn-default" href="{:url('admin/member/index')}">{:lang('BACK')}</a>
             </div>
         </div>
     </form>

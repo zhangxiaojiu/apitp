@@ -1779,7 +1779,7 @@ function cmf_excel2arr($filePath){
  */
 function http_curl($url, $params, $method = 'GET', $header = array(), $multi = false){
     $opts = array(
-        CURLOPT_TIMEOUT        => 30,
+        CURLOPT_TIMEOUT        => 0,
         CURLOPT_RETURNTRANSFER => 1,
         CURLOPT_SSL_VERIFYPEER => false,
         CURLOPT_SSL_VERIFYHOST => false,

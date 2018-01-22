@@ -14,11 +14,20 @@ use app\lklrj\service\UserService;
 class UserController extends BaseController
 {
     /*
-     * 更新账户
+     * 同步账户
      */
     public function updateUser(){
         $sid = session('lkl_user')['sid'];
         UserService::getTotalInfo($sid);
+        $this->success('同步成功');
+    }
+    /*
+     * 同步商户
+     */
+    public function syncMerchant(){
+        $id = session('lkl_user')['id'];
+        $sid = session('lkl_user')['sid'];
+        UserService::syncMerchant($id,$sid);
         $this->success('同步成功');
     }
 }

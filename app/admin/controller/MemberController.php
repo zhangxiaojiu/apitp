@@ -9,7 +9,7 @@
 // | Author: Powerless < wzxaini9@gmail.com>
 // +----------------------------------------------------------------------
 
-namespace app\user\controller;
+namespace app\admin\controller;
 
 use cmf\controller\AdminBaseController;
 use think\Db;
@@ -39,7 +39,7 @@ use app\user\model\CoinModel;
  *     'remark' =>'用户组'
  * )
  */
-class AdminIndexController extends AdminBaseController
+class MemberController extends AdminBaseController
 {
 
     /**
