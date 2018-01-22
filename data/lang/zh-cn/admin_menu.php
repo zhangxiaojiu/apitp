@@ -2,6 +2,7 @@
 return array (
   'ADMIN_API_DEFAULT' => '接口管理',
   'ADMIN_API_INDEX' => '接口列表',
+  'ADMIN_API_TESTAPI' => '接口测试',
   'ADMIN_CONTACTS_INDEX' => '留言联系人',
   'ADMIN_EXAM_DEFAULT' => '问卷管理',
   'ADMIN_EXAM_INDEX' => '问卷列表',
@@ -116,6 +117,7 @@ return array (
   'ADMIN_THEME_SETTINGPOST' => '模板文件编辑提交保存',
   'ADMIN_THEME_UNINSTALL' => '卸载模板',
   'ADMIN_THEME_UPDATE' => '模板更新',
+  'ADMIN_THIRDMEMBER_INDEX' => '第三方用户',
   'ADMIN_USER_ADD' => '管理员添加',
   'ADMIN_USER_ADDPOST' => '管理员添加提交',
   'ADMIN_USER_BAN' => '停用管理员',
@@ -167,7 +169,6 @@ return array (
   'USER_ADMININDEX_BAN' => '本站用户拉黑',
   'USER_ADMININDEX_CANCELBAN' => '本站用户启用',
   'USER_ADMINOAUTH_DELETE' => '删除第三方用户绑定',
-  'USER_ADMINOAUTH_INDEX' => '第三方用户',
   'USER_ADMINPOS_DEFAULT' => '产品管理',
   'USER_ADMINPOS_INDEX' => 'POS列表',
   'USER_ADMINPOS_POSREQUEST' => '申请列表',

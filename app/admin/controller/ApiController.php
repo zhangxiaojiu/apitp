@@ -11,6 +11,7 @@ namespace app\admin\controller;
 
 use app\admin\model\ApiModel;
 use app\admin\model\ApiSortModel;
+use app\lklrj\service\ApiService;
 use cmf\controller\AdminBaseController;
 
 class ApiController extends AdminBaseController
@@ -132,5 +133,19 @@ class ApiController extends AdminBaseController
         }
         ApiModel::tb()->update($data);
         $this->success('更新成功');
+    }
+    /*
+     * 接口测试
+     */
+    public function testApi(){
+//        $where = [
+//            'mark' => 'searchAgent',
+//            'sort' => '2',
+//        ];
+//        $params = [
+//
+//        ];
+//        $ret = ApiService::getApi($where,$params);
+        p('testApi');
     }
 }
