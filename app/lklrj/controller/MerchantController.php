@@ -9,26 +9,17 @@
 namespace app\lklrj\controller;
 
 
+use app\admin\model\MerchantModel;
 use app\lklrj\service\ApiService;
 
 class MerchantController extends BaseController
 {
     public function index(){
-        $page = input('get.page',1);
-        if($page-1 < 0){
-            $page = 1;
-        }
-        $sid = session('lkl_user')['sid'];
-        $where = [
-            'mark' => 'queryMerchant'
-        ];
-        $params = [
-            'sessionId' => $sid,
-            'start' => ($page-1)*10,
-            'limit' => 10,
-        ];
-        $ret = ApiService::getApi($where,$params);
-        $list = $ret['retData']['data'];
+        $agent = session('lkl_user')['org_code'];
+        $list = MerchantModel::tb()->where(['agent_id'=>$agent])->paginate(10);
+        // 获取分页显示
+        $page = $list->render();
+
         $this->assign('list', $list);
         $this->assign('page', $page);
         return $this->fetch();

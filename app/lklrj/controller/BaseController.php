@@ -9,7 +9,6 @@
 namespace app\lklrj\controller;
 
 
-use app\lklrj\service\ApiService;
 use app\user\model\UserModel;
 use cmf\controller\HomeBaseController;
 
@@ -20,10 +19,6 @@ class BaseController extends HomeBaseController
         parent::_initialize();
         $session_user = session('lkl_user');
         if (!empty($session_user)) {
-            $ret = self::checkLogin($session_user['sid']);
-            if($ret['retCode'] !== '000000'){
-                $this->error('登录信息过期', url("public/logout"));
-            }
             $user = UserModel::tb()->where(['lkl_org_code' => $session_user['org_code']])->find();
             $this->assign("user", $user);
         } else {
@@ -34,18 +29,5 @@ class BaseController extends HomeBaseController
                 exit();
             }
         }
-    }
-    /*
-     * 检查登录状态
-     */
-    private static function checkLogin($sid){
-        $where = [
-            'mark' => 'checkLogIn'
-        ];
-        $params = [
-            'sessionId' => $sid,
-        ];
-        $ret = ApiService::getApi($where,$params);
-        return $ret;
     }
 }

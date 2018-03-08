@@ -8,7 +8,9 @@ body{background: #eee;}
 .mt60{margin-top:60px;}
 .mt50{margin-top:50px;}
 .pr30{padding-right:30px;}
+.pt20{padding-top:20px;}
 .fs18{font-size:18px;}
+.w100{width:100%;}
 
 .carousel-control.right,.carousel-control.left{background-image:none;}
 /*底部导航*/
