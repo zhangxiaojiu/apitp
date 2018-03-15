@@ -16,7 +16,7 @@ class UserService
      */
     public static function doLoginUser($input){
         $where = [
-            'lkl_org_code' => $input['org_code'],
+            'user_login' => $input['username'],
         ];
         $info = UserModel::tb()->where($where)->find();
         $data = [

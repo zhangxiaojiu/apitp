@@ -121,7 +121,10 @@ class UserController extends AdminBaseController
                 if ($result !== true) {
                     $this->error($result);
                 } else {
+                    $_POST['lkl_password'] = $_POST['user_pass'];
+                    $_POST['create_time'] = time();
                     $_POST['user_pass'] = cmf_password($_POST['user_pass']);
+                    $_POST['user_nickname'] = $_POST['user_login'];
                     $result             = DB::name('user')->insertGetId($_POST);
                     if ($result !== false) {
                         //$role_user_model=M("RoleUser");

@@ -14,6 +14,7 @@ use think\Db;
 
 class UserModel extends Model
 {
+    const TYPE_SUPER_ADMIN = 1; //拉卡拉代理商
     const TYPE_LKL_AGENT = 10; //拉卡拉代理商
     const TYPE_LKL_MERCHANT = 11; //拉卡拉商户
 
