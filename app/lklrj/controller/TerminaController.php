@@ -9,27 +9,33 @@
 namespace app\lklrj\controller;
 
 
+use app\admin\model\TerminaModel;
 use app\lklrj\service\ApiService;
 
 class TerminaController extends BaseController
 {
     public function index(){
-        $page = input('get.page',1);
-        if($page-1 < 0){
-            $page = 1;
-        }
-        $sid = session('lkl_user')['sid'];
-        $where = [
-            'mark' => 'queryCardsByOrgCode'
-        ];
-        $params = [
-            'sessionId' => $sid,
-            'start' => ($page-1)*10,
-            'limit' => 10,
-            'isCallback' => false
-        ];
-        $ret = ApiService::getApi($where,$params);
-        $list = $ret['retData']['data'];
+//        $page = input('get.page',1);
+//        if($page-1 < 0){
+//            $page = 1;
+//        }
+//        $sid = session('lkl_user')['sid'];
+//        $where = [
+//            'mark' => 'queryCardsByOrgCode'
+//        ];
+//        $params = [
+//            'sessionId' => $sid,
+//            'start' => ($page-1)*10,
+//            'limit' => 10,
+//            'isCallback' => false
+//        ];
+//        $ret = ApiService::getApi($where,$params);
+//        $list = $ret['retData']['data'];
+        $agent = session('lkl_user')['org_code'];
+        $list = TerminaModel::tb()->where(['cid'=>$agent])->paginate(10);
+        // 获取分页显示
+        $page = $list->render();
+
         $this->assign('list', $list);
         $this->assign('page', $page);
         return $this->fetch();

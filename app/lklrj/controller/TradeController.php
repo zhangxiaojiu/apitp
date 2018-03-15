@@ -1,21 +1,21 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: jiu
- * Date: 2018/1/4
- * Time: 18:20
+ * User: zhjigu
+ * Date: 2018/3/13
+ * Time: 上午11:01
  */
 
 namespace app\lklrj\controller;
 
 
-use app\admin\model\MerchantModel;
+use app\admin\model\TradeModel;
 
-class MerchantController extends BaseController
+class TradeController extends BaseController
 {
     public function index(){
         $agent = session('lkl_user')['org_code'];
-        $list = MerchantModel::tb()->where(['agent_id'=>$agent])->paginate(10);
+        $list = TradeModel::tb()->where(['org_code'=>$agent])->paginate(10);
         // 获取分页显示
         $page = $list->render();
 

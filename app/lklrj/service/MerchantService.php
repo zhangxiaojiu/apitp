@@ -18,9 +18,9 @@ class MerchantService
      * 同步商户信息
      */
     public static function syncMerchant($id,$sid){
+        self::syncOneMerchant(session('lkl_user')['org_code'],$sid);
         $where = [
             'pid'=>$id,
-            'id' =>['>',2844],
         ];
         $list = UserModel::tb()->where($where)->select();
         foreach ($list as $v){

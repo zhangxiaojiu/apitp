@@ -1,0 +1,26 @@
+<include file="public/head"/>
+<div class="top-bar pr30"><a href="{:url('index/user')}"><span class="glyphicon glyphicon-menu-left fl"></span></a>交易记录</div>
+<div class="mt60"></div>
+<div class="carpet">
+    <h4><span class="icon-inm glyphicon glyphicon-save-file"></span>交易记录 <a class="fr" href="{:url('api/synctrade')}">同步当月交易记录</a></h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>商户名</th>
+            <th>交易金额</th>
+            <th>详情</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="list" item="vo">
+            <tr>
+                <td width="40%">{$vo.merchant_name}</td>
+                <td>{$vo.trans_amt}</td>
+                <td><a target="_blank" href="{$vo.sign_image}">签购单</a> </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<include file="public/foot"/>

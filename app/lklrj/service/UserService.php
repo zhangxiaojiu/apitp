@@ -84,42 +84,46 @@ class UserService
         if($ret['retCode'] == '000000'){
             $data['lkl_agent'] = count($ret['retData']);
         }
-        //完善下级代理
-        $num = $data['lkl_agent'];
-        $size = 10;
-        $page = ceil($num/$size);
-        for($i=1;$i<=$page;$i++){
-            $where = [
-                'mark' => 'getSubAgentListAndDetail',
-            ];
-            $params = [
-                'page' => $i,
-                'pageSize' => $size,
-                'isChild' => 1,
-                'sessionId' => $sid,
-            ];
-            $ret = ApiService::getApi($where,$params);
-            if($ret['retCode'] == '000000'){
-                self::perfectAgent($ret['retData']['data']);
-            }
-        }
 
         UserModel::tb()->where(['lkl_org_code'=>session('lkl_user')['org_code']])->update($data);
+    }
+
+    private static function getApiAgent($sid,$code){
+        $where = [
+            'mark' => 'getSubAgentListAndDetail',
+        ];
+        $params = [
+            'page' => 1,
+            'pageSize' => 10000,
+            'isChild' => 1,
+            'sessionId' => $sid,
+            'compOrgParent' => $code,
+        ];
+        $ret = ApiService::getApi($where,$params);
+        return $ret;
+    }
+
+    public static function syncAgent($sid,$code){
+        $ret = self::getApiAgent($sid,$code);
+        if($ret['retCode'] == '000000'){
+            self::perfectAgent($ret['retData']['data'],$code);
+        }
     }
 
     /*
      * 完善代理商信息
      */
-    private static function perfectAgent($list){
+    private static function perfectAgent($list,$code){
         foreach ($list as $v){
             //当前用户跳过
-            if($v['compOrgCode'] == session('lkl_user')['org_code']){
+            if($v['compOrgCode'] == $code){
                 continue;
             }
             $info = UserModel::tb()->where(['lkl_org_code' => $v['compOrgCode']])->find();
 
             $data = [
                 'pid' => session('lkl_user')['id'],
+                'porg_code' => $code,
                 'user_nickname' => isset($v['crName'])?$v['crName']:'',
                 'lkl_org_code' => isset($v['compOrgCode'])?$v['compOrgCode']:'',
                 'user_card' => isset($v['crLicenceNo'])?$v['crLicenceNo']:'',
@@ -137,6 +141,10 @@ class UserService
                 UserModel::tb()->update($data);
             }else{
                 UserModel::tb()->insert($data);
+            }
+            $ret = self::getApiAgent(session('lkl_user')['sid'],$v['compOrgCode']);
+            if($ret['retCode'] == '000000' && $ret['retData']['count'] > 1){
+                self::perfectAgent($ret['retData']['data'],$v['compOrgCode']);
             }
         }
     }
