@@ -11,6 +11,9 @@
 
 namespace app\admin\controller;
 
+use app\admin\model\UserModel;
+use app\admin\service\MemberService;
+use app\api\controller\LklController;
 use cmf\controller\AdminBaseController;
 use think\Db;
 use app\user\model\CoinModel;
@@ -184,6 +187,41 @@ class MemberController extends AdminBaseController
         $ret = $m_coin->txPass($id);
         if($ret > 0){
             $this->success("审核成功");
+        }
+    }
+
+    /*
+     * 同步代理数据
+     */
+    public function syncData(){
+        $id = $this->request->param('id',0,'intval');
+        if($id >= 1){
+            $info = UserModel::tb()->where(['id' => $id])->find();
+            if(empty($info['lkl_org_code'])){
+                return $this->fetch('update_lkl');
+            }
+            $sid = $info['lkl_session_id'];
+            $ret = MemberService::checkLogin($sid);
+            p($ret,0);
+            if($ret['retCode'] !== '000000'){
+                $this->error('登录信息过期', url(""));
+            }
+        }
+    }
+
+    /*
+     * 登录代理获取信息
+     */
+    public function updateLklPost(){
+        if ($this->request->isPost()) {
+            $username = $_POST['user_login'];
+            $pwd = $_POST['user_pass'];
+
+            if (true !== false) {
+                $this->success("添加成功！", url("user/index"));
+            } else {
+                $this->error("添加失败！");
+            }
         }
     }
 }
