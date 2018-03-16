@@ -30,7 +30,7 @@ class MerchantService
     }
 
     /*
-     * 同步一个代理的商户信息
+     * 同步第一页代理的商户信息
      */
     public static function syncOneMerchant($code,$sid){
         $where = [
@@ -40,11 +40,37 @@ class MerchantService
             'sessionId' => $sid,
             'group' => $code,
             'start' => 0,
-            'limit' => 10000,
+            'limit' => 10,
         ];
         $ret = ApiService::getApi($where,$params);
         if($ret['retCode'] == '000000'){
             self::perfectMerchant($ret['retData']['data']);
+            $total = $ret['retData']['totalNum'];
+            if($total > 10) {
+                self::syncOtherMerchant($sid, $code, $total);
+            }
+        }
+    }
+    /*
+     * 同步剩余代理商户信息
+     */
+    private static function syncOtherMerchant($sid,$code,$total){
+        $num = ceil($total/10);
+        for($i=1; $i<$num; $i++){
+            $start = $i*10;
+            $where = [
+                'mark' => 'queryMerchant',
+            ];
+            $params = [
+                'sessionId' => $sid,
+                'group' => $code,
+                'start' => $start,
+                'limit' => 10,
+            ];
+            $ret = ApiService::getApi($where,$params);
+            if($ret['retCode'] == '000000'){
+                self::perfectMerchant($ret['retData']['data']);
+            }
         }
     }
 
