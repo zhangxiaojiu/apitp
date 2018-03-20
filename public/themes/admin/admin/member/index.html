@@ -22,6 +22,8 @@
             <tr>
                 <th>ID</th>
                 <th>PID</th>
+                <th>ORGCODE</th>
+                <th>PORGCODE</th>
                 <th>{:lang('USERNAME')}</th>
                 <th>{:lang('NICENAME')}</th>
                 <!--<th>{:lang('AVATAR')}</th>-->
@@ -44,6 +46,8 @@
                 <tr>
                     <td>{$vo.id}</td>
                     <td>{$vo.pid}</td>
+                    <td>{$vo.lkl_org_code}</td>
+                    <td>{$vo.porg_code}</td>
                     <td>{$vo['user_login']?$vo['user_login']:($vo['mobile']?$vo['mobile']:$vo['user_email'])}
                     </td>
                     <td>{$vo['user_nickname']?$vo['user_nickname']:lang('NOT_FILLED')}</td>

@@ -13,7 +13,7 @@ namespace app\admin\controller;
 
 use app\admin\model\UserModel;
 use app\admin\service\MemberService;
-use app\api\controller\LklController;
+use app\lklrj\service\ApiService;
 use cmf\controller\AdminBaseController;
 use think\Db;
 use app\user\model\CoinModel;
@@ -197,15 +197,31 @@ class MemberController extends AdminBaseController
         $id = $this->request->param('id',0,'intval');
         if($id >= 1){
             $info = UserModel::tb()->where(['id' => $id])->find();
+            $code = $info['lkl_org_code'];
+            while($info['porg_code'] != 0){
+                $info = UserModel::tb()->where(['lkl_org_code' => $info['porg_code']])->find();
+            }
             if(empty($info['lkl_org_code'])){
+                $this->assign('info',$info);
                 return $this->fetch('update_lkl');
             }
             $sid = $info['lkl_session_id'];
+
             $ret = MemberService::checkLogin($sid);
-            p($ret,0);
             if($ret['retCode'] !== '000000'){
-                $this->error('登录信息过期', url(""));
+                $this->assign('info',$info);
+                return $this->fetch('update_lkl');
             }
+
+            //开始同步数据
+            //同步代理
+            MemberService::syncAgent($sid,$code);
+            //同步终端
+            MemberService::syncTermina($sid,$code);
+            //同步商户
+            MemberService::syncMerchant($sid,$code);
+            //同步月交易
+            MemberService::syncMonthTrade($sid,$code);
         }
     }
 
@@ -214,14 +230,29 @@ class MemberController extends AdminBaseController
      */
     public function updateLklPost(){
         if ($this->request->isPost()) {
-            $username = $_POST['user_login'];
-            $pwd = $_POST['user_pass'];
-
-            if (true !== false) {
-                $this->success("添加成功！", url("user/index"));
-            } else {
-                $this->error("添加失败！");
+            $where = [
+                'mark' => 'login'
+            ];
+            $params = [
+                'loginName' => $_POST['user_login'],
+                'userPwd' => $_POST['user_pass'],
+                'code' => $_POST['vcode']
+            ];
+            $res = ApiService::getApi($where,$params);
+            if($res['retCode'] == 000000) {
+                $msg = $res['retMsg'];
+                $data['lkl_session_id'] = $res['retData']['sessionId'];
+                $data['user_nickname'] = $res['retData']['compOrgName'];
+                $data['lkl_org_code'] = $res['retData']['compOrgCode'];
+                $data['id'] = $_POST['id'];
+                $data['last_login_time'] = time();
+                $data['last_login_ip'] = get_client_ip(0, true);
+                UserModel::tb()->update($data);
+                $this->success($msg);
+            }else{
+                $msg = $res['retMsg'];
             }
+            $this->error($msg);
         }
     }
 }

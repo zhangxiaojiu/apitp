@@ -9,13 +9,13 @@
         <div class="form-group">
             <label for="input-user_name" class="col-sm-2 control-label">拉卡拉账号<span class="form-required">*</span></label>
             <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" id="input-user_name" name="user_login" value="" placeholder="请输入拉卡拉后台登录账号">
+                <input type="text" class="form-control" id="input-user_name" name="user_login" value="{$info.user_login}" placeholder="请输入拉卡拉后台登录账号" readonly>
             </div>
         </div>
         <div class="form-group">
             <label for="input-user_pwd" class="col-sm-2 control-label">拉卡拉密码<span class="form-required">*</span></label>
             <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" id="input-user_pwd" name="user_pass" placeholder="请输入拉卡拉后台登录密码">
+                <input type="password" class="form-control" id="input-user_pwd" name="user_pass" placeholder="请输入拉卡拉后台登录密码">
             </div>
         </div>
         <div class="form-group">
@@ -28,6 +28,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
+                <input type="hidden" name="id" value="{$info.id}"/>
                 <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
                 <a class="btn btn-default" href="{:url('admin/member/index')}">{:lang('BACK')}</a>
             </div>

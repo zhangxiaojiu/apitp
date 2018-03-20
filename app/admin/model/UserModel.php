@@ -18,6 +18,10 @@ class UserModel extends Model
     const TYPE_LKL_AGENT = 10; //拉卡拉代理商
     const TYPE_LKL_MERCHANT = 11; //拉卡拉商户
 
+    const STATUS_PROHIBIT = 0; //禁止状态
+    const STATUS_NORMAL = 1; //正常状态
+    const STATUS_UNVERIFIED = 2; //未验证状态
+
     public static function tb(){
         return Db::name('user');
     }
