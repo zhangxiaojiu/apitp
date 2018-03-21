@@ -7,6 +7,15 @@
         <!-- <li><a href="{:url('admin/member/add')}">添加用户</a></li> -->
     </ul>
     <form class="well form-inline margin-top-20" method="post" action="{:url('admin/member/index')}">
+        <notempty name="uid">
+        代理：
+        <select class="form-control" name="porg_code">
+            <option value="-1">大代理</option>
+            <foreach name="agentList" item="vo">
+                <option value="{$vo.lkl_org_code}">{$vo.user_nickname}</option>
+            </foreach>
+        </select>
+        </notempty>
         用户ID：
         <input class="form-control" type="text" name="uid" style="width: 200px;" value="{:input('request.uid')}"
                placeholder="请输入用户ID">

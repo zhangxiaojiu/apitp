@@ -62,9 +62,22 @@ class MemberController extends AdminBaseController
     {
         $where   = [];
         $request = input('request.');
-
+        $uid = session('ADMIN_ID');
+        $where['user_status'] = 1;
         if (!empty($request['uid'])) {
             $where['id'] = intval($request['uid']);
+        }
+
+        if($uid > 1){
+            $info = Db::name('user')->where(['id' => $uid])->find();
+            $where['porg_code'] = $info['lkl_org_code'];
+        }
+        if (!empty($request['porg_code'])) {
+            $porg_code = intval($request['porg_code']);
+            if($request['porg_code'] == -1){
+                $porg_code = 0;
+            }
+            $where['porg_code'] = $porg_code;
         }
         $keywordComplex = [];
         if (!empty($request['keyword'])) {
@@ -77,6 +90,12 @@ class MemberController extends AdminBaseController
         $usersQuery = Db::name('user');
 
         $list = $usersQuery->where($where)->whereOr($keywordComplex)->order("id DESC")->paginate(10);
+        if($uid == 1){
+            $agentList = $usersQuery->where(['porg_code' => 0,'id' => ['>',1]])->select();
+            $this->assign('uid',$uid);
+            $this->assign('agentList',$agentList);
+        }
+
         // 获取分页显示
         $page = $list->render();
         $this->assign('list', $list);
