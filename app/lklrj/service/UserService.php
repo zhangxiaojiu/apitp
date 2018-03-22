@@ -45,7 +45,7 @@ class UserService
             'sid' => $input['sid'],
             'org_code' => $input['org_code'],
         ];
-        session('lkl_user', $lklUser);
+        session('user', $lklUser);
     }
     /*
      * 获取商户、终端、代理统计

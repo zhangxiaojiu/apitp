@@ -17,15 +17,15 @@ class BaseController extends HomeBaseController
     public function _initialize()
     {
         parent::_initialize();
-        $session_user = session('lkl_user');
+        $session_user = session('user');
         if (!empty($session_user)) {
-            $user = UserModel::tb()->where(['lkl_org_code' => $session_user['org_code']])->find();
+            $user = UserModel::tb()->where(['id' => $session_user['id']])->find();
             $this->assign("user", $user);
         } else {
             if ($this->request->isPost()) {
-                $this->error("您还没有登录！", url("lklrj/public/login"));
+                $this->error("您还没有登录！", url("lklrj/public/index"));
             } else {
-                header("Location:" . url("public/login"));
+                header("Location:" . url("public/index"));
                 exit();
             }
         }
