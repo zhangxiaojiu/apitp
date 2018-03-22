@@ -33,6 +33,10 @@ class PublicController extends HomeBaseController
     {
         return $this->fetch();
     }
+    //找回密码页面
+    public function findPwd(){
+        return $this->fetch();
+    }
     //登录拉卡拉帐号
     public function doLogin(){
         $data = input('post.');
@@ -186,6 +190,47 @@ class PublicController extends HomeBaseController
                     break;
                 default :
                     $this->error('未受理的请求');
+            }
+
+        } else {
+            $this->error("请求错误");
+        }
+    }
+    /*
+     * 找回密码
+     */
+    public function doFindPwd(){
+        if ($this->request->isPost()) {
+            $rules = [
+                'username'  => 'require',
+                'code'     => 'require',
+                'password' => 'require|min:6|max:32',
+
+            ];
+
+            $validate = new Validate($rules);
+            $validate->message([
+                'code.require'     => '验证码不能为空',
+                'username.require' => '手机号不能为空',
+                'password.require' => '密码不能为空',
+                'password.max'     => '密码不能超过32个字符',
+                'password.min'     => '密码不能小于6个字符',
+            ]);
+
+            $data = $this->request->post();
+            if (!$validate->check($data)) {
+                $this->error($validate->getError());
+            }
+
+
+            $errMsg = cmf_check_verification_code($data['username'], $data['code']);
+            if (!empty($errMsg)) {
+                $this->error($errMsg);
+            }
+
+            $user['user_pass'] = cmf_password($data['password']);
+            if(Db::name('user')->where(['mobile'=>$data['username']])->update($user)){
+                $this->success('成功','/public/index');
             }
 
         } else {

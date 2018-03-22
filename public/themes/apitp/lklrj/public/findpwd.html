@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>注册帐号</title>
+    <title>找回密码</title>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style>
@@ -14,15 +14,11 @@
 <body style="height:100%; background-image:-webkit-linear-gradient(to top left, #fff,#00afec); background-image:linear-gradient(to top left,#fff,#00afec);">
 <div class="container">
 
-    <form class="js-ajax-form" style="margin-top:30%;" action="{:url('public/registeruser')}" method="post">
-        <h2 style="text-align:center; color:#fff;">注册加入拉卡拉日结系统</h2>
+    <form class="js-ajax-form" style="margin-top:30%;" action="{:url('public/dofindpwd')}" method="post">
+        <h2 style="text-align:center; color:#fff;">找回密码</h2>
         <div class="form-group">
             <label for="js-mobile-input" class="sr-only">Email address</label>
-            <input name="username" type="text" id="js-mobile-input" class="form-control" placeholder="手机号" required="" autofocus="">
-        </div>
-        <div class="form-group">
-                <label for="inputPassword" class="sr-only">Password</label>
-            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="密码" required="">
+            <input name="username" type="text" id="js-mobile-input" class="form-control" placeholder="输入手机号" required="" autofocus="">
         </div>
         <div class="form-group">
             <div style="position: relative;">
@@ -36,10 +32,14 @@
             </div>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-loadingmsg="{:lang('LOADING')}">立即注册</button>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="输入新密码" required="">
         </div>
         <div class="form-group">
-            <a style="float:left;" href="/public/findpwd">找回密码</a>
+            <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-loadingmsg="{:lang('LOADING')}">找回密码</button>
+        </div>
+        <div class="form-group">
+            <a style="float:left;" href="/public/register">注册帐号</a>
             <a style="float:right;" href="/public/index">登录</a>
         </div>
     </form>
