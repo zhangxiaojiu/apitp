@@ -146,19 +146,19 @@ class MemberService
             $info = TerminaModel::tb()->where(['code' => $v['cardNo']])->find();
 
             $data = [
-                'code' => isset($v['cardNo'])?$v['cardNo']:'',
-                'pid' => $pid,
-                'uid' => $user['id'],
-                'cid' => isset($v['org'])?$v['org']:'',
                 'status' => isset($v['status'])?$v['status']:0,
                 'detail' => isset($v['statusName'])?$v['statusName']:'未定义',
                 'time' => time(),
             ];
 
             if($info){
-                //$data['id'] = $info['id'];
-                //TerminaModel::tb()->update($data);
+                $data['id'] = $info['id'];
+                TerminaModel::tb()->update($data);
             }else{
+                $data['code'] = isset($v['cardNo'])?$v['cardNo']:'';
+                $data['pid'] = $pid;
+                $data['uid'] = $user['id'];
+                $data['cid'] = isset($v['org'])?$v['org']:'';
                 TerminaModel::tb()->insert($data);
             }
         }

@@ -16,7 +16,7 @@ class PosController extends AdminBaseController
     {
         $uid = session('ADMIN_ID');
         $where = [];
-        $where['uid'] = $uid;
+        $where['pid'] = $uid;
         $request = input('request.');
 
         if (!empty($request['cid'])) {
@@ -45,7 +45,7 @@ class PosController extends AdminBaseController
             $keywordComplex = session('search')['keyword'];
         }
 
-        $userList = UserModel::tb()->where(['pid' => $uid])->select();
+        $userList = UserModel::tb()->where(['pid' => $uid,'user_status' => 1])->whereOr(['id'=>$uid])->select();
         $this->assign('userlist', $userList);
 
         $q_pos = Db::name('pos');
