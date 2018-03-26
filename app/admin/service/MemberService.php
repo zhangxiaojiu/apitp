@@ -44,31 +44,31 @@ class MemberService
         return $ret;
     }
     //同步代理
-    public static function syncAgent($sid,$code){
+    public static function syncAgent($sid,$code,$pid){
         $ret = self::getApiAgent($sid,$code,1);
         if($ret['retCode'] == '000000'){
-            self::perfectAgent($ret['retData']['data'],$code);
+            self::perfectAgent($ret['retData']['data'],$code,$pid);
             $total = $ret['retData']['count'];
             if($total > 10) {
-                self::syncOtherAgent($sid, $code, $total);
+                self::syncOtherAgent($sid, $code, $total,$pid);
             }
         }
     }
     //同步其他代理
-    public static function syncOtherAgent($sid,$code,$total){
+    public static function syncOtherAgent($sid,$code,$total,$pid){
         $num = ceil($total/10);
         for($i=1; $i<$num; $i++){
             $start = $i+1;
             $ret = self::getApiAgent($sid,$code,$start);
             if($ret['retCode'] == '000000'){
-                self::perfectAgent($ret['retData']['data'],$code);
+                self::perfectAgent($ret['retData']['data'],$code,$pid);
             }
         }
     }
     /*
    * 完善代理商信息
    */
-    private static function perfectAgent($list,$code){
+    private static function perfectAgent($list,$code,$pid){
         foreach ($list as $v) {
             //当前用户跳过
             if ($v['compOrgCode'] == $code) {
@@ -77,6 +77,7 @@ class MemberService
             $info = UserModel::tb()->where(['lkl_org_code' => $v['compOrgCode']])->find();
 
             $data = [
+                'pid' => $pid,
                 'porg_code' => $code,
                 'user_nickname' => isset($v['crName']) ? $v['crName'] : '',
                 'lkl_org_code' => isset($v['compOrgCode']) ? $v['compOrgCode'] : '',
@@ -118,35 +119,35 @@ class MemberService
         return $ret;
     }
     //同步第一页
-    public static function syncTermina($sid,$code){
+    public static function syncTermina($sid,$code,$pid){
         $ret = self::getApiTermina($sid,$code,0);
         if($ret['retCode'] == '000000'){
-            self::perfectTermina($ret['retData']['data'],$code);
+            self::perfectTermina($ret['retData']['data'],$code,$pid);
             $total = $ret['retData']['totalNum'];
             if($total > 500) {
-                self::syncOtherTermina($sid, $code, $total);
+                self::syncOtherTermina($sid, $code, $total,$pid);
             }
         }
     }
     //同步其他页
-    public static function syncOtherTermina($sid,$code,$total){
+    public static function syncOtherTermina($sid,$code,$total,$pid){
         $num = ceil($total/500);
         for($i=1; $i<$num; $i++){
             $start = $i*500;
             $ret = self::getApiTermina($sid,$code,$start);
             if($ret['retCode'] == '000000'){
-                self::perfectTermina($ret['retData']['data'],$code);
+                self::perfectTermina($ret['retData']['data'],$code,$pid);
             }
         }
     }
-    private static function perfectTermina($list,$code){
+    private static function perfectTermina($list,$code,$pid){
         $user = UserModel::tb()->where(['lkl_org_code' => $code])->find();
         foreach ($list as $v){
             $info = TerminaModel::tb()->where(['code' => $v['cardNo']])->find();
 
             $data = [
                 'code' => isset($v['cardNo'])?$v['cardNo']:'',
-                'pid' => $user['pid'],
+                'pid' => $pid,
                 'uid' => $user['id'],
                 'cid' => isset($v['org'])?$v['org']:'',
                 'status' => isset($v['status'])?$v['status']:0,
@@ -182,37 +183,38 @@ class MemberService
     /*
      * 同步第一页代理的商户信息
      */
-    public static function syncMerchant($sid,$code){
+    public static function syncMerchant($sid,$code,$pid){
         $ret = self::getApiMerchant($sid,$code,0);
         if($ret['retCode'] == '000000'){
-            self::perfectMerchant($ret['retData']['data']);
+            self::perfectMerchant($ret['retData']['data'],$pid);
             $total = $ret['retData']['totalNum'];
             if($total > 10) {
-                self::syncOtherMerchant($sid, $code, $total);
+                self::syncOtherMerchant($sid, $code, $total,$pid);
             }
         }
     }
     /*
      * 同步剩余代理商户信息
      */
-    private static function syncOtherMerchant($sid,$code,$total){
+    private static function syncOtherMerchant($sid,$code,$total,$pid){
         $num = ceil($total/10);
         for($i=1; $i<$num; $i++){
             $start = $i*10;
             $ret = self::getApiMerchant($sid,$code,$start);
             if($ret['retCode'] == '000000'){
-                self::perfectMerchant($ret['retData']['data']);
+                self::perfectMerchant($ret['retData']['data'],$pid);
             }
         }
     }
     /*
      * 完善商户信息
      */
-    private static function perfectMerchant($list){
+    private static function perfectMerchant($list,$pid){
         foreach ($list as $v){
             $info = MerchantModel::tb()->where(['merchant_code' => $v['posmercode']])->find();
 
             $data = [
+                'pid' => $pid,
                 'merchant_code' => isset($v['posmercode'])?$v['posmercode']:'',
                 'merchant_name' => isset($v['merchantName'])?$v['merchantName']:'',
                 'agent_id' => isset($v['group'])?$v['group']:'',

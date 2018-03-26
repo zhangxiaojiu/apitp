@@ -26,6 +26,8 @@ class PublicController extends HomeBaseController
     }
     //注册页面
     public function register(){
+        $pid = isset($_GET['pid'])?$_GET['pid']:0;
+        $this->assign('pid',$pid);
         return $this->fetch();
     }
     // 登录页面
@@ -150,11 +152,12 @@ class PublicController extends HomeBaseController
             if (preg_match('/(^(13\d|15[^4\D]|17[13678]|18\d)\d{8}|170[^346\D]\d{7})$/', $data['username'])) {
                 $user['mobile'] = $data['username'];
                 $user['user_login'] = $data['username'];
+                $user['pid'] = isset($data['pid'])?$data['pid']:0;
                 $result = Db::name("user")->where('mobile', $user['mobile'])->find();
 
                 if (empty($result)) {
                     $data = [
-                        //'pid' => $user['pid'],
+                        'pid' => $user['pid'],
                         'user_login' => $user['user_login'],
                         'user_email' => '',
                         'mobile' => $user['mobile'],

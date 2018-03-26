@@ -69,8 +69,8 @@ class MemberController extends AdminBaseController
         }
 
         if($uid > 1){
-            $info = Db::name('user')->where(['id' => $uid])->find();
-            $where['porg_code'] = $info['lkl_org_code'];
+            //$info = Db::name('user')->where(['id' => $uid])->find();
+            $where['pid'] = $uid;
         }
         if (!empty($request['porg_code'])) {
             $porg_code = intval($request['porg_code']);
@@ -80,6 +80,7 @@ class MemberController extends AdminBaseController
             $where['porg_code'] = $porg_code;
         }
         $keywordComplex = [];
+        $keywordComplex['id'] = $uid;
         if (!empty($request['keyword'])) {
             $keyword = $request['keyword'];
 
@@ -225,7 +226,7 @@ class MemberController extends AdminBaseController
                 return $this->fetch('update_lkl');
             }
             $sid = $info['lkl_session_id'];
-
+            $pid = $info['id'];
             $ret = MemberService::checkLogin($sid);
             if($ret['retCode'] !== '000000'){
                 $this->assign('info',$info);
@@ -234,13 +235,15 @@ class MemberController extends AdminBaseController
 
             //开始同步数据
             //同步代理
-            MemberService::syncAgent($sid,$code);
+            MemberService::syncAgent($sid,$code,$pid);
             //同步终端
-            MemberService::syncTermina($sid,$code);
+            MemberService::syncTermina($sid,$code,$pid);
             //同步商户
-            MemberService::syncMerchant($sid,$code);
+            MemberService::syncMerchant($sid,$code,$pid);
             //同步月交易
             MemberService::syncMonthTrade($sid,$code);
+
+            $this->success('同步成功');
         }
     }
 
@@ -273,5 +276,13 @@ class MemberController extends AdminBaseController
             }
             $this->error($msg);
         }
+    }
+
+    /*
+     * 分享连接
+     */
+    public function share(){
+        $this->assign('id',session('ADMIN_ID'));
+        return $this->fetch();
     }
 }

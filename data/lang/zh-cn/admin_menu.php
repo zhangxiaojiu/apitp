@@ -27,6 +27,7 @@ return array (
   'ADMIN_MEMBER_DEFAULT' => '用户管理',
   'ADMIN_MEMBER_DEFAULT1' => '用户组',
   'ADMIN_MEMBER_INDEX' => '本站用户',
+  'ADMIN_MEMBER_SHARE' => '分享连接',
   'ADMIN_MENU_ADD' => '后台菜单添加',
   'ADMIN_MENU_ADDPOST' => '后台菜单添加提交保存',
   'ADMIN_MENU_DELETE' => '后台菜单删除',

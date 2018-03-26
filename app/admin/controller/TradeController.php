@@ -35,4 +35,18 @@ class TradeController extends AdminBaseController
         $this->assign('page', $page);
         return $this->fetch();
     }
+
+    /*
+     * 交易统计
+     */
+    public function count(){
+        echo "统计";
+    }
+
+    /*
+     * 导入记录
+     */
+    public function import(){
+        echo "开发中";
+    }
 }
