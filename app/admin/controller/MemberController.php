@@ -281,8 +281,10 @@ class MemberController extends AdminBaseController
     /*
      * 分享连接
      */
-    public function share(){
-        $this->assign('id',session('ADMIN_ID'));
+    public function option(){
+        $id = session('ADMIN_ID');
+        $info = UserModel::tb()->find($id);
+        $this->assign('info',$info);
         return $this->fetch();
     }
 }

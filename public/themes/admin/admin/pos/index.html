@@ -15,12 +15,13 @@
                placeholder="机具号">
         状态：
         <php>
-        $status = input('request.status');
-        $isSelected = array("0" => $status == 0?"selected":"",
-                            "1" => $status == 1?"selected":"",
-                            "2" => $status == 2?"selected":"",
-                            "-1" => $status == "未绑定"?"selected":"",
-        );
+            $status = input('request.status');
+            $isSelected = array("0" => $status == 0?"selected":"",
+                                "1" => $status == 1?"selected":"",
+                                "2" => $status == 2?"selected":"",
+                                "-1" => $status == "未绑定"?"selected":"",
+            );
+            $yesno = array("0" => '否',"1" => "是");
         </php>
         <select class="form-control" name="status">
             <option value="0" {$isSelected['0']}>全部</option>
@@ -40,7 +41,8 @@
                 <th>UID</th>
                 <th>机具号</th>
                 <th>机构号</th>
-                <th>状态</th>
+                <th>是否绑定</th>
+                <th>是否激活</th>
                 <!--<th>{:lang('ACTIONS')}</th>-->
             </tr>
             </thead>
@@ -52,7 +54,8 @@
                     <td>{$vo.uid}</td>
                     <td>{$vo.code}</td>
                     <td>{$vo.cid}</td>
-                    <td>{$vo.detail}</td>
+                    <td>{$yesno[$vo.status]}</td>
+                    <td>{$yesno[$vo.is_ok]}</td>
                     <!--<td>-->
 
                     <!--</td>-->

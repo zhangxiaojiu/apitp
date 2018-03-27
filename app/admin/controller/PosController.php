@@ -16,14 +16,17 @@ class PosController extends AdminBaseController
     {
         $uid = session('ADMIN_ID');
         $where = [];
-        $where['pid'] = $uid;
         $request = input('request.');
 
         if (!empty($request['cid'])) {
             $where['cid'] = intval($request['cid']);
         }
         if (!empty($request['status'])) {
-            $where['status'] = intval($request['status']);
+            if($request['status'] <=1) {
+                $where['status'] = $request['status'];
+            }else{
+                $where['is_ok'] = 1;
+            }
         }
         $keywordComplex = [];
         if (!empty($request['keyword'])) {
@@ -40,10 +43,11 @@ class PosController extends AdminBaseController
         if (!empty($where) || !empty($keywordComplex)) {
             session('search', $search);
         }
-        if ($page > 1) {
+        if ($page >= 1) {
             $where = session('search')['where'];
             $keywordComplex = session('search')['keyword'];
         }
+        $where['pid'] = $uid;
 
         $userList = UserModel::tb()->where(['pid' => $uid,'user_status' => 1])->whereOr(['id'=>$uid])->select();
         $this->assign('userlist', $userList);

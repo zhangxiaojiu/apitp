@@ -314,4 +314,31 @@ class MemberService
             }
         }
     }
+
+    /*
+     * 获取交易统计接口
+     */
+    public static function getApiTradeCount($sid,$code,$startDate,$endDate){
+        $where = [
+            'mark' => 'queryTradeCount',
+        ];
+        $params = [
+            'sessionId' => $sid,
+            'signOrg' => $code,
+            'transCode' => 'P_ALL',
+            'pageNo' => 1,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+        ];
+        $ret = ApiService::getApi($where,$params);
+        return $ret;
+    }
+
+    /*
+     * 获取用户列表
+     */
+    public static function getUserList($id,$status){
+        $ret = UserModel::tb()->where(['pid' => $id,'user_status' => $status])->whereOr(['id' => $id])->select();
+        return $ret;
+    }
 }

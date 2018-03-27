@@ -26,4 +26,8 @@ class UserModel extends Model
         return Db::name('user');
     }
 
+    public static function getInfoById($id){
+        $ret = self::tb()->find($id);
+        return $ret;
+    }
 }
