@@ -13,7 +13,9 @@ namespace app\admin\controller;
 
 use app\admin\model\UserModel;
 use app\admin\service\MemberService;
+use app\admin\service\TerminaService;
 use app\lklrj\service\ApiService;
+use app\lklrj\service\TradeService;
 use cmf\controller\AdminBaseController;
 use think\Db;
 use app\user\model\CoinModel;
@@ -286,5 +288,21 @@ class MemberController extends AdminBaseController
         $info = UserModel::tb()->find($id);
         $this->assign('info',$info);
         return $this->fetch();
+    }
+
+    /*
+     * 终端激活
+     */
+    public function activateTerminal(){
+        $this->error('由于接口注册时间不准确，暂时不能统一检验是否达标，请在终端列表手动达标');
+        $pid = $this->request->param('pid',0);
+        if($pid == 0){
+            $this->error('参数错误');
+        }
+        $terminalList = TerminaService::getListByPid($pid,1,2);
+        foreach ($terminalList as $v){
+            //$code = $v['code'];
+            //$is_ok = TradeService::isTerminalActivate($code);
+        }
     }
 }

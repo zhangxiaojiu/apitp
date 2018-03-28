@@ -61,4 +61,14 @@ class TradeService
             }
         }
     }
+
+    /*
+     * 终端是否激活
+     */
+    public static function isTerminalActivate($code){
+        $where['term_no'] = $code;
+        $where['trans_time'] = $code;
+        $list = TradeModel::tb()->where($where)->select();
+        return $list;
+    }
 }

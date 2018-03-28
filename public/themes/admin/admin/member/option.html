@@ -10,6 +10,24 @@
         <div class="col-md-6 col-sm-10">
             <input type="text" class="form-control" value="http://app.sckemeinuo.com/public/register?pid={$info.id}" readonly="readonly">
         </div>
+    </div><br/><br/>
+    <div class="form-group margin-top-20">
+        <label class="col-sm-2 control-label">同步数据:</label>
+        <div class="col-md-6 col-sm-10">
+            <a class="btn btn-default" href="{:url('member/syncData',array('id'=>$info.id))}">同步</a>
+        </div>
+    </div><br/><br/>
+    <!--<div class="form-group margin-top-20">-->
+        <!--<label class="col-sm-2 control-label">终端激活:</label>-->
+        <!--<div class="col-md-6 col-sm-10">-->
+            <!--<a class="btn btn-default" href="{:url('member/activateTerminal',array('pid'=>$info.id))}">检验</a>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="form-group margin-top-20">
+        <label class="col-sm-2 control-label">分润核算:</label>
+        <div class="col-md-6 col-sm-10">
+            <a class="btn btn-default" href="{:url('member/syncData',array('id'=>$info.id))}">核算</a>
+        </div>
     </div>
 </div>
 <script src="__STATIC__/js/admin.js"></script>

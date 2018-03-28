@@ -43,7 +43,7 @@
                 <th>机构号</th>
                 <th>是否绑定</th>
                 <th>是否激活</th>
-                <!--<th>{:lang('ACTIONS')}</th>-->
+                <th>{:lang('ACTIONS')}</th>
             </tr>
             </thead>
             <tbody>
@@ -56,9 +56,13 @@
                     <td>{$vo.cid}</td>
                     <td>{$yesno[$vo.status]}</td>
                     <td>{$yesno[$vo.is_ok]}</td>
-                    <!--<td>-->
-
-                    <!--</td>-->
+                    <td>
+                        <eq name="vo.status" value="1">
+                            <eq name="vo.is_ok" value="0">
+                                <a class="btn btn-info btn-sm" href="{:url('pos/activate')}">激活</a>
+                            </eq>
+                        </eq>
+                    </td>
                 </tr>
             </foreach>
             </tbody>
