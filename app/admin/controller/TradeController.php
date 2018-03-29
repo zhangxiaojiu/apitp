@@ -13,6 +13,7 @@ use app\admin\model\TradeModel;
 use app\admin\model\UserModel;
 use app\admin\service\MemberService;
 use app\admin\service\TerminaService;
+use app\admin\service\TradeService;
 use cmf\controller\AdminBaseController;
 
 class TradeController extends AdminBaseController
@@ -80,19 +81,8 @@ class TradeController extends AdminBaseController
             $startDate = str_replace('-','',$_POST['startDate']);
             $endDate = str_replace('-','',$_POST['endDate']);
             if($codeArr[0] == 'sys'){
-                $terminaList = TerminaService::getListByUid($code);
-                foreach($terminaList as $v){
-                    $terminaArray[] = $v['code'];
-                }
-                $where['term_no'] = ['IN',$terminaArray];
-                $where['trans_time'] = ['between',"$startDate,$endDate"];
-                $tradeList = TradeModel::tb()->where($where)->select();
-                $amt = 0;
-                foreach ($tradeList as $v){
-                    $amt += $v['trans_amt'];
-                }
-                $total['num'] = count($tradeList);
-                $total['amt'] = $amt;
+
+                $total = TradeService::getTradeTotal($code,$startDate,$endDate);
                 $info = UserModel::getInfoById($code);
                 $list[0]['maintainOrg'] = $info['user_nickname'];
                 $list[0]['transCntTotal'] = $total['num'];

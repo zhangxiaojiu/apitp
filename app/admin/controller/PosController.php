@@ -4,6 +4,7 @@ namespace app\admin\controller;
 
 use app\admin\model\TerminaModel;
 use app\admin\model\UserModel;
+use app\admin\service\TerminaService;
 use cmf\controller\AdminBaseController;
 use think\Db;
 use app\user\model\PosModel;
@@ -63,6 +64,9 @@ class PosController extends AdminBaseController
         return $this->fetch();
     }
 
+    /*
+     * 划拨机器
+     */
     public function transfer()
     {
         $data = $_POST;
@@ -87,6 +91,28 @@ class PosController extends AdminBaseController
             $this->success('划拨成功，有'.$errorPos.'台已绑终端不可划拨');
         }
         $this->success('全部划拨成功');
+    }
+
+    /*
+     * 激活机器
+     */
+    public function activate()
+    {
+        $id = input('param.id', 0);
+        if ($id > 0) {
+
+            $ret = TerminaService::doActive($id, true);
+            if($ret == -1){
+                $this->error('写入记录错误');
+            }
+            if ($ret > 0) {
+                $this->success('激活完成');
+            } else {
+                $this->error('激活失败');
+            }
+        } else {
+            $this->error('参数错误');
+        }
     }
 
     public function add()

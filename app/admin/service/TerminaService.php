@@ -10,6 +10,7 @@ namespace app\admin\service;
 
 
 use app\admin\model\TerminaModel;
+use think\Db;
 
 class TerminaService
 {
@@ -32,5 +33,40 @@ class TerminaService
         }
         $ret = TerminaModel::tb()->where($where)->select();
         return $ret;
+    }
+    //终端激活处理
+    public static function doActive($id,$isMoney = false)
+    {
+        $data['id'] = $id;
+        $data['is_ok'] = 1;
+        Db::startTrans();
+        $ret = TerminaModel::tb()->update($data);
+        if($ret > 0){
+            if($isMoney){
+                $row_pos = TerminaModel::tb()->find($id);
+                $coin = 99;
+                $data_f = [
+                    'uid' => $row_pos['uid'],
+                    'coin' => $coin,
+                    'type' => 'active',
+                    'detail' => '激活'.$row_pos['code'].'奖励',
+                    'status' => 1,
+                ];
+                $ret = CoinLogService::addCoinLog($data_f);
+                if(!$ret){
+                    Db::rollback();
+                    return -1;
+                }
+                $retCoin = CoinService::changeCoin($row_pos['uid'],'activate',$coin);
+                if(!$retCoin){
+                    Db::rollback();
+                    return -1;
+                }
+            }
+            Db::commit();
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }

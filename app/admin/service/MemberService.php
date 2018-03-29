@@ -335,10 +335,54 @@ class MemberService
     }
 
     /*
-     * 获取用户列表
+     * 获取用户列表包括本身
      */
     public static function getUserList($id,$status){
         $ret = UserModel::tb()->where(['pid' => $id,'user_status' => $status])->whereOr(['id' => $id])->select();
         return $ret;
+    }
+    /*
+     * 获取下级用户列表
+     */
+    public static function getUserListByPid($id,$status){
+        $ret = UserModel::tb()->where(['pid' => $id,'user_status' => $status])->select();
+        return $ret;
+    }
+
+    /*
+     * 设置所有分润比例
+     */
+    public static function setRunScale($id){
+        $uList = self::getUserListByPid($id,1);
+        $time = time();
+        $startDate = getBeforeMonthStart($time);
+        $endDate = getBeforeMonthEnd($time);
+
+        foreach ($uList as $v){
+            $uid = $v['id'];
+            $total = TradeService::getTradeTotal($uid,$startDate,$endDate);
+            $money = floor($total['amt']/10000);
+            self::setRunScaleByUid($uid,$money);
+        }
+    }
+
+    /*
+     * 设置分润比例   by uid money
+     */
+    public static function setRunScaleByUid($uid,$money){
+        $trade = cmf_get_option('level_trade');
+
+        foreach ($trade as $k=>$v){
+            if($money>$v){
+                continue;
+            }
+            if($money<$v){
+                $level = $k;
+                break;
+            }
+        }
+        $data['id'] = $uid;
+        $data['run_level'] = $level;
+        UserModel::tb()->update($data);
     }
 }

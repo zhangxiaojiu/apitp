@@ -15,7 +15,6 @@ use app\admin\model\UserModel;
 use app\admin\service\MemberService;
 use app\admin\service\TerminaService;
 use app\lklrj\service\ApiService;
-use app\lklrj\service\TradeService;
 use cmf\controller\AdminBaseController;
 use think\Db;
 use app\user\model\CoinModel;
@@ -272,7 +271,7 @@ class MemberController extends AdminBaseController
                 $data['last_login_time'] = time();
                 $data['last_login_ip'] = get_client_ip(0, true);
                 UserModel::tb()->update($data);
-                $this->success($msg);
+                $this->success($msg.'正在同步……');
             }else{
                 $msg = $res['retMsg'];
             }
@@ -286,8 +285,41 @@ class MemberController extends AdminBaseController
     public function option(){
         $id = session('ADMIN_ID');
         $info = UserModel::tb()->find($id);
+
+        $trade = cmf_get_option('level_trade');
+        $scale = cmf_get_option('level_scale');
+        $level['trade'] = implode(',',$trade);
+        $level['scale'] = implode(',',$scale);
+
+        $this->assign('level',$level);
         $this->assign('info',$info);
         return $this->fetch();
+    }
+
+    /*
+     * 分润级别比例
+     */
+    public function setLevel(){
+        if ($this->request->isPost()) {
+            $trade = explode(',',$this->request->param('trade'));
+            $scale = explode(',',$this->request->param('scale'));
+
+            cmf_set_option('level_trade',$trade,true);
+            cmf_set_option('level_scale',$scale,true);
+            $this->success("设置成功！");
+        }
+    }
+
+    /*
+     * 设置用户分润比例
+     */
+    public function setRunScale(){
+        $id = $this->request->param('id',0);
+        if($id == 0){
+            $this->error('参数错误');
+        }
+        MemberService::setRunScale($id);
+        $this->success('设置成功');
     }
 
     /*

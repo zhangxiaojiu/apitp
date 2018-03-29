@@ -1820,3 +1820,21 @@ function p($arr,$e=true){
         exit;
     }
 }
+
+/*
+ * 获取上月月初日期
+ */
+function getBeforeMonthStart($time){
+    $bDate = date('Y-m-01 00:00:00',$time);
+    $bTime = strtotime($bDate)-1;
+    return date('Ym01',$bTime);
+}
+
+/*
+ * 获取上月月末日期
+ */
+function getBeforeMonthEnd($time){
+    $bDate = date('Y-m-01 00:00:00',$time);
+    $bTime = strtotime($bDate)-1;
+    return date('Ymd',$bTime);
+}
