@@ -353,17 +353,29 @@ class MemberService
      * 设置所有分润比例
      */
     public static function setRunScale($id){
-        $uList = self::getUserListByPid($id,1);
-        $time = time();
-        $startDate = getBeforeMonthStart($time);
-        $endDate = getBeforeMonthEnd($time);
-
-        foreach ($uList as $v){
-            $uid = $v['id'];
-            $total = TradeService::getTradeTotal($uid,$startDate,$endDate);
-            $money = floor($total['amt']/10000);
-            self::setRunScaleByUid($uid,$money);
+        //一级设为最高级别
+        $uInfo = UserModel::getInfoById($id);
+        if($uInfo['pid'] == 0){
+            self::setRunScaleByUid($id,10000000000);
         }
+
+        $uList = self::getUserListByPid($id,1);
+        $ret = 0;
+        if(count($uList) > 0) {
+            $time = time();
+            $startDate = getBeforeMonthStart($time);
+            $endDate = getBeforeMonthEnd($time);
+            foreach ($uList as $v) {
+                $uid = $v['id'];
+                $total = TradeService::getTradeTotal($uid, $startDate, $endDate);
+                $childTotal = self::setRunScale($uid);
+                $allTotal = $total['amt'] + $childTotal['amt'];
+                $money = floor($allTotal / 10000);
+                self::setRunScaleByUid($uid, $money);
+                $ret += $allTotal;
+            }
+        }
+        return $ret;
     }
 
     /*
@@ -371,13 +383,11 @@ class MemberService
      */
     public static function setRunScaleByUid($uid,$money){
         $trade = cmf_get_option('level_trade');
-
+        $level = 0;
         foreach ($trade as $k=>$v){
-            if($money>$v){
-                continue;
-            }
-            if($money<$v){
-                $level = $k;
+            if($money>=$v){
+                $level++;
+            }else{
                 break;
             }
         }

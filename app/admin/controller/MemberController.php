@@ -14,6 +14,7 @@ namespace app\admin\controller;
 use app\admin\model\UserModel;
 use app\admin\service\MemberService;
 use app\admin\service\TerminaService;
+use app\admin\service\TradeService;
 use app\lklrj\service\ApiService;
 use cmf\controller\AdminBaseController;
 use think\Db;
@@ -336,5 +337,18 @@ class MemberController extends AdminBaseController
             //$code = $v['code'];
             //$is_ok = TradeService::isTerminalActivate($code);
         }
+    }
+
+    /*
+     * 核算分润
+     */
+    public function calculateRun(){
+        $id = $this->request->param('id',0);
+        if($id == 0){
+            $this->error('参数错误');
+        }
+        TradeService::calculateRunByUid($id);
+        TradeService::calculateAllRun($id);
+        $this->success('核算分润成功');
     }
 }

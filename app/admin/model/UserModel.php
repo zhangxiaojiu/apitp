@@ -30,4 +30,12 @@ class UserModel extends Model
         $ret = self::tb()->find($id);
         return $ret;
     }
+
+    public static function getScaleById($id){
+        $uInfo = self::getInfoById($id);
+        $level = $uInfo['run_level'];
+        $scaleArray = cmf_get_option('level_scale');
+        $scale = $scaleArray[$level]/10000;
+        return $scale;
+    }
 }
