@@ -3,21 +3,50 @@
 <div class="top-bar pr30"><a href="{:url('index/user')}"><span class="glyphicon glyphicon-menu-left fl"></span></a>我的钱包</div>
 <div class="mt50"></div>
 <div class="user-top">
-
-    <h1 class="pt20">￥0.00</h1>
+    <h1 class="pt10">￥{$account.coin}</h1>
     当前余额(元)
-</div>
-
-<div class="carpet">
-    <h4>今日分润：<span class="view-money">￥12580</span></h4>
-    <div class="top-line">
-        <div class="one-from-two tac right-line"><span class="glyphicon glyphicon-yen icon-money"></span>分润记录</div>
-        <div class="one-from-two tac"><span class="glyphicon glyphicon-align-left icon-time"></span>提现记录</div>
+    <div class="carpet" style="color:#00afec">
+        <div class="one-from-three right-line tac">{$account.run}<br>累计分润</div></a>
+        <div class="one-from-three right-line tac">{$account.activate}<br>累计返现</div></a>
+        <div class="one-from-three tac">{$account.diff_run}<br>累计差值</div></a>
     </div>
 </div>
 
-<div class="carpet">
+<div class="carpet" style="margin-top:40px;">
     <button type="button" class="btn btn-lg btn-info w100">提现</button>
+</div>
+
+<div class="carpet">
+    <h4>资金记录：</h4>
+    <div class="top-line">
+        <div class="pagination">{$page}</div>
+        <php>
+            $types = [
+                'run' => '分润核算',
+                'activate' => '激活发现',
+                'withdraw' => '提现',
+                'diff_run' => '分润差值'
+            ];
+        </php>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>金额</th>
+                <th>类型</th>
+                <th>备注</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td>{$vo.coin}</td>
+                    <td width="50">{$types[$vo.type]}</td>
+                    <td>{$vo.detail}</td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 

@@ -17,4 +17,8 @@ class CoinModel extends Model
     public static function tb(){
         return Db::name('coin');
     }
+    public static function getInfoById($id){
+        $ret = self::tb()->where(['uid'=>$id])->find();
+        return $ret;
+    }
 }

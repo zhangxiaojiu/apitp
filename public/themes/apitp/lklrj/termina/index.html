@@ -2,25 +2,70 @@
 <div class="top-bar pr30"><a href="{:url('index/user')}"><span class="glyphicon glyphicon-menu-left fl"></span></a>我的终端</div>
 <div class="mt60"></div>
 <div class="carpet">
-    <h4><span class="icon-inm glyphicon glyphicon-save-file"></span>我的终端  <a class="fr" href="{:url('api/synctermina')}">同步终端</a></h4>
+    <h4><span class="icon-inm glyphicon glyphicon-hdd"></span>我的终端  <a class="fr" >共计{$num}个</a></h4>
+    <php>
+        $status = input('request.status');
+        $isSelected = array("0" => $status == 0?"selected":"",
+        "1" => $status == 1?"selected":"",
+        "2" => $status == 2?"selected":"",
+        "-1" => $status == "未绑定"?"selected":"",
+        );
+        $yesNo = array("0" => '否',"1" => "是");
+    </php>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('termina/index')}">
+        机具号：
+        <input class="form-control" type="text" name="keyword" value="{:input('request.keyword')}"
+               placeholder="模糊机具号">
+        状态：
+        <select class="form-control" name="status">
+            <option value="0" {$isSelected['0']}>全部</option>
+            <option {$isSelected['-1']}>未绑定</option>
+            <option value="1" {$isSelected['1']}>已绑定</option>
+            <option value="2" {$isSelected['2']}>已激活</option>
+        </select>
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('termina/index')}">清空</a>
+    </form>
+    <form class="js-ajax-form" method="post" action="{:url('termina/transfer')}">
     <table class="table table-striped">
         <thead>
         <tr>
+            <th width="60"><input type="checkbox"  onclick="checkAll(this)"/>全选</th>
             <th>机具号</th>
-            <th>所属机构号</th>
-            <th>状态</th>
+            <th>是否绑定</th>
+            <th>是否激活</th>
         </tr>
         </thead>
         <tbody>
         <foreach name="list" item="vo">
             <tr>
+                <td><input class="pos-check" type="checkbox" name="checkarr[{$vo.id}]" /></td>
                 <td width="40%">{$vo.code}</td>
-                <td>{$vo.cid}</td>
-                <td>{$vo.detail}</td>
+                <td>{$yesNo[$vo.status]}</td>
+                <td>{$yesNo[$vo.is_ok]}</td>
             </tr>
         </foreach>
         </tbody>
     </table>
+    <h4>划拨选中终端 至
+        <select name="uid" style="border:1px">
+            <foreach name="userlist" item="vo">
+                <option value="{$vo.id}">{$vo.user_nickname}</option>
+            </foreach>
+        </select>
+        <button class="btn btn-info js-ajax-submit" type="submit" data-loadingmsg="{:lang('LOADING')}">划拨</button>
+    </h4>
+    </form>
     <div class="pagination">{$page}</div>
 </div>
 <include file="public/foot"/>
+<script>
+    function checkAll(obj){
+        var sta = obj.checked;
+        if(sta){
+            $(".pos-check").attr('checked',true);
+        }else{
+            $(".pos-check").removeAttr('checked',false);
+        }
+    }
+</script>

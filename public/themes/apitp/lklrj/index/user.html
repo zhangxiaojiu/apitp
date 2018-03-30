@@ -7,24 +7,19 @@
 <div class="mt50"></div>
 <div class="user-top">
     <img class="head" src="__TMPL__/lklrj/public/assets/home/head.png"><br/>
-    {$user.user_nickname}
+    {$user.user_nickname}(LV{$user.run_level})
 </div>
 <!-- end top bar -->
 <div class="carpet">
-    <a href="{:url('merchant/index')}"><div class="one-from-three right-line tac">{$user.lkl_merchant}<br>我的商户</div></a>
-    <a href="{:url('termina/index')}"><div class="one-from-three right-line tac">{$user.lkl_termina}<br>我的终端</div></a>
-    <a href="{:url('agent/index')}"><div class="one-from-three tac">{$user.lkl_agent}<br>我的代理</div></a>
+    <a href="{:url('termina/index')}"><div class="one-from-two right-line tac"><span class="glyphicon glyphicon-hdd"></span><br>我的终端</div></a>
+    <a href="{:url('agent/index')}"><div class="one-from-two tac"><span class="glyphicon glyphicon-tags"></span><br>我的代理</div></a>
 </div>
 <div class="carpet">
     <a href="{:url('acount/index')}"><h4 class=""><span class="glyphicon glyphicon-piggy-bank icon-time"></span>我的钱包 <span class="fr">￥{$user.coin}</span></h4></a>
     <a href="{:url('trade/index')}"><h4 class=""><span class="glyphicon glyphicon-random icon-time"></span>交易记录</h4></a>
     <a href="{:url('user/info')}"><h4 class=""><span class="glyphicon glyphicon-list-alt icon-time"></span>我的资料</h4></a>
-    <!--<h4 class="top-line"><span class="glyphicon glyphicon-file icon-time"></span>我的政策</h4>-->
-    <a class="js-ajax-bt" href="{:url('api/updateuser')}"><h4 class=""><span class="glyphicon glyphicon-user icon-time"></span>账号同步</h4></a>
 </div>
 <div class="carpet">
-    <h4 class=""><span class="glyphicon glyphicon-question-sign icon-time"></span>帮助与反馈</h4>
-    <h4 class=""><span class="glyphicon glyphicon-cog icon-time"></span>设置</h4>
     <a href="{:url('public/logout')}"><h4 class=""><span class="glyphicon glyphicon-off icon-time"></span>退出</h4></a>
 </div>
 

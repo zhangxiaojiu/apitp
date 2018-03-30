@@ -14,10 +14,13 @@ use app\user\model\UserModel;
 class AgentController extends BaseController
 {
     public function index(){
-        $pid = session('lkl_user')['id'];
-        $list = UserModel::tb()->where(['pid'=>$pid])->paginate(10);
+        $uid = session('user')['id'];
+        $list = UserModel::tb()->where(['pid'=>$uid,'user_status'=>1])->paginate(10);
+        $num = UserModel::tb()->where(['pid'=>$uid,'user_status'=>1])->count();
         // 获取分页显示
         $page = $list->render();
+
+        $this->assign('num',$num);
         $this->assign('list', $list);
         $this->assign('page', $page);
         return $this->fetch();
