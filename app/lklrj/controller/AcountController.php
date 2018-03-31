@@ -19,14 +19,16 @@ class AcountController extends BaseController
     public function index(){
         $uid = session('user')['id'];
         $uInfo = UserModel::getInfoById($uid);
-        $account = CoinModel::getInfoById($uid);
+        $cInfo = CoinModel::getInfoById($uid);
+
+        $account['run'] = isset($cInfo['run'])?$cInfo['run']:0;
+        $account['activate'] = isset($cInfo['activate'])?$cInfo['activate']:0;
+        $account['diff_run'] = isset($cInfo['diff_run'])?$cInfo['diff_run']:0;
         $account['coin'] = $uInfo['coin'];
 
-        $coinLog = CoinLogModel::tb()->where(['uid'=>$uid])->paginate(5);
-        $page = $coinLog->render();
+        $coinLog = CoinLogModel::tb()->where(['uid'=>$uid])->order('create_time desc')->limit(5)->select();
 
         $this->assign('list', $coinLog);
-        $this->assign('page', $page);
         $this->assign('account',$account);
         return $this->fetch();
     }
@@ -47,6 +49,10 @@ class AcountController extends BaseController
         $uInfo = UserModel::getInfoById($uid);
         $data = $_POST;
 
+        if($data['coin'] < 0){
+            $this->error('请输入正确金额');
+        }
+
         if($data['coin'] > $uInfo['coin']){
             $this->error('余额不足');
         }
@@ -63,5 +69,25 @@ class AcountController extends BaseController
         if($clRet) {
             $this->success('提现成功,请等待审核');
         }
+    }
+
+    /*
+     * 资金记录
+     */
+    public function acountList(){
+        $uid = session('user')['id'];
+        $where = [];
+        $where['uid'] = $uid;
+        $request = input('request.');
+        if (!empty($request['type'])) {
+            $where['type'] = $request['type'];
+        }
+
+        $list = CoinLogModel::tb()->where($where)->paginate(5);
+        $page = $list->render();
+
+        $this->assign('list', $list);
+        $this->assign('page', $page);
+        return $this->fetch();
     }
 }

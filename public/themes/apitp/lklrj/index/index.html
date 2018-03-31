@@ -28,60 +28,56 @@
 </div>
 <!-- end carousel -->
 <div class="carpet">
-    <h4>今日分润：<span class="view-money">￥12580</span></h4>
+    <h4>公告：<span class="view-money">欢迎使用拉卡拉日结日反系统</span></h4>
     <div class="top-line">
-        <div class="one-from-two tac right-line"><span class="glyphicon glyphicon-yen icon-money"></span>分润记录</div>
-        <div class="one-from-two tac"><span class="glyphicon glyphicon-align-left icon-time"></span>提现记录</div>
+        <div class="one-from-two tac right-line"><a href="{:url('acount/acountList',array('type'=>'run'))}"><span class="glyphicon glyphicon-yen icon-money"></span>分润记录</a></div>
+        <div class="one-from-two tac"><a href="{:url('acount/acountList',array('type'=>'withdraw'))}"><span class="glyphicon glyphicon-align-left icon-time"></span>提现记录</a></div>
     </div>
 </div>
 <div class="carpet">
     <div class="one-from-two right-line">
-        <div>收单<a class="fr gray-text" href="">详情<span class="glyphicon glyphicon-menu-right"></span></a></div>
-        <div class="gray-text">今日(万元)<span class="fr view-money">0</span></div>
-        <div class="gray-text">本月(万元)<span class="fr view-money">0</span></div>
+        <div>分润<a class="fr gray-text" href="{:url('acount/acountList',array('type'=>'run'))}">详情<span class="glyphicon glyphicon-menu-right"></span></a></div>
+        <div class="gray-text">今日(万元)<span class="fr view-money">¥{$today.run}</span></div>
+        <div class="gray-text">累计(万元)<span class="fr view-money">¥{$total.run}</span></div>
     </div>
     <div class="one-from-two">
-        <div>提款<a class="fr gray-text" href="">详情<span class="glyphicon glyphicon-menu-right"></span></a></div>
-        <div class="gray-text">今日(万元)<span class="fr view-money">0</span></div>
-        <div class="gray-text">本月(万元)<span class="fr view-money">0</span></div>
+        <div>返现<a class="fr gray-text" href="{:url('acount/acountList',array('type'=>'activate'))}">详情<span class="glyphicon glyphicon-menu-right"></span></a></div>
+        <div class="gray-text">今日(万元)<span class="fr view-money">¥{$today.activate}</span></div>
+        <div class="gray-text">累计(万元)<span class="fr view-money">¥{$total.activate}</span></div>
     </div>
 </div>
 <div class="carpet">
-    <h4><span class="icon-inm glyphicon glyphicon-save-file"></span>交易记录<a class="gray-text fr" href="">查看全部</a></h4>
+    <h4><span class="icon-inm glyphicon glyphicon-save-file"></span>资金记录<a class="gray-text fr" href="{:url('acount/acountList')}">查看全部</a></h4>
+    <php>
+        $types = [
+        'run' => '分润核算',
+        'activate' => '激活发现',
+        'withdraw' => '提现',
+        'diff_run' => '分润差值'
+        ];
+        $statuses = [
+        0 => '<span style="color:red;">审核中</span>',
+        1 => '<span style="color:green;">已入账</span>',
+        ]
+    </php>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>#</th>
-            <th>机具号</th>
-            <th>姓名</th>
-            <th>时间</th>
+            <th>金额</th>
+            <th>类型</th>
+            <th>备注</th>
+            <th>状态</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>CBCA2017*****228</td>
-            <td>王**</td>
-            <td>2017.12.28 11点</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>CBCA2017*****218</td>
-            <td>丁**</td>
-            <td>2017.12.28 10点</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>CBCA2017*****229</td>
-            <td>刘**</td>
-            <td>2017.12.29 9点</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>CBCA2017*****229</td>
-            <td>刘**</td>
-            <td>2017.12.29 9点</td>
-        </tr>
+        <foreach name="coinLog" item="vo">
+            <tr>
+                <td>{$vo.coin}</td>
+                <td width="50">{$types[$vo.type]}</td>
+                <td>{$vo.detail}</td>
+                <td width=60">{$statuses[$vo.status]}</td>
+            </tr>
+        </foreach>
         </tbody>
     </table>
 </div>

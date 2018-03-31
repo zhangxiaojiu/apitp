@@ -11,6 +11,9 @@
 namespace app\lklrj\controller;
 
 
+use app\admin\model\CoinLogModel;
+use app\admin\model\CoinModel;
+
 class IndexController extends BaseController
 {
     /*
@@ -18,7 +21,21 @@ class IndexController extends BaseController
      */
     public function index()
     {
+        $uid = session('user')['id'];
+        $coinLog = CoinLogModel::tb()->where(['uid'=>$uid])->order('create_time desc')->paginate(5);
+        $cInfo = CoinModel::getInfoById($uid);
+        $total['run'] = isset($cInfo['run'])?$cInfo['run']:0;
+        $total['activate'] = isset($cInfo['activate'])?$cInfo['activate']:0;
+
+        $today['run'] = $today['activate'] = 0;
+        $time = strtotime(date('Y-m-d 00:00:00',time()));
+        $today['run'] = CoinLogModel::tb()->where(['uid'=>$uid,'type'=>'run','create_time'=>['>',$time]])->sum('coin');
+        $today['activate'] = CoinLogModel::tb()->where(['uid'=>$uid,'type'=>'activate','create_time'=>['>',$time]])->sum('coin');
+
+        $this->assign('total',$total);
+        $this->assign('today',$today);
         $this->assign('menu','index');
+        $this->assign('coinLog',$coinLog);
         return $this->fetch();
     }
     /*
