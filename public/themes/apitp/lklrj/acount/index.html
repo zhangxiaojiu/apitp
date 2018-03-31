@@ -13,7 +13,7 @@
 </div>
 
 <div class="carpet" style="margin-top:40px;">
-    <button type="button" class="btn btn-lg btn-info w100">提现</button>
+    <a href="{:url('acount/withdraw')}"><button type="button" class="btn btn-lg btn-info w100">提现</button></a>
 </div>
 
 <div class="carpet">
@@ -27,6 +27,10 @@
                 'withdraw' => '提现',
                 'diff_run' => '分润差值'
             ];
+            $statuses = [
+                0 => '<span style="color:red;">审核中</span>',
+                1 => '<span style="color:green;">已入账</span>',
+            ]
         </php>
         <table class="table table-striped">
             <thead>
@@ -34,6 +38,7 @@
                 <th>金额</th>
                 <th>类型</th>
                 <th>备注</th>
+                <th>状态</th>
             </tr>
             </thead>
             <tbody>
@@ -42,6 +47,7 @@
                     <td>{$vo.coin}</td>
                     <td width="50">{$types[$vo.type]}</td>
                     <td>{$vo.detail}</td>
+                    <td width=60">{$statuses[$vo.status]}</td>
                 </tr>
             </foreach>
             </tbody>

@@ -17,4 +17,10 @@ class CoinLogModel extends Model
     public static function tb(){
         return Db::name('coin_log');
     }
+
+    public static function getListByType($type)
+    {
+        $list = self::tb()->where(['type'=>$type])->order("status, create_time")->paginate(10);
+        return $list;
+    }
 }

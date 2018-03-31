@@ -11,6 +11,7 @@
 
 namespace app\admin\controller;
 
+use app\admin\model\CoinLogModel;
 use app\admin\model\UserModel;
 use app\admin\service\MemberService;
 use app\admin\service\TerminaService;
@@ -194,19 +195,17 @@ class MemberController extends AdminBaseController
         }
     }
 
-    public function txList()
+    public function withdraw()
     {
-        $m_coin = new CoinModel();
-        $list = $m_coin->getListByType('tx');
+        $list = CoinLogModel::getListByType('withdraw');
         $this->assign('list',$list);
         return $this->fetch();
     }
 
-    public function txPass()
+    public function doWithdraw()
     {
         $id = $this->request->param('id', 0, 'intval');
-        $m_coin = new CoinModel();
-        $ret = $m_coin->txPass($id);
+        $ret = CoinLogModel::tb()->where('id',$id)->setField('status', 1);
         if($ret > 0){
             $this->success("审核成功");
         }

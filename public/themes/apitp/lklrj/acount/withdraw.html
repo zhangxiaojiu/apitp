@@ -1,0 +1,35 @@
+<include file="public/head"/>
+<div class="top-bar pr30"><a href="{:url('acount/index')}"><span class="glyphicon glyphicon-menu-left fl"></span></a>我的代理</div>
+<div class="mt60"></div>
+<div class="carpet">
+    <h4><span class="icon-inm glyphicon glyphicon-list-alt"></span>提现</h4>
+    <div class="container">
+        <form class="js-ajax-for" style="margin-top:20px;" action="{:url('acount/dowithdraw')}" method="post">
+            <div class="form-group">
+                <label class="">当前余额</label>
+                <h2>¥{$info.coin}</h2>
+            </div>
+            <div class="form-group">
+                <label>提现金额</label>
+                <input name="coin" type="text" class="form-control" placeholder="请输入提现金额">
+            </div>
+            <div class="form-group">
+                <label>提现方式  <a href="{:url('user/info')}">(点这里完善提现方式)</a></label>
+                <select name="type" class="form-control">
+                    <option value="微信号:{$info.wechat}">微信号:{$info.wechat}</option>
+                    <option value="支付宝:{$info.alipay}">支付宝:{$info.alipay}</option>
+                    <option value="银行：{$info.bankname}:{$info.bankcard}">银行：{$info.bankname}:{$info.bankcard}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>备注</label>
+                <input name="detail" type="text"  class="form-control" placeholder="如有其他备注请在这里输入">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-loadingmsg="{:lang('LOADING')}">提交</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+<include file="public/foot"/>

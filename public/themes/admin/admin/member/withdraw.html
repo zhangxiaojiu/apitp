@@ -42,8 +42,8 @@
                     <td>
                         <neq name="vo.status" value="1">
                            
-                            <a href="{:url('member/txpass',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn"
-                                   data-msg="确定要审核通过么">审核通过</a>
+                            <a href="{:url('member/dowithdraw',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn"
+                                   data-msg="确定已打款么">审核通过</a>
                             <else/>
                             <a style="color: #ccc;">已审核</a>
                         </neq>
