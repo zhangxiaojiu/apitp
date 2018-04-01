@@ -54,6 +54,7 @@ return array (
   'ADMIN_NAVMENU_EDITPOST' => '编辑导航菜单提交保存',
   'ADMIN_NAVMENU_INDEX' => '导航菜单',
   'ADMIN_NAVMENU_LISTORDER' => '导航菜单排序',
+  'ADMIN_ORDER_INDEX' => '采购列表',
   'ADMIN_PLUGIN_DEFAULT' => '插件管理',
   'ADMIN_PLUGIN_INDEX' => '插件列表',
   'ADMIN_PLUGIN_INSTALL' => '插件安装',

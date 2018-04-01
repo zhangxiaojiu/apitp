@@ -49,12 +49,7 @@
 <div class="carpet">
     <h4><span class="icon-inm glyphicon glyphicon-save-file"></span>资金记录<a class="gray-text fr" href="{:url('acount/acountList')}">查看全部</a></h4>
     <php>
-        $types = [
-        'run' => '分润核算',
-        'activate' => '激活发现',
-        'withdraw' => '提现',
-        'diff_run' => '分润差值'
-        ];
+        $types = getCoinLogTypes();
         $statuses = [
         0 => '<span style="color:red;">审核中</span>',
         1 => '<span style="color:green;">已入账</span>',

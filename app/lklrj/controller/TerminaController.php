@@ -9,8 +9,11 @@
 namespace app\lklrj\controller;
 
 
+use app\admin\model\OrderModel;
 use app\admin\model\TerminaModel;
 use app\admin\model\UserModel;
+use app\admin\service\CoinLogService;
+use think\Db;
 
 class TerminaController extends BaseController
 {
@@ -73,5 +76,73 @@ class TerminaController extends BaseController
             $this->success('划拨成功，有'.$errorPos.'台已绑终端不可划拨');
         }
         $this->success('全部划拨成功');
+    }
+
+    /*
+     * 采购
+     */
+    public function purchase(){
+        $uid = session('user')['id'];
+        $uInfo = UserModel::getInfoById($uid);
+        $list = OrderModel::tb()->where(['uid'=>$uid])->order('create_time desc')->paginate(5);
+
+        $this->assign('info',$uInfo);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    /*
+     *处理采购
+     */
+    public function doPurchase(){
+        $uid = session('user')['id'];
+        $uInfo = UserModel::getInfoById($uid);
+
+        $data = $_POST;
+        if($data['num'] < 1){
+            $this->error('数量至少为1');
+        }
+        if(isset($data['isCoin'])){
+            $money = 99*$data['num'];
+            if($uInfo['coin'] < $money){
+                $this->error('余额不足');
+            }else{
+                Db::startTrans();
+                $data_o = [
+                    'uid' => $uid,
+                    'num' => $data['num'],
+                    'money' => 99*$data['num'],
+                    'detail' => $data['detail'],
+                    'status' => 1,
+                    'create_time' => time(),
+                ];
+                OrderModel::tb()->insert($data_o);
+
+                $data_c = [
+                    'uid' => $uid,
+                    'coin' => 0-99*$data['num'],
+                    'type' => 'buy',
+                    'detail' => '机器采购'.$data['num'].'台;'.$data['detail'],
+                    'status' => 1,
+                ];
+                $clRet = CoinLogService::addCoinLog($data_c);
+                if(!$clRet){
+                    Db::rollback();
+                }
+                Db::commit();
+            }
+        }else{
+            $data_o = [
+                'uid' => $uid,
+                'num' => $data['num'],
+                'money' => 99*$data['num'],
+                'detail' => $data['detail'],
+                'status' => 0,
+                'create_time' => time(),
+            ];
+            OrderModel::tb()->insert($data_o);
+        }
+
+        $this->success('采购成功');
     }
 }

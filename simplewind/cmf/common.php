@@ -1838,3 +1838,16 @@ function getBeforeMonthEnd($time){
     $bTime = strtotime($bDate)-1;
     return date('Ymd',$bTime);
 }
+
+/*
+ * 获取资金记录类型
+ */
+function getCoinLogTypes(){
+    return [
+        'run' => '分润核算',
+        'activate' => '激活发现',
+        'withdraw' => '提现',
+        'diff_run' => '分润差值',
+        'buy' => '采购'
+    ];
+}

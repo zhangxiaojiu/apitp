@@ -1,0 +1,53 @@
+<include file="public/head"/>
+<div class="top-bar pr30"><a href="{:url('acount/index')}"><span class="glyphicon glyphicon-menu-left fl"></span></a>机器采购</div>
+<div class="mt60"></div>
+<div class="carpet">
+    <h4><span class="icon-inm glyphicon glyphicon-list-alt"></span>采购记录</h4>
+    付款帐号：3939393939
+    <php>
+        $yesNo = array("0" => '待付款',"1" => "已付款");
+    </php>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>数量</th>
+            <th>金钱</th>
+            <th>状态</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="list" item="vo">
+            <tr>
+                <td>{$vo.num}</td>
+                <td>{$vo.money}</td>
+                <td>{$yesNo[$vo.status]}</td>
+            </tr>
+        </foreach>
+        </tbody>
+        <div class="pagination">{$list->render()}</div>
+    </table>
+</div>
+<div class="carpet">
+    <h4><span class="icon-inm glyphicon glyphicon-hdd"></span>采购机器</h4>
+    <div class="container">
+        <form class="js-ajax-for" style="margin-top:20px;" action="{:url('termina/doPurchase')}" method="post">
+            <div class="form-group">
+                <label class="">机器单价¥99 当前余额<span style="font-size:20px;">¥{$info.coin}</span></label>
+                <h4><label><input type="checkbox" name="isCoin">使用余额</label></h4>
+            </div>
+            <div class="form-group">
+                <label>采购数量(台)</label>
+                <input name="num" type="number" class="form-control" placeholder="请输入采购机器数量" min="1" value="1">
+            </div>
+
+            <div class="form-group">
+                <label>备注</label>
+                <textarea name="detail" style="width:100%; border:1px solid #ccc; height:100px;"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-loadingmsg="{:lang('LOADING')}">提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+<include file="public/foot"/>
