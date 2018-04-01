@@ -152,7 +152,7 @@ class PublicController extends HomeBaseController
             if (preg_match('/(^(13\d|15[^4\D]|17[13678]|18\d)\d{8}|170[^346\D]\d{7})$/', $data['username'])) {
                 $user['mobile'] = $data['username'];
                 $user['user_login'] = $data['username'];
-                $user['pid'] = isset($data['pid'])?$data['pid']:0;
+                $user['pid'] = isset($data['pid'])?$data['pid']:1;
                 $result = Db::name("user")->where('mobile', $user['mobile'])->find();
 
                 if (empty($result)) {
