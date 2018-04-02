@@ -20,7 +20,7 @@ class TradeService
      */
     public static function getTradeTotal($id,$startDate,$endDate){
         $terminalList = TerminaService::getListByUid($id);
-        if(!empty($terminalList)) {
+        if(count($terminalList) > 0) {
             foreach ($terminalList as $v) {
                 $terminalArray[] = $v['code'];
             }
