@@ -240,6 +240,24 @@ class PublicController extends HomeBaseController
             $this->error("请求错误");
         }
     }
+
+    /*
+     * 分享二维码
+     */
+    public function shareCode(){
+        $uid = session('user')['id'];
+        $uInfo = \app\admin\model\UserModel::getInfoById($uid);
+        $url = url('public/register',array('pid'=>$uid));
+        $qrcode = './themes/apitp/public/qrcode/qrlogo'.$uid.'.png';
+        if (!file_exists($qrcode)) {
+            crQrcode($url,$uid);
+        }
+        $imgurl = '/public/qrcode/qrlogo'.$uid.'.png';
+        $this->assign('imgurl',$imgurl);
+        $this->assign('user',$uInfo);
+        return $this->fetch();
+    }
+
     /*
      * 退出登录
      */

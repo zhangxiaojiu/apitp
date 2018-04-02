@@ -18,6 +18,7 @@ class TradeController extends BaseController
         $uid = session('user')['id'];
 
         $tList = TerminaService::getListByUid($uid,1);
+        $tArray = [];
         foreach ($tList as $v){
             $tArray[] = $v['code'];
         }
