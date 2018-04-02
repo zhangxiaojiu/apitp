@@ -88,6 +88,10 @@ class PublicController extends HomeBaseController
             $user['user_pass'] = $data['password'];
             if (preg_match('/(^(13\d|15[^4\D]|17[13678]|18\d)\d{8}|170[^346\D]\d{7})$/', $data['username'])) {
                 $user['mobile'] = $data['username'];
+                $uInfo = Db::name('user')->where(['mobile'=>$data['username']])->find();
+                if($uInfo['user_status'] == 0){
+                    $this->error('用户已经被禁用');
+                }
                 $log            = $userModel->doMobile($user);
             } else {
                 $user['user_login'] = $data['username'];
@@ -229,6 +233,10 @@ class PublicController extends HomeBaseController
             $errMsg = cmf_check_verification_code($data['username'], $data['code']);
             if (!empty($errMsg)) {
                 $this->error($errMsg);
+            }
+            $uInfo = Db::name('user')->where(['mobile'=>$data['username']])->find();
+            if($uInfo['user_status'] == 0){
+                $this->error('用户已经被禁用');
             }
 
             $user['user_pass'] = cmf_password($data['password']);

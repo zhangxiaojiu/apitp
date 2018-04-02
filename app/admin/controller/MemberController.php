@@ -236,7 +236,7 @@ class MemberController extends AdminBaseController
 
             //开始同步数据
             //同步代理
-            MemberService::syncAgent($sid,$code,$pid);
+            //MemberService::syncAgent($sid,$code,$pid);
             //同步终端
             MemberService::syncTermina($sid,$code,$pid);
             //同步商户
