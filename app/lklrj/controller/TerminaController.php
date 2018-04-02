@@ -102,6 +102,8 @@ class TerminaController extends BaseController
         if($data['num'] < 1){
             $this->error('数量至少为1');
         }
+
+        $detail = "姓名：".$data['name']."<br>电话：".$data['tel']."<br> 地址：".$data['address'];
         if(isset($data['isCoin'])){
             $money = 99*$data['num'];
             if($uInfo['coin'] < $money){
@@ -112,7 +114,7 @@ class TerminaController extends BaseController
                     'uid' => $uid,
                     'num' => $data['num'],
                     'money' => 99*$data['num'],
-                    'detail' => $data['detail'],
+                    'detail' => $detail,
                     'status' => 1,
                     'create_time' => time(),
                 ];
@@ -136,7 +138,7 @@ class TerminaController extends BaseController
                 'uid' => $uid,
                 'num' => $data['num'],
                 'money' => 99*$data['num'],
-                'detail' => $data['detail'],
+                'detail' => $detail,
                 'status' => 0,
                 'create_time' => time(),
             ];

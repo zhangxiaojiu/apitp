@@ -2,8 +2,41 @@
 <div class="top-bar pr30"><a href="{:url('acount/index')}"><span class="glyphicon glyphicon-menu-left fl"></span></a>机器采购</div>
 <div class="mt60"></div>
 <div class="carpet">
+    <h2>付款帐号：</h2>
+    <h3>中国平安银行：3939393939</h3>
+</div>
+<div class="carpet">
+    <h4><span class="icon-inm glyphicon glyphicon-hdd"></span>采购机器</h4>
+    <div class="container">
+        <form class="js-ajax-for" style="margin-top:20px;" action="{:url('termina/doPurchase')}" method="post">
+            <div class="form-group">
+                <label class="">机器单价¥99 当前余额<span style="font-size:20px;">¥{$info.coin}</span></label>
+                <h4><label><input type="checkbox" name="isCoin">使用余额</label></h4>
+            </div>
+            <div class="form-group">
+                <label>采购数量(台)</label>
+                <input name="num" type="number" class="form-control" placeholder="请输入采购机器数量" min="0" value="0">
+            </div>
+            <div class="form-group">
+                <label>收货人</label>
+                <input name="name" type="text" class="form-control" placeholder="请输入收货人姓名" value="{$user.user_nickname}" required>
+            </div>
+            <div class="form-group">
+                <label>电话</label>
+                <input name="tel" type="text" class="form-control" placeholder="请输入收货人电话" value="{$user.mobile}" required>
+            </div>
+            <div class="form-group">
+                <label>地址</label>
+                <input name="address" type="text" class="form-control" placeholder="请输入收货人地址" value="{$user.user_address}" required>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-loadingmsg="{:lang('LOADING')}">提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="carpet">
     <h4><span class="icon-inm glyphicon glyphicon-list-alt"></span>采购记录</h4>
-    付款帐号：3939393939
     <php>
         $yesNo = array("0" => '待付款',"1" => "已付款");
     </php>
@@ -26,28 +59,5 @@
         </tbody>
         <div class="pagination">{$list->render()}</div>
     </table>
-</div>
-<div class="carpet">
-    <h4><span class="icon-inm glyphicon glyphicon-hdd"></span>采购机器</h4>
-    <div class="container">
-        <form class="js-ajax-for" style="margin-top:20px;" action="{:url('termina/doPurchase')}" method="post">
-            <div class="form-group">
-                <label class="">机器单价¥99 当前余额<span style="font-size:20px;">¥{$info.coin}</span></label>
-                <h4><label><input type="checkbox" name="isCoin">使用余额</label></h4>
-            </div>
-            <div class="form-group">
-                <label>采购数量(台)</label>
-                <input name="num" type="number" class="form-control" placeholder="请输入采购机器数量" min="1" value="1">
-            </div>
-
-            <div class="form-group">
-                <label>备注</label>
-                <textarea name="detail" style="width:100%; border:1px solid #ccc; height:100px;"></textarea>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-loadingmsg="{:lang('LOADING')}">提交</button>
-            </div>
-        </form>
-    </div>
 </div>
 <include file="public/foot"/>
