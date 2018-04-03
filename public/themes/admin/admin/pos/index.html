@@ -59,7 +59,9 @@
                     <td>
                         <eq name="vo.status" value="1">
                             <eq name="vo.is_ok" value="0">
-                                <a class="btn btn-info btn-sm" href="{:url('pos/activate',array('id'=>$vo.id))}">激活</a>
+                                <a class="btn btn-info btn-sm" href="{:url('pos/activate',array('id'=>$vo.id,'is_money'=>1))}">返现激活</a>
+                                 | 
+                                <a class="btn btn-info btn-sm" href="{:url('pos/activate',array('id'=>$vo.id))}">直接激活</a>
                             </eq>
                         </eq>
                     </td>

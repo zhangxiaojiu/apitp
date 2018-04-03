@@ -9,6 +9,7 @@
 namespace app\lklrj\controller;
 
 
+use app\admin\model\TerminaModel;
 use app\user\model\UserModel;
 
 class AgentController extends BaseController
@@ -23,6 +24,15 @@ class AgentController extends BaseController
         $this->assign('num',$num);
         $this->assign('list', $list);
         $this->assign('page', $page);
+        return $this->fetch();
+    }
+    public function terminal(){
+        $uid = $_REQUEST['uid'];
+        $uInfo = UserModel::tb()->find($uid);
+        $tList = TerminaModel::tb()->where(['uid'=>$uid])->paginate(10);
+        $this->assign('info',$uInfo);
+        $this->assign('num',count($tList));
+        $this->assign('list',$tList);
         return $this->fetch();
     }
 }

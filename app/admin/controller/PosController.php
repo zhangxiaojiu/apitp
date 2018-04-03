@@ -111,9 +111,10 @@ class PosController extends AdminBaseController
     public function activate()
     {
         $id = input('param.id', 0);
+        $isMoney = input('param.is_money', 0);
         if ($id > 0) {
 
-            $ret = TerminaService::doActive($id, true);
+            $ret = TerminaService::doActive($id, $isMoney);
             if($ret == -1){
                 $this->error('写入记录错误');
             }
