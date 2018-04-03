@@ -48,7 +48,7 @@ class TerminaService
                 $data_f = [
                     'uid' => $row_pos['uid'],
                     'coin' => $coin,
-                    'type' => 'active',
+                    'type' => 'activate',
                     'detail' => '激活'.$row_pos['code'].'奖励',
                     'status' => 1,
                 ];
