@@ -69,16 +69,28 @@ class PosController extends AdminBaseController
      */
     public function transfer()
     {
+        $id = session('ADMIN_ID');
         $data = $_POST;
-        if(empty($data['checkarr'])){
-            $this->error('请选择终端');
-        }
+
         if(empty($data['uid'])){
             $this->error('请选择划拨用户');
         }
+
+        $uInfo = UserModel::tb()->find($data['uid']);
+        if($uInfo['pid'] != $id && $uInfo['id'] != $id){
+            $this->error('不能划拨其他代理');
+        }
+
+        if(empty($data['checkarr'])){
+            $this->error('请选择终端');
+        }
+
         $errorPos = 0;
         foreach($data['checkarr'] as $k=>$v){
             $pos = TerminaModel::tb()->find($k);
+            if($pos['pid'] != $id){
+                $this->error('不能划拨非自己终端');
+            }
             if($pos['status'] > 0){
                 $errorPos++;
             }else{
@@ -88,7 +100,7 @@ class PosController extends AdminBaseController
             }
         }
         if($errorPos > 0) {
-            $this->success('划拨成功，有'.$errorPos.'台已绑终端不可划拨');
+            $this->success('划拨成功，有'.$errorPos.'台已绑终端已绑定不可划拨');
         }
         $this->success('全部划拨成功');
     }

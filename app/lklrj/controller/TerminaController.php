@@ -54,16 +54,26 @@ class TerminaController extends BaseController
     */
     public function transfer()
     {
+        $id = session('user')['id'];
         $data = $_POST;
-        if(empty($data['checkarr'])){
-            $this->error('请选择终端');
-        }
+
         if(empty($data['uid'])){
             $this->error('请选择划拨用户');
+        }
+        $uInfo = UserModel::tb()->find($data['uid']);
+        if($uInfo['pid'] != $id && $uInfo['id'] != $id){
+            $this->error('不能划拨其他代理');
+        }
+
+        if(empty($data['checkarr'])){
+            $this->error('请选择终端');
         }
         $errorPos = 0;
         foreach($data['checkarr'] as $k=>$v){
             $pos = TerminaModel::tb()->find($k);
+            if($pos['uid'] != $id){
+                $this->error('不能划拨非自己终端');
+            }
             if($pos['status'] > 0){
                 $errorPos++;
             }else{

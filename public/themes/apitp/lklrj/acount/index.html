@@ -40,7 +40,12 @@
                 <tr>
                     <td>{$vo.coin}</td>
                     <td width="50">{$types[$vo.type]}</td>
-                    <td>{$vo.detail}</td>
+                    <td>
+                        <eq name="vo.type" value="run">
+                            <a href="{:url('trade/index',array('cl_id'=>$vo.id))}">{$vo.detail}</a>
+                            <else/>{$vo.detail}
+                        </eq>
+                    </td>
                     <td width=60">{$statuses[$vo.status]}</td>
                 </tr>
             </foreach>

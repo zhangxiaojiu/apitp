@@ -16,6 +16,11 @@ class TradeController extends BaseController
 {
     public function index(){
         $uid = session('user')['id'];
+        $request = input('request.');
+
+        if (!empty($request['cl_id'])) {
+            $where['cl_id'] = $request['cl_id'];
+        }
 
         $tList = TerminaService::getListByUid($uid,1);
         $tArray = [];
@@ -23,6 +28,18 @@ class TradeController extends BaseController
             $tArray[] = $v['code'];
         }
         $where['term_no'] = ['IN',$tArray];
+
+        $search['where'] = $where;
+        $page = input('request.page');
+        if (!isset($page)) {
+            session('search', null);
+        }
+        if (!empty($where)) {
+            session('search', $search);
+        }
+        if ($page >= 1) {
+            $where = session('search')['where'];
+        }
         $list = TradeModel::tb()->where($where)->paginate(10);
         
         // 获取分页显示

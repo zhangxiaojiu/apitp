@@ -57,49 +57,51 @@ class TradeService
      */
     public static function calculateRunByUid($id){
         $tList = TerminaService::getListByUid($id,1);
-        foreach ($tList as $v){
-            $tArray[] = $v['code'];
-        }
-        $where['term_no'] = ['IN',$tArray];
-        $where['status'] = 0;
-        $tradeList = TradeModel::tb()->where($where)->select();
-        $amt = 0;
-        $num = count($tradeList);
-        if($num == 0){
-            return false;
-        }
-        foreach ($tradeList as $v){
-            $amt += $v['trans_amt'];
-        }
-        $scale = UserModel::getScaleById($id);
-        $coin = round($amt*$scale,2);
+        if(count($tList) > 0) {
+            foreach ($tList as $v) {
+                $tArray[] = $v['code'];
+            }
+            $where['term_no'] = ['IN', $tArray];
+            $where['status'] = 0;
+            $tradeList = TradeModel::tb()->where($where)->select();
+            $amt = 0;
+            $num = count($tradeList);
+            if ($num == 0) {
+                return false;
+            }
+            foreach ($tradeList as $v) {
+                $amt += $v['trans_amt'];
+            }
+            $scale = UserModel::getScaleById($id);
+            $coin = round($amt * $scale, 2);
 
-        Db::startTrans();
-        TradeModel::tb()->where($where)->update(['status'=>1]);
+            Db::startTrans();
 
-        $cRet = CoinService::changeCoin($id,'run',$coin);
-        if(!$cRet){
-            Db::rollback();
+            $cRet = CoinService::changeCoin($id, 'run', $coin);
+            if (!$cRet) {
+                Db::rollback();
+            }
+
+            $data = [
+                'uid' => $id,
+                'coin' => $coin,
+                'type' => 'run',
+                'detail' => $num . '条交易记录,交易量¥' . $amt . ',结算分润得' . $coin,
+                'status' => 1,
+            ];
+            $clRet = CoinLogService::addCoinLog($data);
+            if (!$clRet) {
+                Db::rollback();
+            }
+            TradeModel::tb()->where($where)->update(['status' => 1, 'cl_id' => $clRet]);
+
+            $pDiffRunRet = self::addDiffRun($id, $amt);
+            if (!$pDiffRunRet) {
+                Db::rollback();
+            }
+
+            Db::commit();
         }
-
-        $data= [
-            'uid' => $id,
-            'coin' => $coin,
-            'type' => 'run',
-            'detail' => $num.'条交易记录,交易量¥'.$amt.',结算分润得'.$coin,
-            'status' => 1,
-        ];
-        $clRet = CoinLogService::addCoinLog($data);
-        if(!$clRet){
-            Db::rollback();
-        }
-
-        $pDiffRunRet = self::addDiffRun($id,$amt);
-        if(!$pDiffRunRet){
-            Db::rollback();
-        }
-
-        Db::commit();
     }
 
     /*
