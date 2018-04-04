@@ -19,7 +19,7 @@ class WxController extends HomeBaseController
             'app_id' => 'wx65bd2c9f080075b4',
             'app_secret' => '3e434e007d0c14e7183e2eb7acb80627',
             'token' => 'lblk1611',
-            'aes_key' => '',
+            'aes_key' => '741WZwI4qRFlZHWUTysZDdOnnlU2AebnDficlTmvNmr',
         ];
     }
     public function index(){
@@ -34,6 +34,9 @@ class WxController extends HomeBaseController
         $sign = WxService::getSign($token,$timestamp,$nonce);
         if($signature == $sign){
             echo $echoStr;
+            exit;
+        }else{
+            p($echoStr,0);
         }
     }
 }
