@@ -39,6 +39,8 @@ class WxController extends HomeBaseController
         //签名正确 返回
         if($signStr == $signature){
             p($echoStr,0);
+        }else{
+            p($echoStr,0);
         }
     }
 }
