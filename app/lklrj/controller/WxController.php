@@ -23,16 +23,18 @@ class WxController extends HomeBaseController
         ];
     }
     public function index(){
-        $echoStr = $_GET["echostr"];
-        $signature = $_GET["signature"];
+        //get参数
+        $echoStr = $_GET['echostr'];
+        $signature = $_GET['signature'];
         $timestamp = $_GET['timestamp'];
         $nonce = $_GET['nonce'];
-
+        //配置参数
         $config = self::getConfig();
         $token = $config['token'];
-
+        //获取签名
         $sign = WxService::getSign($token,$timestamp,$nonce);
-        if($signature == $sign){
+        //签名正确 返回
+        if($sign == $signature && $echoStr){
             p($echoStr,0);
         }
     }

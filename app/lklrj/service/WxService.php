@@ -13,9 +13,9 @@ class WxService
 {
     public static function getSign($token,$timestamp, $nonce){
         $tmpArr = array($token, $timestamp, $nonce);
-        sort($tmpArr);
-        $tmpStr = implode( $tmpArr );
-        $signStr = sha1( $tmpStr );
+        sort($tmpArr, SORT_STRING);
+        $tmpStr = implode($tmpArr);
+        $signStr = sha1($tmpStr);
         return $signStr;
     }
 }
