@@ -2,7 +2,8 @@
 <div class="top-bar pr30"><a href="{:url('agent/index')}"><span class="glyphicon glyphicon-menu-left fl"></span></a>{$info.user_nickname}的终端</div>
 <div class="mt60"></div>
 <div class="carpet">
-    <h4><span class="icon-inm glyphicon glyphicon-hdd"></span>{$info.user_nickname}的终端  <a class="fr" >共计{$num}个</a></h4>
+    <h4><span class="icon-inm glyphicon glyphicon-hdd"></span>{$info.user_nickname}的终端</h4>
+    <h4><a class="fr" >共计{$num}个 激活{$activate.num}个 最新激活{$activate.today}</a></h4>
     <table class="table table-striped">
         <php>
             $yesNo = array("0" => '否',"1" => "是");

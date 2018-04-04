@@ -9,6 +9,7 @@
 namespace app\lklrj\controller;
 
 
+use app\admin\model\CoinLogModel;
 use app\admin\model\TerminaModel;
 use app\user\model\UserModel;
 
@@ -30,6 +31,12 @@ class AgentController extends BaseController
         $uid = $_REQUEST['uid'];
         $uInfo = UserModel::tb()->find($uid);
         $tList = TerminaModel::tb()->where(['uid'=>$uid])->paginate(10);
+        $activateNum = TerminaModel::tb()->where(['uid'=>$uid,'is_ok'=>1])->count();
+        $todayTime = strtotime(date('Y-m-d',time()));
+        $todayActivateNum = CoinLogModel::tb()->where(['type'=>'activate','uid'=>$uid,'create_time'=>['>',$todayTime]])->count();
+        $activate['num'] = $activateNum;
+        $activate['today'] = $todayActivateNum;
+        $this->assign('activate',$activate);
         $this->assign('info',$uInfo);
         $this->assign('num',count($tList));
         $this->assign('list',$tList);
