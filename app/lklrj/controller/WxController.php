@@ -33,9 +33,6 @@ class WxController extends HomeBaseController
 
         $sign = WxService::getSign($token,$timestamp,$nonce);
         if($signature == $sign){
-            echo $echoStr;
-            exit;
-        }else{
             p($echoStr,0);
         }
     }
