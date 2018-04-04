@@ -32,15 +32,13 @@ class WxController extends HomeBaseController
         $config = self::getConfig();
         $token = $config['token'];
         //获取签名
-        $tmpArr = array($token, $timestamp, $nonce);
-        sort($tmpArr);
-        $tmpStr = implode($tmpArr);
-        $signStr = sha1($tmpStr);
+        $sign = WxService::getSign($token,$timestamp,$nonce);
         //签名正确 返回
-        if($signStr == $signature){
-            p($echoStr,0);
+        if($sign == $signature && $echoStr){
+            echo $echoStr;
+            exit;
         }else{
-            p($echoStr,0);
+
         }
     }
 }
