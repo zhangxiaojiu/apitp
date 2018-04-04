@@ -28,17 +28,19 @@ class AgentController extends BaseController
         return $this->fetch();
     }
     public function terminal(){
-        $uid = $_REQUEST['uid'];
+        $uid = isset($_REQUEST['uid'])?$_REQUEST['uid']:session('terminal_agent_uid');
+        session('terminal_agent_uid',$uid);
         $uInfo = UserModel::tb()->find($uid);
         $tList = TerminaModel::tb()->where(['uid'=>$uid])->paginate(10);
         $activateNum = TerminaModel::tb()->where(['uid'=>$uid,'is_ok'=>1])->count();
+        $num = TerminaModel::tb()->where(['uid'=>$uid])->count();
         $todayTime = strtotime(date('Y-m-d',time()));
         $todayActivateNum = CoinLogModel::tb()->where(['type'=>'activate','uid'=>$uid,'create_time'=>['>',$todayTime]])->count();
         $activate['num'] = $activateNum;
         $activate['today'] = $todayActivateNum;
         $this->assign('activate',$activate);
         $this->assign('info',$uInfo);
-        $this->assign('num',count($tList));
+        $this->assign('num',$num);
         $this->assign('list',$tList);
         return $this->fetch();
     }
