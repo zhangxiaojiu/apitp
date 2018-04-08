@@ -35,13 +35,14 @@ class WxController extends HomeBaseController
     }
     public function test(){
         $redirect_uri= url('wx/backUrl');
-        $url = WxService::getCodeUrl($redirect_uri);
+        $url = WxService::getAuthUrl($redirect_uri);
         $this->redirect($url);
     }
     public function backUrl()
     {
         $code = $_GET['code'];
-        $state = $_GET['state'];
-        p($_GET);
+        //$state = $_GET['state'];//传递参数用
+        $ret = WxService::getAccessToken($code);
+        p($ret);
     }
 }

@@ -51,7 +51,7 @@ class WxService
         return $ret;
     }
 
-    public static function getCodeUrl($url,$state=0){
+    public static function getAuthUrl($url,$state=0){
         //配置参数
         $config = self::getConfig();
         $appId = $config['app_id'];
@@ -60,8 +60,26 @@ class WxService
             'mark' => 'authorize'
         ];
         $urlInfo = ApiModel::tb()->where($where)->find();
-        $wxUrl = $urlInfo['url']."?appid=".$appId."&redirect_uri=".urlencode($url)."&response_type=code&scope=snsapi_userinfo&state=".$state."#wechat_redirect";
+        $wxUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$appId."&redirect_uri=".urlencode($url)."&response_type=code&scope=snsapi_userinfo&state=".$state."#wechat_redirect";
 
         return $wxUrl;
+    }
+
+    public static function getAccessToken($code){
+        $config = self::getConfig();
+        $appId = $config['app_id'];
+        $appSecret = $config['app_secret'];
+
+        $where = [
+            'mark' => 'user_access_token'
+        ];
+        $params = [
+            'appid' => $appId,
+            'secret' => $appSecret,
+            'code' => $code,
+            'grant_type' => 'authorization_code'
+        ];
+        $ret = ApiService::getApi($where,$params);
+        return $ret;
     }
 }
