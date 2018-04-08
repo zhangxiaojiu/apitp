@@ -66,10 +66,12 @@ class WxController extends HomeBaseController
                         $userData['user_nickname'] = $userRet['nickname'];
                         $uid = UserModel::tb()->insertGetId($userData);
                         $data['user_id'] = $uid;
+
+                        $uInfo = UserModel::tb()->find($info['user_id']);
                     }else{
                         $uInfo = UserModel::tb()->find($info['user_id']);
-                        session('user',$uInfo);
                     }
+                    session('user',$uInfo);
                 }else{
                     $data['user_id'] = session('user')['id'];
                     $userData['id'] = session('user')['id'];
