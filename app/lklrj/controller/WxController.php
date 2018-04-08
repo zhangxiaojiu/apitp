@@ -67,7 +67,7 @@ class WxController extends HomeBaseController
                         $uid = UserModel::tb()->insertGetId($userData);
                         $data['user_id'] = $uid;
 
-                        $uInfo = UserModel::tb()->find($info['user_id']);
+                        $uInfo = UserModel::tb()->find($uid);
                     }else{
                         $uInfo = UserModel::tb()->find($info['user_id']);
                     }
