@@ -38,4 +38,9 @@ class UserModel extends Model
         $scale = $scaleArray[$level]/10000;
         return $scale;
     }
+
+    public static function getListByPid($id){
+        $ret = self::tb()->where(['pid'=>$id])->select();
+        return $ret;
+    }
 }

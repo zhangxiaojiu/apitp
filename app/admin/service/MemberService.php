@@ -28,6 +28,18 @@ class MemberService
         return $ret;
     }
 
+    public static function getPidArr($uid){
+        $uList = UserModel::getListByPid($uid);
+        $ret[] = $uid;
+        if(count($uList) >= 1){
+            foreach ($uList as $v){
+                $pRet = self::getPidArr($v['id']);
+                $ret = array_merge($ret,$pRet);
+            }
+        }
+        return $ret;
+    }
+
     //返回代理接口
     public static function getApiAgent($sid,$code,$start){
         $where = [

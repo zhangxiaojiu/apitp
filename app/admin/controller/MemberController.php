@@ -73,7 +73,8 @@ class MemberController extends AdminBaseController
 
         if($uid > 1){
             //$info = Db::name('user')->where(['id' => $uid])->find();
-            $where['pid'] = $uid;
+            $pidArr = MemberService::getPidArr($uid);
+            $where['pid'] = ['IN',$pidArr];
         }
         if (!empty($request['porg_code'])) {
             $porg_code = intval($request['porg_code']);
