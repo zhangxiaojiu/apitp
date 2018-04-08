@@ -19,8 +19,8 @@ class PosController extends AdminBaseController
         $where = [];
         $request = input('request.');
 
-        if (!empty($request['cid'])) {
-            $where['cid'] = intval($request['cid']);
+        if (!empty($request['uid'])) {
+            $where['uid'] = intval($request['uid']);
         }
         if (!empty($request['status'])) {
             if($request['status'] <=1) {
