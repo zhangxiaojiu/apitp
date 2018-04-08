@@ -59,22 +59,30 @@ class WxController extends HomeBaseController
                 $userData['sex'] = $userRet['sex'];
                 $userData['avatar'] = $userRet['headimgurl'];
 
+                $info = ThirdPartyUserModel::tb()->where(['openid' => $data['openid']])->find();
+
                 if(empty(session('user')['id'])){
-                    $userData['nickname'] = $userRet['nickname'];
-                    $uid = UserModel::tb()->insertGetId($userData);
-                    $data['user_id']= $uid;
+                    if(empty($info['user_id'])) {
+                        $userData['user_nickname'] = $userRet['nickname'];
+                        $uid = UserModel::tb()->insertGetId($userData);
+                        $data['user_id'] = $uid;
+                    }else{
+                        $uInfo = UserModel::tb()->find($info['user_id']);
+                        session('user',$uInfo);
+                    }
                 }else{
                     $data['user_id'] = session('user')['id'];
                     $userData['id'] = session('user')['id'];
                     UserModel::tb()->update($userData);
                 }
 
-                $info = ThirdPartyUserModel::tb()->where(['openid' => $data['openid']])->find();
+
                 if (empty($info)) {
                     ThirdPartyUserModel::tb()->insert($data);
                 } else {
                     ThirdPartyUserModel::tb()->where(['openid' => $data['openid']])->update($data);
                 }
+                $this->redirect('index/user');
             }
         }else{
             $redirect_uri= url('wx/auth');

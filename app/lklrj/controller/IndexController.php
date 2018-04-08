@@ -13,6 +13,7 @@ namespace app\lklrj\controller;
 
 use app\admin\model\CoinLogModel;
 use app\admin\model\CoinModel;
+use app\admin\model\ThirdPartyUserModel;
 
 class IndexController extends BaseController
 {
@@ -56,6 +57,9 @@ class IndexController extends BaseController
      */
     public function user()
     {
+        $uid = session('user')['id'];
+        $wxUser = ThirdPartyUserModel::tb()->where(['user_id'=>$uid])->find();
+        $this->assign('wxuser',$wxUser);
         $this->assign('menu','user');
         return $this->fetch();
     }

@@ -6,8 +6,8 @@
 </div>
 <div class="mt50"></div>
 <div class="user-top">
-    <img class="head" src="__TMPL__/lklrj/public/assets/home/head.png"><br/>
-    {$user.user_nickname}(LV{$user.run_level})
+    <img class="head" src="<empty name='user.avatar'>__TMPL__/lklrj/public/assets/home/head.png<else/>{$user.avatar}</empty>"><br/>
+    <empty name="user.user_nickname">{$wxuser.nickname}<else/>{$user.user_nickname}</empty>(LV{$user.run_level})
 </div>
 <!-- end top bar -->
 <div class="carpet">
