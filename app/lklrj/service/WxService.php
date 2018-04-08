@@ -62,7 +62,6 @@ class WxService
         $urlInfo = ApiModel::tb()->where($where)->find();
         $wxUrl = $urlInfo['url']."?appid=".$appId."&redirect_uri=".urlencode($url)."&response_type=code&scope=snsapi_userinfo&state=".$state."#wechat_redirect";
 
-        $ret = http_curl($url,[],$urlInfo['type'],[]);
-        return json_decode($ret,true);
+        return $wxUrl;
     }
 }
