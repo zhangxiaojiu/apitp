@@ -33,4 +33,15 @@ class WxController extends HomeBaseController
 
         }
     }
+    public function test(){
+        $redirect_uri= url('wx/backUrl');
+        $ret = WxService::getCodeUrl($redirect_uri);
+        p($ret);
+    }
+    public function backUrl()
+    {
+        $code = $_GET['code'];
+        $state = $_GET['state'];
+        p($_GET);
+    }
 }

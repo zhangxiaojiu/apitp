@@ -9,6 +9,8 @@
 namespace app\lklrj\service;
 
 
+use app\admin\model\ApiModel;
+
 class WxService
 {
     public static function getConfig(){
@@ -47,5 +49,20 @@ class WxService
         $data['access_token'] = $ret['access_token'];
         cmf_set_option('wx_lblk',$data);
         return $ret;
+    }
+
+    public static function getCodeUrl($url,$state=0){
+        //配置参数
+        $config = self::getConfig();
+        $appId = $config['app_id'];
+
+        $where = [
+            'mark' => 'authorize'
+        ];
+        $urlInfo = ApiModel::tb()->where($where)->find();
+        $wxUrl = $urlInfo['url']."?appid=".$appId."&redirect_uri=".urlencode($url)."&response_type=code&scope=snsapi_userinfo&state=".$state."#wechat_redirect";
+
+        $ret = http_curl($url,[],$urlInfo['type'],[]);
+        return json_decode($ret,true);
     }
 }
