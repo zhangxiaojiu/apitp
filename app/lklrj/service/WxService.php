@@ -76,4 +76,17 @@ class WxService
         $ret = ApiService::getApi($where,$params);
         return $ret;
     }
+
+    public static function getUserInfo($accessToken,$openid){
+        $where = [
+            'mark' => 'wx_userinfo'
+        ];
+        $params = [
+            'access_token' => $accessToken,
+            'openid' => $openid,
+            'lang' => 'zh_CN'
+        ];
+        $ret = ApiService::getApi($where,$params);
+        return $ret;
+    }
 }
