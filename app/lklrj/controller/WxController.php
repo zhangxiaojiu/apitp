@@ -62,9 +62,9 @@ class WxController extends HomeBaseController
 
                 if(empty(session('user')['id'])){
                     $uid = UserModel::tb()->insertGetId($userData);
-                    $data['uid']= $uid;
+                    $data['user_id']= $uid;
                 }else{
-                    $data['uid'] = session('user')['id'];
+                    $data['user_id'] = session('user')['id'];
                 }
 
                 $info = ThirdPartyUserModel::tb()->where(['openid' => $data['openid']])->find();
