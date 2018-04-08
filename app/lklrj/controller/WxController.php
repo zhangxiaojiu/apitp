@@ -55,7 +55,7 @@ class WxController extends HomeBaseController
                 p($userRet);
                 $data['openid'] = $userRet['openid'];
                 $data['nickname'] = $userRet['nickname'];
-                $data['union_id'] = $userRet['unionid'];
+                $data['union_id'] = isset($userRet['unionid'])?$userRet['unionid']:'';
                 $userData['sex'] = $userRet['sex'];
                 $userData['avatar'] = $userRet['headimgurl'];
                 p($userData);
