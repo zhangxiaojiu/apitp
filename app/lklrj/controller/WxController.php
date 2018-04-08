@@ -9,6 +9,7 @@
 namespace app\lklrj\controller;
 
 
+use app\admin\model\ThirdPartyUserModel;
 use app\lklrj\service\WxService;
 use cmf\controller\HomeBaseController;
 
@@ -43,6 +44,16 @@ class WxController extends HomeBaseController
         $code = $_GET['code'];
         //$state = $_GET['state'];//传递参数用
         $ret = WxService::getAccessToken($code);
-        p($ret);
+        $data['openid'] = $ret['openid'];
+        $data['access_token'] = $ret['access_token'];
+        $data['refresh_token'] = $ret['refresh_token'];
+        $data['expire_time'] = time()+$ret['expires_in'];
+
+        $info = ThirdPartyUserModel::tb()->where(['openid'=>$data['openid']])->find();
+        if(empty($info)){
+            ThirdPartyUserModel::tb()->insert($data);
+        }else{
+            ThirdPartyUserModel::tb()->where(['openid'=>$data['openid']])->update($data);
+        }
     }
 }

@@ -55,13 +55,7 @@ class WxService
         //配置参数
         $config = self::getConfig();
         $appId = $config['app_id'];
-
-        $where = [
-            'mark' => 'authorize'
-        ];
-        $urlInfo = ApiModel::tb()->where($where)->find();
         $wxUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$appId."&redirect_uri=".urlencode($url)."&response_type=code&scope=snsapi_userinfo&state=".$state."#wechat_redirect";
-
         return $wxUrl;
     }
 
