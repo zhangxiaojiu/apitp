@@ -10,6 +10,7 @@ namespace app\lklrj\controller;
 
 
 use app\admin\model\ThirdPartyUserModel;
+use app\admin\model\UserModel;
 use app\lklrj\service\WxService;
 use cmf\controller\HomeBaseController;
 
@@ -46,20 +47,25 @@ class WxController extends HomeBaseController
             if (isset($ret['errcode'])) {
                 p($ret, 0);
             } else {
-                $data['openid'] = $ret['openid'];
                 $data['access_token'] = $ret['access_token'];
                 $data['refresh_token'] = $ret['refresh_token'];
                 $data['expire_time'] = time() + $ret['expires_in'];
 
-                $userRet = WxService::getUserInfo($data['access_token'],$data['openid']);
-                p($userRet);
+                $userRet = WxService::getUserInfo($data['access_token'],$ret['openid']);
                 $data['openid'] = $userRet['openid'];
                 $data['nickname'] = $userRet['nickname'];
                 $data['union_id'] = isset($userRet['unionid'])?$userRet['unionid']:'';
+                //本地用户数据
                 $userData['sex'] = $userRet['sex'];
                 $userData['avatar'] = $userRet['headimgurl'];
-                p($userData);
-                echo "<a href='".$userData['avatar']."'>头像</a>";
+                $userData['nickname'] = $userRet['nickname'];
+
+                if(empty(session('user')['id'])){
+                    $uid = UserModel::tb()->insertGetId($userData);
+                    $data['uid']= $uid;
+                }else{
+                    $data['uid'] = session('user')['id'];
+                }
 
                 $info = ThirdPartyUserModel::tb()->where(['openid' => $data['openid']])->find();
                 if (empty($info)) {
