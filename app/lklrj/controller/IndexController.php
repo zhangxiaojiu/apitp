@@ -14,6 +14,7 @@ namespace app\lklrj\controller;
 use app\admin\model\CoinLogModel;
 use app\admin\model\CoinModel;
 use app\admin\model\ThirdPartyUserModel;
+use app\admin\model\UserModel;
 
 class IndexController extends BaseController
 {
@@ -58,6 +59,10 @@ class IndexController extends BaseController
     public function user()
     {
         $uid = session('user')['id'];
+        $user = UserModel::tb()->where(['id' => $uid])->find();
+        if(empty($user['mobile'])){
+            $this->redirect('index/voidMobile');
+        }
         $wxUser = ThirdPartyUserModel::tb()->where(['user_id'=>$uid])->find();
         $this->assign('wxuser',$wxUser);
         $this->assign('menu','user');
@@ -67,6 +72,7 @@ class IndexController extends BaseController
      * 验证手机号
      */
     public function voidMobile(){
-        $this->fetch();
+        p('void mobile',0);
+        return $this->fetch();
     }
 }
