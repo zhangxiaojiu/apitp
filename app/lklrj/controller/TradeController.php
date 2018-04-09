@@ -41,12 +41,14 @@ class TradeController extends BaseController
             $where = session('search')['where'];
         }
         $list = TradeModel::tb()->where($where)->paginate(10);
-        
+        $num = TradeModel::tb()->where($where)->sum('trans_amt');
+
         // 获取分页显示
         $page = $list->render();
 
         $this->assign('list', $list);
         $this->assign('page', $page);
+        $this->assign('num', $num);
         return $this->fetch();
     }
 }
