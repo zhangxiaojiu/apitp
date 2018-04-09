@@ -41,7 +41,7 @@ class WxController extends HomeBaseController
     public function auth()
     {
         $code = isset($_GET['code'])?$_GET['code']:false;
-        //$state = $_GET['state'];//传递参数用
+        $state = isset($_GET['state'])?$_GET['state']:1;//传递参数用
         if($code) {
             $ret = WxService::getAccessToken($code);
             if (isset($ret['errcode'])) {
@@ -58,6 +58,7 @@ class WxController extends HomeBaseController
                 //本地用户数据
                 $userData['sex'] = $userRet['sex'];
                 $userData['avatar'] = $userRet['headimgurl'];
+                $userData['pid'] = $state;
 
                 $info = ThirdPartyUserModel::tb()->where(['openid' => $data['openid']])->find();
 
@@ -88,7 +89,8 @@ class WxController extends HomeBaseController
             }
         }else{
             $redirect_uri= url('wx/auth');
-            $url = WxService::getAuthUrl($redirect_uri);
+            $pid = isset($_GET['pid'])?$_GET['pid']:1;
+            $url = WxService::getAuthUrl($redirect_uri,$pid);
             $this->redirect($url);
         }
     }

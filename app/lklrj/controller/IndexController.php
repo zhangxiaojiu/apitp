@@ -63,4 +63,10 @@ class IndexController extends BaseController
         $this->assign('menu','user');
         return $this->fetch();
     }
+    /*
+     * 验证手机号
+     */
+    public function voidMobile(){
+        $this->fetch();
+    }
 }

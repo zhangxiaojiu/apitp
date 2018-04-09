@@ -21,6 +21,9 @@ class BaseController extends HomeBaseController
         if (!empty($session_user)) {
             $user = UserModel::tb()->where(['id' => $session_user['id']])->find();
             $this->assign("user", $user);
+            if(empty($user['mobile'])){
+                return $this->redirect('index/voidMobile');
+            }
         } else {
             if ($this->request->isPost()) {
                 $this->error("您还没有登录！", url("lklrj/public/index"));

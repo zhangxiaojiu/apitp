@@ -26,7 +26,11 @@ class PublicController extends HomeBaseController
     }
     //注册页面
     public function register(){
-        $pid = isset($_GET['pid'])?$_GET['pid']:0;
+        $pid = isset($_GET['pid'])?$_GET['pid']:1;
+        //微信则直接注册
+        if(cmf_is_wechat()){
+            $this->redirect('wx/auth',array('pid'=>$pid));
+        }
         $this->assign('pid',$pid);
         return $this->fetch();
     }
