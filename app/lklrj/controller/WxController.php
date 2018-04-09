@@ -58,13 +58,13 @@ class WxController extends HomeBaseController
                 //本地用户数据
                 $userData['sex'] = $userRet['sex'];
                 $userData['avatar'] = $userRet['headimgurl'];
-                $userData['pid'] = $state;
 
                 $info = ThirdPartyUserModel::tb()->where(['openid' => $data['openid']])->find();
 
                 if(empty(session('user')['id'])){
                     if(empty($info['user_id'])) {
                         $userData['user_nickname'] = $userRet['nickname'];
+                        $userData['pid'] = $state;
                         $uid = UserModel::tb()->insertGetId($userData);
                         $data['user_id'] = $uid;
 

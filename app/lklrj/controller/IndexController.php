@@ -15,6 +15,7 @@ use app\admin\model\CoinLogModel;
 use app\admin\model\CoinModel;
 use app\admin\model\ThirdPartyUserModel;
 use app\admin\model\UserModel;
+use think\Validate;
 
 class IndexController extends BaseController
 {
@@ -72,7 +73,83 @@ class IndexController extends BaseController
      * 验证手机号
      */
     public function voidMobile(){
-        p('void mobile',0);
+        $uid = session('user')['id'];
+        $wxUser = ThirdPartyUserModel::tb()->where(['user_id'=>$uid])->find();
+        $this->assign('wxuser',$wxUser);
         return $this->fetch();
+    }
+    public function doVoidMobile(){
+        if ($this->request->isPost()) {
+            $rules = [
+                'username'  => 'require',
+                'code'     => 'require',
+                'password' => 'require|min:6|max:32',
+
+            ];
+
+            $validate = new Validate($rules);
+            $validate->message([
+                'code.require'     => '验证码不能为空',
+                'username.require' => '手机号不能为空',
+                'password.require' => '密码不能为空',
+                'password.max'     => '密码不能超过32个字符',
+                'password.min'     => '密码不能小于6个字符',
+            ]);
+
+            $data = $this->request->post();
+            if (!$validate->check($data)) {
+                $this->error($validate->getError());
+            }
+
+
+            $errMsg = cmf_check_verification_code($data['username'], $data['code']);
+            if (!empty($errMsg)) {
+                $this->error($errMsg);
+            }
+
+            $user['user_pass'] = $data['password'];
+            $user['mobile'] = $data['username'];
+            if (preg_match('/(^(13\d|15[^4\D]|17[13678]|18\d)\d{8}|170[^346\D]\d{7})$/', $data['username'])) {
+                $user['user_login'] = $data['username'];
+                $result = UserModel::tb()->where('mobile', $user['mobile'])->find();
+
+                if (empty($result)) {
+                    $data = [
+                        'id' => session('user')['id'],
+                        'mobile' => $user['mobile'],
+                        'user_pass' => cmf_password($user['user_pass']),
+                        'last_login_ip' => get_client_ip(0, true),
+                        'create_time' => time(),
+                        'last_login_time' => time(),
+                        'user_status' => 1,
+                        "user_type" => \app\admin\model\UserModel::TYPE_LKL_AGENT,
+                    ];
+                    UserModel::tb()->update($data);
+                    $log = 0;
+                }else{
+                    $log = 1;
+                }
+            } else {
+                $log = 2;
+            }
+            $sessionLoginHttpReferer = session('login_http_referer');
+            $redirect                = empty($sessionLoginHttpReferer) ? cmf_get_root() . '/' : $sessionLoginHttpReferer;
+            switch ($log) {
+                case 0:
+                    $this->success('成功', $redirect);
+                    break;
+                case 1:
+                    $this->error("手机号已注册过");
+                    break;
+                case 2:
+                    $this->error("您输入的手机号格式错误");
+                    break;
+                default :
+                    $this->error('未受理的请求');
+            }
+
+        } else {
+            $this->error("请求错误");
+        }
     }
 }
