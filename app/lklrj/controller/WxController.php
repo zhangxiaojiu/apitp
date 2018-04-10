@@ -65,6 +65,8 @@ class WxController extends HomeBaseController
                     if(empty($info['user_id'])) {
                         $userData['user_nickname'] = $userRet['nickname'];
                         $userData['pid'] = $state;
+                        $userData['user_type'] = UserModel::TYPE_LKL_AGENT;
+                        $userData['user_status'] = UserModel::STATUS_UNVERIFIED;
                         $uid = UserModel::tb()->insertGetId($userData);
                         $data['user_id'] = $uid;
 

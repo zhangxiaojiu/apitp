@@ -121,8 +121,7 @@ class IndexController extends BaseController
                         'last_login_ip' => get_client_ip(0, true),
                         'create_time' => time(),
                         'last_login_time' => time(),
-                        'user_status' => 1,
-                        "user_type" => \app\admin\model\UserModel::TYPE_LKL_AGENT,
+                        'user_status' => UserModel::STATUS_NORMAL,
                     ];
                     UserModel::tb()->update($data);
                     $log = 0;
