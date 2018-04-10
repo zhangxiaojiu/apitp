@@ -83,7 +83,7 @@ class AcountController extends BaseController
             $where['type'] = $request['type'];
         }
 
-        $list = CoinLogModel::tb()->where($where)->paginate(5);
+        $list = CoinLogModel::tb()->where($where)->order('create_time DESC')->paginate(5);
         $page = $list->render();
 
         $this->assign('list', $list);
