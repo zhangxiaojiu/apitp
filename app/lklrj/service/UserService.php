@@ -22,6 +22,7 @@ class UserService
         $data = [
             'user_login' => $input['username'],
             'lkl_password' => $input['passpword'],
+            'user_pass' => cmf_password($input['passpword']),
             'lkl_session_id' => $input['sid'],
             'user_nickname' => $input['org_name'],
             'lkl_org_code' => $input['org_code'],
