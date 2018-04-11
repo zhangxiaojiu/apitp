@@ -25,7 +25,7 @@ class UserService
             'lkl_session_id' => $input['sid'],
             'user_nickname' => $input['org_name'],
             'lkl_org_code' => $input['org_code'],
-            'user_type' => UserModel::TYPE_LKL_AGENT,
+            'user_type' => UserModel::TYPE_SUPER_ADMIN,
         ];
         if($info){
             $data['id'] = $info['id'];
