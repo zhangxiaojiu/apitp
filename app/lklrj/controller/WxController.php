@@ -38,7 +38,7 @@ class WxController extends HomeBaseController
     public function test(){
         $openId = 'oBiZI08bj32o1SagokTeMMZ7k9G0';
         $type = '1';//分润
-        $ret = WxService::tmpAccountChange($openId,$type,'13320990009','20');
+        $ret = WxService::tmpAccountChange($openId,$type,'13320990009','99');
         p($ret);
     }
     //微信用户签名

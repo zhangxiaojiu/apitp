@@ -30,26 +30,32 @@ class WxService
         $signStr = sha1($tmpStr);
         return $signStr;
     }
-    //设置access_token
-    public static function setAccessToken(){
-        //配置参数
-        $config = self::getConfig();
-        $appId = $config['app_id'];
-        $appSecret = $config['app_secret'];
+    //设置access_token  （通用）
+    public static function returnSetAccessToken(){
+        cache('cmf_options_lblk_access_token', null);
+        $accessToken = cmf_get_option('lblk_access_token');
+        $expires_in = isset($accessToken['expires_in'])?$accessToken['expires_in']:0;
+        if(time() > $expires_in) {
+            //配置参数
+            $config = self::getConfig();
+            $appId = $config['app_id'];
+            $appSecret = $config['app_secret'];
 
-        $where = [
-            'mark' => 'access_token'
-        ];
-        $params = [
-            'grant_type' => 'client_credential',
-            'appid' => $appId,
-            'secret' => $appSecret
-        ];
-        $ret = ApiService::getApi($where,$params);
-        $data['access_token'] = $ret['access_token'];
-        $data['expires_in'] = time()+$ret['expires_in'];
-        cmf_set_option('lblk_access_token',$data);
-        return $ret;
+            $where = [
+                'mark' => 'access_token'
+            ];
+            $params = [
+                'grant_type' => 'client_credential',
+                'appid' => $appId,
+                'secret' => $appSecret
+            ];
+            $ret = ApiService::getApi($where, $params);
+            $data['access_token'] = $ret['access_token'];
+            $data['expires_in'] = time() + $ret['expires_in'];
+            cmf_set_option('lblk_access_token', $data);
+            return $data;
+        }
+        return $accessToken;
     }
     //获取授权链接
     public static function getAuthUrl($url,$state=0){
@@ -92,11 +98,7 @@ class WxService
     }
     //发送模版消息
     public static function sendTmpMess($params){
-        $expires_in = isset(cmf_get_option('lblk_access_token')['expires_in'])?cmf_get_option('lblk_access_token')['expires_in']:0;
-        if(time() > $expires_in){
-            self::setAccessToken();
-        }
-        $accessToken = cmf_get_option('lblk_access_token');
+        $accessToken = self::returnSetAccessToken();
         $token = $accessToken['access_token'];
         $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$token;
         $ret = request_post($url,urldecode($params));
