@@ -97,10 +97,41 @@ class WxService
             self::setAccessToken();
         }
         $accessToken = cmf_get_option('lblk_access_token');
-        p($accessToken);
         $token = $accessToken['access_token'];
         $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$token;
-        $ret = http_curl($url,$params,'post');
+        $ret = request_post($url,urldecode($params));
         return json_decode($ret,true);
+    }
+    //模版 账户变更
+    public static function tmpAccountChange($openId,$type,$account,$coin){
+        switch ($type){
+            case 1:
+                $title = '分润到账提醒';
+                $type = '分润';
+                $remark = '尊敬的会员您好，你的账户分润到账¥'.$coin.'，请及时查收。';
+                break;
+            case 2:
+                $title = '';
+                $type = '';
+                $remark = '';
+                break;
+            default:
+        }
+        $data = [
+            'first' =>  ['value'=>$title,'color'=>'#000'],
+            'account' =>  ['value'=>$account,'color'=>'#000'],
+            'time' =>  ['value'=>date("Y-m-d H:i:s",time()),'color'=>'#00f'],
+            'type' =>  ['value'=>$type,'color'=>'#000'],
+            'remark' =>  ['value'=>$remark,'color'=>'#666']
+        ];
+        $params = [
+            'touser' => $openId,
+            'template_id' => 'UP0rah2nHfF1V-45IXtibp63t9Hvm4zKIM6qoIvr8mY',
+            'url' => url('index/user'),
+            'data' => $data
+        ];
+        $json = json_encode($params);
+        $ret = WxService::sendTmpMess($json);
+        return $ret;
     }
 }

@@ -1809,6 +1809,46 @@ function http_curl($url, $params, $method = 'GET', $header = array(), $multi = f
     if($error) throw new Exception('请求发生错误：' . $error);
     return  $data;
 }
+/**
+ * 发送post请求
+ * @param string $url
+ * @param string $param
+ * @return bool|mixed
+ */
+function request_post($url = '', $param = '')
+{
+    if (empty($url) || empty($param)) {
+        return false;
+    }
+    $postUrl = $url;
+    $curlPost = $param;
+    $ch = curl_init(); //初始化curl
+    curl_setopt($ch, CURLOPT_URL, $postUrl); //抓取指定网页
+    curl_setopt($ch, CURLOPT_HEADER, 0); //设置header
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //要求结果为字符串且输出到屏幕上
+    curl_setopt($ch, CURLOPT_POST, 1); //post提交方式
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
+    $data = curl_exec($ch); //运行curl
+    curl_close($ch);
+    return $data;
+}
+/**
+ * 发送get请求
+ * @param string $url
+ * @return bool|mixed
+ */
+function request_get($url = '')
+{
+    if (empty($url)) {
+        return false;
+    }
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
+}
 /*
 * 打印
 */

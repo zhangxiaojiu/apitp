@@ -36,19 +36,9 @@ class WxController extends HomeBaseController
         }
     }
     public function test(){
-        $params = [
-            'touser' => 'oBiZI08bj32o1SagokTeMMZ7k9G0',
-            'template_id' => 'UP0rah2nHfF1V-45IXtibp63t9Hvm4zKIM6qoIvr8mY',
-            'url' => url('index/user'),
-            'data' => [
-                'first' =>  ['value'=>'测试模版消息','color'=>'#abcdef'],
-                'keynote1' =>  ['value'=>'张小九','color'=>'#0f0'],
-                'keynote2' =>  ['value'=>date("Y-m-d H:i:s",time()),'color'=>'#00f'],
-                'keynote3' =>  ['value'=>'测试','color'=>'#ccc'],
-                'remark' =>  ['value'=>'啊哈哈哈哈～扭了个比','color'=>'#f00']
-            ]
-        ];
-        $ret = WxService::sendTmpMess($params);
+        $openId = 'oBiZI08bj32o1SagokTeMMZ7k9G0';
+        $type = '1';//分润
+        $ret = WxService::tmpAccountChange($openId,$type,'13320990009','20');
         p($ret);
     }
     //微信用户签名

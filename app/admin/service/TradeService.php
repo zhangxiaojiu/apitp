@@ -9,8 +9,10 @@
 namespace app\admin\service;
 
 
+use app\admin\model\ThirdPartyUserModel;
 use app\admin\model\TradeModel;
 use app\admin\model\UserModel;
+use app\lklrj\service\WxService;
 use think\Db;
 
 class TradeService
@@ -101,6 +103,11 @@ class TradeService
             }
 
             Db::commit();
+            //微信模版消息
+            $wxUser = ThirdPartyUserModel::tb()->where(['user_id'=>$id])->find();
+            $openId = $wxUser['openid'];
+            $type = '1';//分润
+            WxService::tmpAccountChange($openId,$type,$wxUser['nickname'],$coin);
         }
     }
 
