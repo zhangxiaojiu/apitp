@@ -10,6 +10,9 @@ namespace app\admin\service;
 
 
 use app\admin\model\TerminaModel;
+use app\admin\model\ThirdPartyUserModel;
+use app\admin\model\UserModel;
+use app\lklrj\service\WxService;
 use think\Db;
 
 class TerminaService
@@ -42,8 +45,9 @@ class TerminaService
         Db::startTrans();
         $ret = TerminaModel::tb()->update($data);
         if($ret > 0){
+            $coin = 0;
+            $row_pos = TerminaModel::tb()->find($id);
             if($isMoney){
-                $row_pos = TerminaModel::tb()->find($id);
                 $coin = 99;
                 $data_f = [
                     'uid' => $row_pos['uid'],
@@ -64,6 +68,15 @@ class TerminaService
                 }
             }
             Db::commit();
+            //微信模版消息
+            $wxUser = ThirdPartyUserModel::tb()->where(['user_id'=>$row_pos['uid']])->find();
+            if(!empty($wxUser)) {
+                $openId = $wxUser['openid'];
+                $uInfo = UserModel::getInfoById($id);
+                $type = '2';//激活机器
+                $remark = '尊敬的会员您好，你的机器'.$row_pos['code'].'激活成功，返现¥'.$coin.'，请及时查收。';
+                WxService::tmpAccountChange($openId, $type, $uInfo['user_nickname'], $remark);
+            }
             return 1;
         }else{
             return 0;

@@ -105,17 +105,15 @@ class WxService
         return json_decode($ret,true);
     }
     //模版 账户变更
-    public static function tmpAccountChange($openId,$type,$account,$coin){
+    public static function tmpAccountChange($openId,$type,$account,$remark){
         switch ($type){
             case 1:
                 $title = '分润到账提醒';
                 $type = '分润';
-                $remark = '尊敬的会员您好，你的账户分润到账¥'.$coin.'，请及时查收。';
                 break;
             case 2:
-                $title = '';
-                $type = '';
-                $remark = '';
+                $title = '机器激活提醒';
+                $type = '激活';
                 break;
             default:
         }
@@ -129,7 +127,7 @@ class WxService
         $params = [
             'touser' => $openId,
             'template_id' => 'UP0rah2nHfF1V-45IXtibp63t9Hvm4zKIM6qoIvr8mY',
-            'url' => url('index/user'),
+            'url' => 'http://app.mylabulaka.com/wx/auth',
             'data' => $data
         ];
         $json = json_encode($params);

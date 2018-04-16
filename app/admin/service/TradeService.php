@@ -105,9 +105,13 @@ class TradeService
             Db::commit();
             //微信模版消息
             $wxUser = ThirdPartyUserModel::tb()->where(['user_id'=>$id])->find();
-            $openId = $wxUser['openid'];
-            $type = '1';//分润
-            WxService::tmpAccountChange($openId,$type,$wxUser['nickname'],$coin);
+            if(!empty($wxUser)) {
+                $uInfo = UserModel::getInfoById($id);
+                $openId = $wxUser['openid'];
+                $type = '1';//分润
+                $remark = '尊敬的会员您好，你的账户分润到账¥'.$coin.'，请及时查收。';
+                WxService::tmpAccountChange($openId, $type, $uInfo['user_nickname'], $remark);
+            }
         }
     }
 
