@@ -65,6 +65,7 @@ class TradeService
             }
             $where['term_no'] = ['IN', $tArray];
             $where['status'] = 0;
+            $where['card_type'] = '贷记卡';
             $tradeList = TradeModel::tb()->where($where)->select();
             $amt = 0;
             $num = count($tradeList);
