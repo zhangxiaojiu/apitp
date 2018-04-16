@@ -12,11 +12,13 @@
 namespace app\admin\controller;
 
 use app\admin\model\CoinLogModel;
+use app\admin\model\ThirdPartyUserModel;
 use app\admin\model\UserModel;
 use app\admin\service\MemberService;
 use app\admin\service\TerminaService;
 use app\admin\service\TradeService;
 use app\lklrj\service\ApiService;
+use app\lklrj\service\WxService;
 use cmf\controller\AdminBaseController;
 use think\Db;
 use app\user\model\CoinModel;
@@ -198,7 +200,11 @@ class MemberController extends AdminBaseController
 
     public function withdraw()
     {
-        $list = CoinLogModel::getListByType('withdraw');
+        $id = session('ADMIN_ID');
+        $pIds = MemberService::getPidArr($id);
+        $where['type'] = 'withdraw';
+        $where['uid'] = ['in',$pIds];
+        $list = CoinLogModel::tb()->where($where)->paginate(10);
         $this->assign('list',$list);
         return $this->fetch();
     }
@@ -208,6 +214,16 @@ class MemberController extends AdminBaseController
         $id = $this->request->param('id', 0, 'intval');
         $ret = CoinLogModel::tb()->where('id',$id)->setField('status', 1);
         if($ret > 0){
+            //微信模版消息
+            $clInfo = CoinLogModel::tb()->find($id);
+            $uInfo = UserModel::getInfoById($clInfo['uid']);
+            $wxUser = ThirdPartyUserModel::tb()->where(['user_id'=>$uInfo['id']])->find();
+            if(!empty($wxUser)) {
+                $openId = $wxUser['openid'];
+                $type = '3';//提现
+                $remark = '尊敬的会员您好，您的提现申请已打款，请及时查收。（银行卡可能会有到账延时）';
+                WxService::tmpAccountChange($openId, $type, $uInfo['user_nickname'], $remark);
+            }
             $this->success("审核成功");
         }
     }

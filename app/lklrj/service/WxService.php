@@ -115,6 +115,10 @@ class WxService
                 $title = '机器激活提醒';
                 $type = '激活';
                 break;
+            case 3:
+                $title = '提现申请打款提醒';
+                $type = '提现';
+                break;
             default:
         }
         $data = [
