@@ -14,7 +14,7 @@ use app\admin\model\UserModel;
 class UserController extends BaseController
 {
     /*
-     * 我的资料
+     * 个人资料
      */
     public function info(){
         $uid = session('user')['id'];
@@ -23,6 +23,15 @@ class UserController extends BaseController
         return $this->fetch();
     }
 
+    /*
+     * 账户信息
+     */
+    public function account(){
+        $uid = session('user')['id'];
+        $uInfo = UserModel::getInfoById($uid);
+        $this->assign('info',$uInfo);
+        return $this->fetch();
+    }
     /*
      * 修改资料
      */
@@ -33,7 +42,19 @@ class UserController extends BaseController
         if(!empty($data)){
             if(UserModel::tb()->update($data)){
                 $this->success('修改成功');
+            }else{
+                $this->error('没有改变资料');
             }
         }
+    }
+
+    public function realNameAuth(){
+        $uid = session('user')['id'];
+        $uInfo = UserModel::getInfoById($uid);
+        $this->assign('info',$uInfo);
+        return $this->fetch();
+    }
+    public function doRealNameAuth(){
+        p($_POST);
     }
 }

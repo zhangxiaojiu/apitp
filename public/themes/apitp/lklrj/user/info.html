@@ -2,32 +2,25 @@
 <div class="top-bar pr30"><a href="{:url('index/user')}"><span class="glyphicon glyphicon-menu-left fl"></span></a>我的资料</div>
 <div class="mt60"></div>
 <div class="carpet">
-    <h4><span class="icon-inm glyphicon glyphicon-list-alt"></span>我的资料</h4>
+    <h4><span class="icon-inm glyphicon glyphicon-list-alt"></span>个人资料</h4>
     <div class="container">
         <form class="js-ajax-form" style="margin-top:20px;" action="{:url('user/editInfo')}" method="post">
             <div class="form-group">
-                <label for="inputNickname" class="">姓名</label>
+                <label for="inputNickname" class="">昵称</label>
                 <input name="user_nickname" type="text" id="inputNickname" class="form-control" placeholder="请输入真实姓名" value="{$info.user_nickname}" autofocus="">
+            </div>
+            <div class="form-group">
+                <label class="btn-block">性别</label>
+                <label><input name="sex" type="radio" value="1" <eq name="info.sex" value="1">checked</eq> >男</label> 　
+                <label><input name="sex" type="radio" value="0" <eq name="info.sex" value="0">checked</eq> >女</label>
+            </div>
+            <div class="form-group">
+                <label for="inputbirthday" class="">生日</label>
+                <input name="birthday" type="text" id="inputbirthday" class="form-control js-bootstrap-date" placeholder="请输入真实姓名" value="{$info.birthday}" autofocus="">
             </div>
             <div class="form-group">
                 <label for="inputaddress" class="">地址</label>
                 <input name="user_address" type="text" id="inputaddress" class="form-control" placeholder="请输入所在地址" value="{$info.user_address}" autofocus="">
-            </div>
-            <div class="form-group">
-                <label for="inputWechat" class="">微信号</label>
-                <input name="wechat" type="text" id="inputWechat" class="form-control" placeholder="微信号" value="{$info.wechat}" autofocus="">
-            </div>
-            <div class="form-group">
-                <label for="inputAlipay" class="">支付宝</label>
-                <input name="alipay" type="text" id="inputAlipay" class="form-control" placeholder="支付宝" value="{$info.alipay}">
-            </div>
-            <div class="form-group">
-                <label for="inputBankname" class="">支行名称</label>
-                <input name="bankname" type="text" id="inputBankname" class="form-control" placeholder="支行名称" value="{$info.bankname}">
-            </div>
-            <div class="form-group">
-                <label for="inputBankcard" class="">支行卡号</label>
-                <input name="bankcard" type="text" id="inputBankcard" class="form-control" placeholder="支行卡号" value="{$info.bankcard}">
             </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-loadingmsg="{:lang('LOADING')}">修改</button>

@@ -16,12 +16,14 @@
 </div>
 <div class="carpet">
     <a href="{:url('acount/index')}"><h4 class=""><span class="glyphicon glyphicon-piggy-bank icon-time"></span>我的钱包 <span class="fr">￥{$user.coin}</span></h4></a>
-    <a href="{:url('user/info')}"><h4 class=""><span class="glyphicon glyphicon-list-alt icon-time"></span>我的资料</h4></a>
-    <a href="{:url('trade/index')}"><h4 class=""><span class="glyphicon glyphicon-random icon-time"></span>交易记录</h4></a>
+    <a href="{:url('user/info')}"><h4 class=""><span class="glyphicon glyphicon-user icon-time"></span>个人资料</h4></a>
+    <a href="{:url('user/account')}"><h4 class=""><span class="glyphicon glyphicon-list-alt icon-time"></span>账户信息</h4></a>
+    <a href="{:url('user/realNameAuth')}"><h4 class=""><i class="fa fa-id-card icon-time"></i>实名信息</h4></a>
     <a href="{:url('public/shareCode')}"><h4 class=""><span class="glyphicon glyphicon-share icon-time"></span>分享二维码</h4></a>
     <empty name="wxuser">
         <a href="{:url('wx/auth')}"><h4 class=""><i class="fa fa-wechat icon-time"></i>绑定微信</h4></a>
     </empty>
+
 </div>
 <div class="carpet">
     <a href="{:url('public/logout')}"><h4 class=""><span class="glyphicon glyphicon-off icon-time"></span>退出</h4></a>
