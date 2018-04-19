@@ -8,3 +8,4 @@
 /public/themes/apitp/public/qrcode
 /vendor
 composer*
+/public/upload/

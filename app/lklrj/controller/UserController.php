@@ -32,6 +32,32 @@ class UserController extends BaseController
         $this->assign('info',$uInfo);
         return $this->fetch();
     }
+
+    /*
+     * 上传图片
+     */
+    private static function uploadImg($file){
+        $result = $file->validate([
+            'ext'  => 'jpg,jpeg,png',
+            'size' => 1024 * 1024*10
+        ])->move('.' . DS . 'upload' . DS . 'userinfo' . DS);
+        if ($result) {
+            $saveName = str_replace('//', '/', str_replace('\\', '/', $result->getSaveName()));
+            return [
+                'code' => 1,
+                "msg"  => "上传成功",
+                "data" => ['file' => $saveName],
+                "url"  => ''
+            ];
+        } else {
+            return [
+                'code' => 0,
+                "msg"  => $file->getError(),
+                "data" => "",
+                "url"  => ''
+            ];
+        }
+    }
     /*
      * 修改资料
      */
@@ -39,6 +65,53 @@ class UserController extends BaseController
         $data = $_POST;
         $uid = session('user')['id'];
         $data['id'] = $uid;
+
+        if(isset($_FILES['bankcard_pic']) && $_FILES['bankcard_pic']['size']>0){
+            $file   = $this->request->file('bankcard_pic');
+            $ret = self::uploadImg($file);
+            if($ret['code'] == 1){
+                $data['bankcard_pic'] = $ret['data']['file'];
+            }else{
+                $this->error($ret['msg']);
+            }
+        }
+        if(isset($_FILES['bankcardhand_pic']) && $_FILES['bankcardhand_pic']['size']>0){
+            $file   = $this->request->file('bankcardhand_pic');
+            $ret = self::uploadImg($file);
+            if($ret['code'] == 1){
+                $data['bankcardhand_pic'] = $ret['data']['file'];
+            }else{
+                $this->error($ret['msg']);
+            }
+        }
+        if(isset($_FILES['user_cardup_pic']) && $_FILES['user_cardup_pic']['size']>0){
+            $file   = $this->request->file('user_cardup_pic');
+            $ret = self::uploadImg($file);
+            if($ret['code'] == 1){
+                $data['user_cardup_pic'] = $ret['data']['file'];
+            }else{
+                $this->error($ret['msg']);
+            }
+        }
+        if(isset($_FILES['user_carddown_pic']) && $_FILES['user_carddown_pic']['size']>0){
+            $file   = $this->request->file('user_carddown_pic');
+            $ret = self::uploadImg($file);
+            if($ret['code'] == 1){
+                $data['user_carddown_pic'] = $ret['data']['file'];
+            }else{
+                $this->error($ret['msg']);
+            }
+        }
+        if(isset($_FILES['user_cardhand_pic']) && $_FILES['user_cardhand_pic']['size']>0){
+            $file   = $this->request->file('user_cardhand_pic');
+            $ret = self::uploadImg($file);
+            if($ret['code'] == 1){
+                $data['user_cardhand_pic'] = $ret['data']['file'];
+            }else{
+                $this->error($ret['msg']);
+            }
+        }
+
         if(!empty($data)){
             if(UserModel::tb()->update($data)){
                 $this->success('修改成功');
@@ -53,8 +126,5 @@ class UserController extends BaseController
         $uInfo = UserModel::getInfoById($uid);
         $this->assign('info',$uInfo);
         return $this->fetch();
-    }
-    public function doRealNameAuth(){
-        p($_POST);
     }
 }

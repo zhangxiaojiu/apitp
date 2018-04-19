@@ -1853,6 +1853,7 @@ function request_get($url = '')
 * 打印
 */
 function p($arr,$e=true){
+    header("Content-type: text/html; charset=utf-8");
     echo "<pre>";
     print_r($arr);
     echo "</pre>";

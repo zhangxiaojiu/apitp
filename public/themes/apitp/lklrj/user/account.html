@@ -24,6 +24,16 @@
             <div class="form-group">
                 <label for="js-bankcard_pic-input" class="btn btn-warning btn-block">上传银行卡照片</label>
                 <input style="display: none;" name="bankcard_pic" id="js-bankcard_pic-input" type="file">
+                <notempty name="info.bankcard_pic">
+                    <img style="width:100%; margin-top:10px;" src="/upload/userinfo/{$info.bankcard_pic}">
+                </notempty>
+            </div>
+            <div class="form-group">
+                <label for="js-bankcardhand_pic-input" class="btn btn-warning btn-block">上传手持银行卡</label>
+                <input style="display: none;" name="bankcardhand_pic" id="js-bankcardhand_pic-input" type="file">
+                <notempty name="info.bankcardhand_pic">
+                    <img style="width:100%; margin-top:10px;" src="/upload/userinfo/{$info.bankcardhand_pic}">
+                </notempty>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-loadingmsg="{:lang('LOADING')}">修改</button>
