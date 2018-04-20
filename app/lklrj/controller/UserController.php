@@ -10,6 +10,7 @@ namespace app\lklrj\controller;
 
 
 use app\admin\model\UserModel;
+use app\admin\service\ImageService;
 
 class UserController extends BaseController
 {
@@ -43,6 +44,19 @@ class UserController extends BaseController
         ])->move('.' . DS . 'upload' . DS . 'userinfo' . DS);
         if ($result) {
             $saveName = str_replace('//', '/', str_replace('\\', '/', $result->getSaveName()));
+            //压缩图片
+            $scale = 0.2;
+            $fileInfo = $file->getInfo();
+            $size = $fileInfo['size'];
+            if($size < 200*1024){
+                $scale = 1;
+            }
+            $src = "./upload/userinfo/".$saveName;
+            $image = new ImageService($src);
+            $image->percent = $scale;
+            $image->openImage();
+            $image->thumpImage();
+            $image->saveImage($src,true);
             return [
                 'code' => 1,
                 "msg"  => "上传成功",
@@ -62,9 +76,26 @@ class UserController extends BaseController
      * 修改资料
      */
     public function editInfo(){
-        $data = $_POST;
         $uid = session('user')['id'];
         $data['id'] = $uid;
+        if(isset($_POST['realname'])) {
+            $data['realname'] = $_POST['realname'];
+        }
+        if(isset($_POST['user_card'])) {
+            $data['user_card'] = $_POST['user_card'];
+        }
+        if(isset($_POST['wechat'])) {
+            $data['wechat'] = $_POST['wechat'];
+        }
+        if(isset($_POST['alipay'])) {
+            $data['alipay'] = $_POST['alipay'];
+        }
+        if(isset($_POST['bankname'])) {
+            $data['bankname'] = $_POST['bankname'];
+        }
+        if(isset($_POST['bankcard'])) {
+            $data['bankcard'] = $_POST['bankcard'];
+        }
 
         if(isset($_FILES['bankcard_pic']) && $_FILES['bankcard_pic']['size']>0){
             $file   = $this->request->file('bankcard_pic');

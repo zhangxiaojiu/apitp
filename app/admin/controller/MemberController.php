@@ -87,6 +87,7 @@ class MemberController extends AdminBaseController
         }
         $keywordComplex = [];
         $keywordComplex['id'] = $uid;
+        $keywordComplex['user_status'] = 0;
         if (!empty($request['keyword'])) {
             $keyword = $request['keyword'];
 
@@ -128,9 +129,9 @@ class MemberController extends AdminBaseController
     {
         $id = input('param.id', 0, 'intval');
         if ($id) {
-            $result = Db::name("user")->where(["id" => $id, "user_type" => 2])->setField('user_status', 0);
+            $result = Db::name("user")->where(["id" => $id])->setField('user_status', 0);
             if ($result) {
-                $this->success("会员拉黑成功！", url("adminIndex/index"));
+                $this->success("会员拉黑成功！", url("member/index"));
             } else {
                 $this->error('会员拉黑失败,会员不存在,或者是管理员！');
             }
@@ -156,10 +157,22 @@ class MemberController extends AdminBaseController
     {
         $id = input('param.id', 0, 'intval');
         if ($id) {
-            Db::name("user")->where(["id" => $id, "user_type" => 2])->setField('user_status', 1);
+            Db::name("user")->where(["id" => $id,])->setField('user_status', 1);
             $this->success("会员启用成功！", '');
         } else {
             $this->error('数据传入失败！');
+        }
+    }
+
+    //认证实名
+    public function authRealName()
+    {
+        $id = input('param.id', 0, 'intval');
+        if ($id) {
+            Db::name("user")->where(["id" => $id,])->setField('is_realname', 1);
+            $this->success("认证成功！", url("member/index"));
+        } else {
+            $this->error('认证失败！');
         }
     }
 

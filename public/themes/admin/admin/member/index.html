@@ -31,18 +31,11 @@
             <tr>
                 <th>ID</th>
                 <th>PID</th>
-                <th>ORGCODE</th>
-                <th>PORGCODE</th>
                 <th>{:lang('USERNAME')}</th>
-                <th>{:lang('NICENAME')}</th>
-                <!--<th>{:lang('AVATAR')}</th>-->
-                <th>类型</th>
+                <th>姓名</th>
                 <th>手机</th>
                 <th>余额</th>
-                <!--<th>{:lang('REGISTRATION_TIME')}</th>
-                <th>{:lang('LAST_LOGIN_TIME')}</th>
-                <th>{:lang('LAST_LOGIN_IP')}</th>-->
-                <th>{:lang('STATUS')}</th>
+                <th>资料信息</th>
                 <th>{:lang('ACTIONS')}</th>
             </tr>
             </thead>
@@ -55,31 +48,47 @@
                 <tr>
                     <td>{$vo.id}</td>
                     <td>{$vo.pid}</td>
-                    <td>{$vo.lkl_org_code}</td>
-                    <td>{$vo.porg_code}</td>
                     <td>{$vo['user_login']?$vo['user_login']:($vo['mobile']?$vo['mobile']:$vo['user_email'])}
                     </td>
-                    <td>{$vo['user_nickname']?$vo['user_nickname']:lang('NOT_FILLED')}</td>
-                    <!--<td><img width="25" height="25" src="{:url('user/public/avatar',array('id'=>$vo['id']))}"/></td>-->
-                    <td>{$user_types[$vo['user_type']]}</td>
+                    <td>{$vo['realname']?$vo['realname']:$vo['user_nickname']}</td>
                     <td>{$vo.mobile}</td>
                     <td>￥{$vo.coin}</td>
-                    <!--<td>{:date('Y-m-d H:i:s',$vo['create_time'])}</td>
-                    <td>{:date('Y-m-d H:i:s',$vo['last_login_time'])}</td>
-                    <td>{$vo.last_login_ip}</td>-->
-                    <td>{$user_statuses[$vo['user_status']]}</td>
+                    <td>
+                        <notempty name="vo.user_cardup_pic">
+                            <a href="/upload/userinfo/{$vo.user_cardup_pic}" target="_blank"><img style="height:50px; " src="/upload/userinfo/{$vo.user_cardup_pic}"></a>
+                        </notempty>
+                        <notempty name="vo.user_carddown_pic">
+                            <a href="/upload/userinfo/{$vo.user_carddown_pic}" target="_blank"><img style="height:50px; " src="/upload/userinfo/{$vo.user_carddown_pic}"></a>
+                        </notempty>
+                        <notempty name="vo.user_cardhand_pic">
+                            <a href="/upload/userinfo/{$vo.user_cardhand_pic}" target="_blank"><img style="height:50px; " src="/upload/userinfo/{$vo.user_cardhand_pic}"></a>
+                        </notempty>
+                        <notempty name="vo.bankcard_pic">
+                            <a href="/upload/userinfo/{$vo.bankcard_pic}" target="_blank"><img style="height:50px; " src="/upload/userinfo/{$vo.bankcard_pic}"></a>
+                        </notempty>
+                        <notempty name="vo.bankcardhand_pic">
+                            <a href="/upload/userinfo/{$vo.bankcardhand_pic}" target="_blank"><img style="height:50px; " src="/upload/userinfo/{$vo.bankcardhand_pic}"></a>
+                        </notempty>
+                    </td>
                     <td>
                         <neq name="vo.id" value="1">
-                            <empty name="vo.user_status">
+                            <eq name="vo.user_status" value="0">
                                 <a href="{:url('member/cancelban',array('id'=>$vo['id']))}"
                                    class="js-ajax-dialog-btn"
                                    data-msg="{:lang('ACTIVATE_USER_CONFIRM_MESSAGE')}">{:lang('ACTIVATE_USER')}</a>
                                 <else/>
                                 <a href="{:url('member/ban',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn"
                                    data-msg="{:lang('BLOCK_USER_CONFIRM_MESSAGE')}">{:lang('BLOCK_USER')}</a>
-                            </empty>
-                            <a href="{:url('admin/member/edit', array('id'=>$vo.id))}"> | 编辑</a>
-                            <a href="{:url('admin/member/syncData', array('id'=>$vo.id))}"> | 同步数据</a>
+                            </eq>
+                            |
+                            <eq name="vo.is_realname" value="0">
+                                <a href="{:url('member/authRealName', array('id'=>$vo.id))}" class="js-ajax-dialog-btn"
+                                   data-msg="确定要认证通过么">认证</a>
+                                <else/>
+                                <span style="color:green;">认证完成</span>
+                            </eq>
+                            <!--| <a href="{:url('admin/member/edit', array('id'=>$vo.id))}">编辑</a>-->
+                            <!--<a href="{:url('admin/member/syncData', array('id'=>$vo.id))}"> | 同步数据</a>-->
                             <else/>
                             <a style="color: #ccc;">{:lang('BLOCK_USER')}</a>
                             <a style="color: #ccc;"> | 编辑</a>

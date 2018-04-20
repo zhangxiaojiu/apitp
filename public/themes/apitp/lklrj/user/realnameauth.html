@@ -5,7 +5,7 @@
 <!-- end top bar -->
 <div class="carpet">
     <form class="js-ajax-form" action="{:url('user/editInfo')}" method="post" enctype="multipart/form-data">
-        <h3>实名认证</h3>
+        <h3>实名认证<eq name="info.is_realname" value="1"><span class="fr" style="color: green;">已认证</span></eq></h3>
         <div class="form-group">
             <label for="js-name-input" class="">姓名</label>
             <input name="realname" type="text" id="js-name-input" class="form-control" placeholder="请输入真实姓名" required="" value="{$info.realname}">
@@ -15,29 +15,37 @@
             <input name="user_card" type="number" id="js-usercard-input" class="form-control" placeholder="请输入身份证号" required="" value="{$info.user_card}">
         </div>
         <div class="form-group">
-            <label for="js-usercardup-input" class="btn btn-warning btn-block">上传身份证正面</label>
+            <eq name="info.is_realname" value="0">
+                <label for="js-usercardup-input" class="btn btn-warning btn-block">上传身份证正面</label>
+            </eq>
             <input style="display: none;" name="user_cardup_pic" id="js-usercardup-input" type="file">
             <notempty name="info.user_cardup_pic">
                 <img style="width:100%; margin-top:10px;" src="/upload/userinfo/{$info.user_cardup_pic}">
             </notempty>
         </div>
         <div class="form-group">
-            <label for="js-usercarddown-input" class="btn btn-warning btn-block">上传身份证反面</label>
+            <eq name="info.is_realname" value="0">
+                <label for="js-usercarddown-input" class="btn btn-warning btn-block">上传身份证反面</label>
+            </eq>
             <input style="display: none;" name="user_carddown_pic" id="js-usercarddown-input" type="file">
             <notempty name="info.user_carddown_pic">
                 <img style="width:100%; margin-top:10px;" src="/upload/userinfo/{$info.user_carddown_pic}">
             </notempty>
         </div>
         <div class="form-group">
-            <label for="js-usercardhand-input" class="btn btn-warning btn-block">上传手持身份证</label>
+            <eq name="info.is_realname" value="0">
+                <label for="js-usercardhand-input" class="btn btn-warning btn-block">上传手持身份证</label>
+            </eq>
             <input style="display: none;" name="user_cardhand_pic" id="js-usercardhand-input" type="file">
             <notempty name="info.user_cardhand_pic">
                 <img style="width:100%; margin-top:10px;" src="/upload/userinfo/{$info.user_cardhand_pic}">
             </notempty>
         </div>
+        <eq name="info.is_realname" value="0">
         <div class="form-group">
-            <button class="btn btn-primary btn-block js-ajax-submi" type="submit" data-loadingmsg="{:lang('LOADING')}">提交审核</button>
+            <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-loadingmsg="{:lang('LOADING')}">修改信息</button>
         </div>
+        </eq>
     </form>
 </div>
 <include file="public/foot"/>

@@ -22,14 +22,18 @@
                 <input name="bankcard" type="text" id="inputBankcard" class="form-control" placeholder="银行卡号" value="{$info.bankcard}">
             </div>
             <div class="form-group">
-                <label for="js-bankcard_pic-input" class="btn btn-warning btn-block">上传银行卡照片</label>
+                <eq name="info.is_realname" value="0">
+                    <label for="js-bankcard_pic-input" class="btn btn-warning btn-block">上传银行卡照片</label>
+                </eq>
                 <input style="display: none;" name="bankcard_pic" id="js-bankcard_pic-input" type="file">
                 <notempty name="info.bankcard_pic">
                     <img style="width:100%; margin-top:10px;" src="/upload/userinfo/{$info.bankcard_pic}">
                 </notempty>
             </div>
             <div class="form-group">
-                <label for="js-bankcardhand_pic-input" class="btn btn-warning btn-block">上传手持银行卡</label>
+                <eq name="info.is_realname" value="0">
+                    <label for="js-bankcardhand_pic-input" class="btn btn-warning btn-block">上传手持银行卡</label>
+                </eq>
                 <input style="display: none;" name="bankcardhand_pic" id="js-bankcardhand_pic-input" type="file">
                 <notempty name="info.bankcardhand_pic">
                     <img style="width:100%; margin-top:10px;" src="/upload/userinfo/{$info.bankcardhand_pic}">
