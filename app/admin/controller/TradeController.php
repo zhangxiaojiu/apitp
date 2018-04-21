@@ -45,14 +45,14 @@ class TradeController extends AdminBaseController
         $search['keyword'] = $keywordComplex;
         $page = input('request.page');
         if (!isset($page)) {
-            session('search', null);
+            session('search_trade', null);
         }
         if (!empty($where) || !empty($keywordComplex)) {
-            session('search', $search);
+            session('search_trade', $search);
         }
         if ($page >= 1) {
-            $where = session('search')['where'];
-            $keywordComplex = session('search')['keyword'];
+            $where = session('search_trade')['where'];
+            $keywordComplex = session('search_trade')['keyword'];
         }
 
         $list = TradeModel::tb()->where($where)->whereOr($keywordComplex)->paginate(10);

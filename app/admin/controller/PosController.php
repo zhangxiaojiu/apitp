@@ -39,14 +39,14 @@ class PosController extends AdminBaseController
         $search['keyword'] = $keywordComplex;
         $page = input('request.page');
         if (!isset($page)) {
-            session('search', null);
+            session('search_pos', null);
         }
         if (!empty($where) || !empty($keywordComplex)) {
-            session('search', $search);
+            session('search_pos', $search);
         }
         if ($page >= 1) {
-            $where = session('search')['where'];
-            $keywordComplex = session('search')['keyword'];
+            $where = session('search_pos')['where'];
+            $keywordComplex = session('search_pos')['keyword'];
         }
         $where['pid'] = $uid;
 
@@ -55,7 +55,7 @@ class PosController extends AdminBaseController
 
         $q_pos = Db::name('pos');
 
-        $list = $q_pos->where($where)->where($keywordComplex)->paginate(10);
+        $list = $q_pos->where($where)->where($keywordComplex)->order('status desc,is_ok')->paginate(10);
         // 获取分页显示
         $page = $list->render();
         $this->assign('list', $list);
