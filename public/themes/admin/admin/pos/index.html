@@ -40,7 +40,7 @@
                 <th>ID</th>
                 <th>UID</th>
                 <th>机具号</th>
-                <th>机构号</th>
+                <th>时间</th>
                 <th>是否绑定</th>
                 <th>是否激活</th>
                 <th>{:lang('ACTIONS')}</th>
@@ -53,7 +53,7 @@
                     <td>{$vo.id}</td>
                     <td>{$vo.uid}</td>
                     <td>{$vo.code}</td>
-                    <td>{$vo.cid}</td>
+                    <td>{:date('Y-m-d H:i:s',$vo.time)}</td>
                     <td>{$yesno[$vo.status]}</td>
                     <td>{$yesno[$vo.is_ok]}</td>
                     <td>

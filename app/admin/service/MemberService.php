@@ -273,6 +273,21 @@ class MemberService
         return $ret;
     }
     /*
+     * 同步上周交易数据
+     */
+    public static function syncLastWeekTrade($sid,$code){
+        $startDate = date('Ymd',time()-7*24*60*60);
+        $endDate = date('Ymd');
+        $ret = self::getApiTrade($sid,$code,1,$startDate,$endDate);
+        if($ret['retCode'] == 'SUCCESS'){
+            self::perfectTrade($ret['retData']['content']['resultModel']['rows'],$code);
+            $total = $ret['retData']['content']['resultModel']['totalPage'];
+            if($total > 1){
+                self::syncOtherTrade($sid,$code,$total,$startDate,$endDate);
+            }
+        }
+    }
+    /*
      * 同步月交易
      */
     public static function syncMonthTrade($sid,$code){

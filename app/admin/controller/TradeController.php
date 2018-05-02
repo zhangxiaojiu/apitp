@@ -55,7 +55,7 @@ class TradeController extends AdminBaseController
             $keywordComplex = session('search_trade')['keyword'];
         }
 
-        $list = TradeModel::tb()->where($where)->whereOr($keywordComplex)->paginate(10);
+        $list = TradeModel::tb()->where($where)->whereOr($keywordComplex)->order('id desc')->paginate(10);
         $page = $list->render();
 
         $user_list = MemberService::getUserList(session('ADMIN_ID'),1);

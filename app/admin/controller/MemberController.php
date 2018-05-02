@@ -242,6 +242,25 @@ class MemberController extends AdminBaseController
     }
 
     /*
+     * 同步上周交易数据
+     */
+    public function syncLastWeekTrade(){
+        $id = $this->request->param('id',0,'intval');
+        if($id >= 1){
+            $info = UserModel::tb()->where(['id' => $id])->find();
+            $code = $info['lkl_org_code'];
+            $sid = $info['lkl_session_id'];
+            $ret = MemberService::checkLogin($sid);
+            if($ret['retCode'] !== '000000'){
+                $this->assign('info',$info);
+                return $this->fetch('update_lkl');
+            }
+            MemberService::syncLastWeekTrade($sid,$code);
+            $this->success('ojbk');
+        }
+    }
+
+    /*
      * 同步代理数据
      */
     public function syncData(){
