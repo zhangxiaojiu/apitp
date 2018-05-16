@@ -22,6 +22,8 @@ class IndexController extends HomeBaseController
         $notice = Db::name('portal_post')->alias('p')->join("portal_category_post c","p.id=c.post_id")->where(["c.category_id"=>'9','p.is_top'=>'1','p.delete_time'=>'0'])->find();
         $notice = html_entity_decode($notice['post_content']);
         $this->assign('notice',$notice);
+        $user_id = isset($_GET['user_id'])?$_GET['user_id']:0;
+        $this->assign('user_id',$user_id);
         return $this->fetch(':index');
     }
     public function old()
@@ -33,6 +35,7 @@ class IndexController extends HomeBaseController
         if ($this->request->isPost()) {
             $rules = [
                 'name'  => 'require|chs',
+                'type'  => 'require',
                 'tel'     => 'require|regex:/^1[34578]{1}\d{9}$/',
 
             ];
@@ -41,6 +44,7 @@ class IndexController extends HomeBaseController
             $validate->message([
                 'name.require'     => '姓名不能为空',
                 'tel.require' => '电话不能为空',
+                'type.require' => '类型不能为空',
                 'name.chs'     => '请填写真实姓名',
                 'tel.regex'     => '请填写真实电话',
             ]);
@@ -55,10 +59,10 @@ class IndexController extends HomeBaseController
            	$log = $conModel->addContacts($data);
             switch ($log) {
                 case 0:
-                    $this->error("已留言，请耐心等待");
+                    $this->error("已申请，请耐心等待");
                     break;
                 default :
-                    $this->success('留言成功，我们会尽快联系您');
+                    $this->success('申请成功，工作人员会在一个工作日之内联系您');
             }
 
         } else {
