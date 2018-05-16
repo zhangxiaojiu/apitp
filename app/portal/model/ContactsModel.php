@@ -25,6 +25,7 @@ class ContactsModel extends Model
 				'name' => $data['name'],
 				'tel' => $data['tel'],
 				'type' => $data['type'],
+				'user_id' => $data['user_id'],
 				'description' => $data['description']
 				);
 			$conId = $conTable->insertGetId($conData);
