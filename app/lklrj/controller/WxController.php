@@ -17,23 +17,7 @@ use cmf\controller\HomeBaseController;
 class WxController extends HomeBaseController
 {
     public function index(){
-        //get参数
-        $echoStr = $_GET['echostr'];
-        $signature = $_GET['signature'];
-        $timestamp = $_GET['timestamp'];
-        $nonce = $_GET['nonce'];
-        //配置参数
-        $config = WxService::getConfig();
-        $token = $config['token'];
-        //获取签名
-        $sign = WxService::getSign($token,$timestamp,$nonce);
-        //签名正确 返回
-        if($sign == $signature && $echoStr){
-            echo $echoStr;
-            exit;
-        }else{
-
-        }
+        
     }
     public function test(){
         $openId = 'oBiZI08bj32o1SagokTeMMZ7k9G0';
