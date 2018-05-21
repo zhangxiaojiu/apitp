@@ -17,7 +17,7 @@ use cmf\controller\HomeBaseController;
 class WxController extends HomeBaseController
 {
     public function index(){
-        
+
     }
     public function test(){
         $openId = 'oBiZI08bj32o1SagokTeMMZ7k9G0';
@@ -75,7 +75,7 @@ class WxController extends HomeBaseController
                 } else {
                     ThirdPartyUserModel::tb()->where(['openid' => $data['openid']])->update($data);
                 }
-                $this->redirect('index');
+                $this->redirect('index/index');
             }
         }else{
             $redirect_uri= url('wx/auth');
