@@ -32,6 +32,7 @@
             <th>金额</th>
             <th>类型</th>
             <th>备注</th>
+            <th>时间</th>
             <th>状态</th>
         </tr>
         </thead>
@@ -39,14 +40,15 @@
         <foreach name="list" item="vo">
             <tr>
                 <td>{$vo.coin}</td>
-                <td width="50">{$types[$vo.type]}</td>
+                <td>{$types[$vo.type]}</td>
                 <td>
                     <eq name="vo.type" value="run">
                         <a href="{:url('trade/index',array('cl_id'=>$vo.id))}">{$vo.detail}</a>
                         <else/>{$vo.detail}
                     </eq>
                 </td>
-                <td width=60">{$statuses[$vo.status]}</td>
+                <td>{:date('m-d H:i',$vo.create_time)}</td>
+                <td>{$statuses[$vo.status]}</td>
             </tr>
         </foreach>
         </tbody>

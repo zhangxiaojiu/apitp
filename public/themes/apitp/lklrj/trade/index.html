@@ -8,6 +8,7 @@
         <tr>
             <th>商户名</th>
             <th>交易金额</th>
+            <th>时间</th>
             <th>详情</th>
         </tr>
         </thead>
@@ -16,6 +17,7 @@
             <tr>
                 <td width="40%">{$vo.merchant_name}</td>
                 <td>{$vo.trans_amt}</td>
+                <td>{$vo.trans_time}</td>
                 <td><a target="_blank" href="{$vo.sign_image}">签购单</a> </td>
             </tr>
         </foreach>

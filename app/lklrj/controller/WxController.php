@@ -91,7 +91,7 @@ class WxController extends HomeBaseController
                 } else {
                     ThirdPartyUserModel::tb()->where(['openid' => $data['openid']])->update($data);
                 }
-                $this->redirect('index/user');
+                $this->redirect('index');
             }
         }else{
             $redirect_uri= url('wx/auth');

@@ -78,8 +78,8 @@ class UserController extends BaseController
     public function editInfo(){
         $uid = session('user')['id'];
         $data['id'] = $uid;
-        if(isset($_POST['realname'])) {
-            $data['realname'] = $_POST['realname'];
+        if(isset($_POST['user_nickname'])) {
+            $data['user_nickname'] = $_POST['user_nickname'];
         }
         if(isset($_POST['user_card'])) {
             $data['user_card'] = $_POST['user_card'];

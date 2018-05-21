@@ -37,17 +37,17 @@
 <div class="carpet">
     <div class="one-from-two right-line">
         <div>分润<a class="fr gray-text" href="{:url('acount/acountList',array('type'=>'run'))}">详情<span class="glyphicon glyphicon-menu-right"></span></a></div>
-        <div class="gray-text">今日(万元)<span class="fr view-money">¥{$today.run}</span></div>
-        <div class="gray-text">累计(万元)<span class="fr view-money">¥{$total.run}</span></div>
+        <div class="gray-text">今日(元)<span class="fr view-money">¥{$today.run}</span></div>
+        <div class="gray-text">累计(元)<span class="fr view-money">¥{$total.run}</span></div>
     </div>
     <div class="one-from-two">
         <div>返现<a class="fr gray-text" href="{:url('acount/acountList',array('type'=>'activate'))}">详情<span class="glyphicon glyphicon-menu-right"></span></a></div>
-        <div class="gray-text">今日(万元)<span class="fr view-money">¥{$today.activate}</span></div>
-        <div class="gray-text">累计(万元)<span class="fr view-money">¥{$total.activate}</span></div>
+        <div class="gray-text">今日(元)<span class="fr view-money">¥{$today.activate}</span></div>
+        <div class="gray-text">累计(元)<span class="fr view-money">¥{$total.activate}</span></div>
     </div>
 </div>
 <div class="carpet">
-    <h4><span class="icon-inm glyphicon glyphicon-save-file"></span>资金记录<a class="gray-text fr" href="{:url('acount/acountList')}">查看全部</a></h4>
+    <h4><span class="icon-inm glyphicon glyphicon-save-file"></span>资金记录<a class="gray-text fr" href="{:url('acount/acountList')}">查看详细</a></h4>
     <php>
         $types = getCoinLogTypes();
         $statuses = [

@@ -49,7 +49,7 @@ class AcountController extends BaseController
         $uInfo = UserModel::getInfoById($uid);
         $data = $_POST;
 
-        if($data['coin'] < 0){
+        if($data['coin'] <= 0){
             $this->error('请输入正确金额');
         }
 
