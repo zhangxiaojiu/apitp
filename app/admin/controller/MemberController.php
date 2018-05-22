@@ -112,6 +112,41 @@ class MemberController extends AdminBaseController
         return $this->fetch();
     }
 
+    public function add(){
+        return $this->fetch();
+    }
+
+    public function addPost(){
+        $data['user_type'] = $_POST['user_type'];
+        $data['create_time'] = time();
+
+        if($_POST['user_pass'] != ""){
+            $pass_len = strlen($_POST['user_pass']);
+            if($pass_len<6 || $pass_len>18){
+                $this->error("密码长度必须是6-18位");
+            }
+            $data['user_pass']= cmf_password($_POST['user_pass']);
+        }else{
+            $this->error('密码不能为空');
+        }
+        if($_POST['user_login'] != ""){
+            $data['user_login']= $_POST['user_login'];
+        }else{
+            $this->error('用户名不能为空');
+        }
+        if($_POST['user_nickname'] != ""){
+            $data['user_nickname']= $_POST['user_nickname'];
+        }else{
+            $this->error('姓名不能为空');
+        }
+
+        $result = DB::name('user')->insert($data);
+        if($result){
+            $this->success("添加成功");
+        }else{
+            $this->error('添加失败');
+        }
+    }
     /**
      * 本站用户拉黑
      * @adminMenu(
