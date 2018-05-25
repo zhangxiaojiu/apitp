@@ -15,6 +15,7 @@ use app\admin\service\MemberService;
 use app\admin\service\TerminaService;
 use app\admin\service\TradeService;
 use cmf\controller\AdminBaseController;
+use think\Db;
 
 class TradeController extends AdminBaseController
 {
@@ -81,12 +82,17 @@ class TradeController extends AdminBaseController
             $startDate = str_replace('-','',$_POST['startDate']);
             $endDate = str_replace('-','',$_POST['endDate']);
             if($codeArr[0] == 'sys'){
+                $childIds = UserModel::getChildIds($code);
+                $childList = Db::name('user')->where(['id'=>['in',$childIds]])->select();
+                foreach($childList as $val){
+                    $total = TradeService::getTradeTotal($val['id'],$startDate,$endDate);
+                    $info = UserModel::getInfoById($val['id']);
+                    $row['maintainOrg'] = $info['user_nickname'];
+                    $row['transCntTotal'] = $total['num'];
+                    $row['transAmtTotal'] = $total['amt'];
+                    $list[] = $row;
+                }
 
-                $total = TradeService::getTradeTotal($code,$startDate,$endDate);
-                $info = UserModel::getInfoById($code);
-                $list[0]['maintainOrg'] = $info['user_nickname'];
-                $list[0]['transCntTotal'] = $total['num'];
-                $list[0]['transAmtTotal'] = $total['amt'];
             }else {
                 if($code == 0){
                     $code = '';

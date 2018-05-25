@@ -43,4 +43,19 @@ class UserModel extends Model
         $ret = self::tb()->where(['pid'=>$id])->select();
         return $ret;
     }
+    public static function getChildIds($id){
+        if(!is_array($id)){
+            $childIds[] = $id;
+        }
+        $childList = Db::name('user')->where(['pid'=>['in',$childIds]])->select();
+        while(count($childList) > 0){
+            $newChild = [];
+            foreach ($childList as $v){
+                $childIds[] = $v['id'];
+                $newChild[] = $v['id'];
+            }
+            $childList = Db::name('user')->where(['pid'=>['in',$newChild]])->select();
+        }
+        return $childIds;
+    }
 }
