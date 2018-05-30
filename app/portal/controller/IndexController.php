@@ -63,7 +63,7 @@ class IndexController extends HomeBaseController
                     break;
                 default :
                     $param = [
-                        'mobile'=>'13120233222‬',
+                        'mobile'=>'13120233222',
                         'content'=>$data['tel'].$data['name']
                     ];
                     newMsg($param);
