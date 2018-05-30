@@ -262,7 +262,8 @@ class PublicController extends HomeBaseController
         $url = url('public/register',array('pid'=>$uid));
         $qrcode = './themes/apitp/public/qrcode/qrlogo'.$uid.'.png';
         if (!file_exists($qrcode)) {
-            crQrcode($url,$uid);
+            $logo = './themes/apitp/public/assets/images/logo.png';
+            crQrcode($url,$qrcode,$logo);
         }
         $imgurl = '/public/qrcode/qrlogo'.$uid.'.png';
         $this->assign('imgurl',$imgurl);

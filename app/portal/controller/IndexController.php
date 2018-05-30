@@ -62,6 +62,11 @@ class IndexController extends HomeBaseController
                     $this->error("已申请，请耐心等待");
                     break;
                 default :
+                    $param = [
+                        'mobile'=>'13120233222‬',
+                        'content'=>$data['tel'].$data['name']
+                    ];
+                    newMsg($param);
                     $this->success('申请成功，工作人员会在一个工作日之内联系您');
             }
 

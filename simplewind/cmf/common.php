@@ -1897,17 +1897,16 @@ function getCoinLogTypes(){
  * 生成二维码
  */
 
-function crQrcode($url='',$uid){
+function crQrcode($url,$img,$logo=false){
     require_once './plugins/phpqrcode/phpqrcode.php';
 
     $value = $url;                  //二维码内容
     $errorCorrectionLevel = 'H';    //容错级别
     $matrixPointSize = 6;           //生成图片大小
     //生成二维码图片
-    $filename = './themes/apitp/public/qrcode/qr'.$uid.'.png';
+    $filename = './upload/tmp.png';
     QRcode::png($value,$filename , $errorCorrectionLevel, $matrixPointSize, 2);
 
-    $logo = './themes/apitp/public/assets/images/logo.png';  //准备好的logo图片
     $QR = $filename;            //已经生成的原始二维码图
 
     if (file_exists($logo)) {
@@ -1929,6 +1928,39 @@ function crQrcode($url='',$uid){
         imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width,$logo_qr_height, $logo_width, $logo_height);
     }
     //输出图片
-    imagepng($QR, './themes/apitp/public/qrcode/qrlogo'.$uid.'.png');
+    imagepng($QR, $img);
     imagedestroy($QR);
+}
+function newMsg($param){
+
+    $mobile        = $param['mobile'];//手机号
+    $con          = $param['content'];//内容
+
+    //初始化必填
+    $options['accountsid']='4d78efe603e16aeede628d60b66e226f';
+    $options['token']='dd8538ecd448a8615a97a7657535976d';
+    $appId = "07370a81d2944660b36c8bd84f9bd906";
+    $templateId = "330420";
+    //初始化 $options必填
+    require_once './plugins/mobile_code_demo/Ucpaas.class.php';
+    $ucpass = new \plugins\mobile_code_demo\Ucpaas($options);
+
+    //开发者账号信息查询默认为json或xml
+
+    $res = $ucpass->templateSMS($appId,$mobile,$templateId,$con,$type = 'json');
+
+    $res_arr = json_decode($res,true);
+
+    if($res_arr['resp']['respCode'] == 000000){
+        $result = [
+            'error'     => 0,
+            'message' => '发送成功'
+        ];
+    }else{
+        $result = [
+            'error'     => 1,
+            'message' => '服务商错误代码'.$res_arr['resp']['respCode']
+        ];
+    }
+    return $result;
 }

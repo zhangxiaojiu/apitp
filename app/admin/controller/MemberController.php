@@ -69,6 +69,7 @@ class MemberController extends AdminBaseController
         $request = input('request.');
         $uid = session('ADMIN_ID');
         $where['user_status'] = 1;
+        $where['user_type'] = 10;
         if (!empty($request['uid'])) {
             $where['id'] = intval($request['uid']);
         }
@@ -86,7 +87,7 @@ class MemberController extends AdminBaseController
             $where['porg_code'] = $porg_code;
         }
         $keywordComplex = [];
-        $keywordComplex['id'] = $uid;
+        //$keywordComplex['id'] = $uid;
         $keywordComplex['user_status'] = 0;
         if (!empty($request['keyword'])) {
             $keyword = $request['keyword'];
@@ -98,11 +99,6 @@ class MemberController extends AdminBaseController
         $usersQuery = Db::name('user');
 
         $list = $usersQuery->where($where)->whereOr($keywordComplex)->order("id DESC")->paginate(10);
-        if($uid == 1){
-            $agentList = $usersQuery->where(['porg_code' => 0,'id' => ['>',1]])->select();
-            $this->assign('uid',$uid);
-            $this->assign('agentList',$agentList);
-        }
 
         // 获取分页显示
         $page = $list->render();
@@ -110,6 +106,42 @@ class MemberController extends AdminBaseController
         $this->assign('page', $page);
         // 渲染模板输出
         return $this->fetch();
+    }
+    //小站用户
+    public function station(){
+        $where   = [];
+        $request = input('request.');
+        $where['user_status'] = 1;
+        $where['user_type'] = 9;
+        if (!empty($request['uid'])) {
+            $where['id'] = intval($request['uid']);
+        }
+
+        if (!empty($request['keyword'])) {
+            $keyword = $request['keyword'];
+            $where['user_nickname'] = ['like', "%$keyword%"];
+        }
+        $usersQuery = Db::name('user');
+        $list = $usersQuery->where($where)->order("id DESC")->paginate(10);
+
+        // 获取分页显示
+        $page = $list->render();
+        $this->assign('list', $list);
+        $this->assign('page', $page);
+        // 渲染模板输出
+        return $this->fetch();
+    }
+    //小站二维码
+    public function qrcode(){
+        $id = input('param.id', 0, 'intval');
+        $url = "http://www.mylabulaka.com/?user_id=".$id;
+        $img = './upload/station/s'.$id.'.png';
+        if (!file_exists($img)) {
+            $logo = './static/images/logolkl.png';
+            crQrcode($url,$img,$logo);
+        }
+        $url = trim($img,'.');
+        return "<img src='$url'>";
     }
 
     public function add(){
