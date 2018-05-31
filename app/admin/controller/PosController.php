@@ -130,7 +130,7 @@ class PosController extends AdminBaseController
     }
     public function unactivate(){
         $id = input('param.id', 0);
-        Db::name('pos')->where(['id'=>$id])->setField('status',3);
+        Db::name('pos')->where(['id'=>$id])->setField('is_ok',2);
         $this->success('ok');
     }
 

@@ -356,9 +356,11 @@ class MemberController extends AdminBaseController
             //同步终端
             MemberService::syncTermina($sid,$code,$pid);
             //同步商户
-            MemberService::syncMerchant($sid,$code,$pid);
+            //MemberService::syncMerchant($sid,$code,$pid);
             //同步月交易
-            MemberService::syncMonthTrade($sid,$code);
+            //MemberService::syncMonthTrade($sid,$code);
+            //同步周交易
+            MemberService::syncLastWeekTrade($sid,$code);
 
             $this->success('同步成功');
         }
