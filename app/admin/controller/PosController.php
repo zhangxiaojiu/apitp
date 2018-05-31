@@ -20,7 +20,8 @@ class PosController extends AdminBaseController
         $request = input('request.');
 
         if (!empty($request['uid'])) {
-            $where['uid'] = intval($request['uid']);
+            $childIds = UserModel::getChildIds($request['uid']);
+            $where['uid'] = ['in',$childIds];
         }
         if (!empty($request['status'])) {
             if($request['status'] <=1) {
@@ -126,6 +127,11 @@ class PosController extends AdminBaseController
         } else {
             $this->error('参数错误');
         }
+    }
+    public function unactivate(){
+        $id = input('param.id', 0);
+        Db::name('pos')->where(['id'=>$id])->setField('status',3);
+        $this->success('ok');
     }
 
     public function add()
