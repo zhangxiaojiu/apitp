@@ -1,58 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>{$site_info.site_name|default=''} {$site_info.site_seo_title|default=''}</title>
-        <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}">
-        <meta name="description" content="{$site_info.site_seo_description|default=''}">
-        <meta name="baidu-site-verification" content="O8P6skrBp3" />
+    <title>{$site_info.site_name|default=''} {$site_info.site_seo_title|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}">
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <meta name="baidu-site-verification" content="O8P6skrBp3" />
 
-        <include file="public@head"/>
-        <!-- Vendor Styles -->
+    <include file="public@head"/>
+    <!-- Vendor Styles -->
 
-        <!-- Theme Styles -->
-        <link href="__TMPL__/public/assets/lblk/files/style.css" rel="stylesheet" type="text/css">
-        <link href="__TMPL__/public/assets/lblk/files/global.css" rel="stylesheet" type="text/css">
+    <!-- Theme Styles -->
+    <link href="__TMPL__/public/assets/lblk/files/style.css" rel="stylesheet" type="text/css">
+    <link href="__TMPL__/public/assets/lblk/files/global.css" rel="stylesheet" type="text/css">
 
-        <style>
-            body{padding-top:0px;}
-        </style>
-    </head>
-    <!-- End Head -->
-    <!-- Body -->
-    <body class=""> 
-        <!--========== HEADER ==========-->
+    <style>
+        body{padding-top:0px;}
+    </style>
+</head>
+<!-- End Head -->
+<!-- Body -->
+<body class="">
+<!--========== HEADER ==========-->
 
-        <!--========== END HEADER ==========-->
+<!--========== END HEADER ==========-->
 
-        <!--========== PROMO BLOCK ==========-->
-        <section class="s-video-v2__bg"  data-vidbg-options="loop: true, muted: true, overlay: false" style="z-index: 1;"><div class="vidbg-container" style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; background-size: cover; background-repeat: no-repeat; background-position: 50% 50%; background-image: url(__TMPL__/public/assets/lblk/images/nav.jpg);"></div>
-            <div class="container g-position--overlay g-text-center--xs">
-                <div class="g-margin-t-100--xs g-margin-b-100--xs g-margin-b-250--md main_content">
-                    <h1 class="g-font-size-36--xs g-font-size-50--sm g-font-size-60--md g-color--white"><img style="height:80px;" src="__TMPL__/public/assets/lblk/logo.png"><br>手机POS机/收钱宝盒</h1>
-                    <div style="margin-top:5%;">
-
-                    
-                    <span class="g-display-block--xs g-display-inline-block--sm g-padding-x-5--xs g-margin-b-10--xs g-margin-b-0--sm">
-                        <!--<button type="button" class="text-uppercase s-btn s-btn-icon--md s-btn--white-brd g-radius--50 g-padding-x-80--xs" data-toggle="modal" data-target="#myModal">Talk to expert</button>-->
-                         <a href="" style="font-size:20px;" class="text-uppercase s-btn s-btn--white-brd s-btn--md  g-radius--50 g-padding-x-80--xs talkto_expert trackData" data-name="talktoExpert" data-toggle="modal" data-target="#myModal">点击免费申请</a>
-                    </span>
-                     </div>
-               
-                   <!-- <div style="margin-top:5%;">
-                       <a href="https://weidian.com/item.html?itemID=2135521686" target="_blank" style="color:#fff;padding-bottom:3px; border-bottom:1px solid #fff" target="_blank">点此免费领取</a>
-                   </div> -->
-              
-                </div>
-
+<!--========== PROMO BLOCK ==========-->
+<section class="s-video-v2__bg"  data-vidbg-options="loop: true, muted: true, overlay: false" style="z-index: 1;"><div class="vidbg-container" style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; background-size: cover; background-repeat: no-repeat; background-position: 50% 50%; background-image: url(__TMPL__/public/assets/lblk/images/nav.jpg);"></div>
+    <div class="container g-position--overlay g-text-center--xs">
+        <div class="g-margin-t-100--xs g-margin-b-100--xs g-margin-b-250--md main_content">
+            <h1 class="g-font-size-36--xs g-font-size-50--sm g-font-size-60--md g-color--white"><img style="height:80px;" src="__TMPL__/public/assets/lblk/logo.png"><br>手机POS机/收钱宝盒</h1>
+            <div style="margin-top:5%;">
+                <span class="g-display-block--xs g-display-inline-block--sm g-padding-x-5--xs g-margin-b-10--xs g-margin-b-0--sm">
+                    <!--<button type="button" class="text-uppercase s-btn s-btn-icon--md s-btn--white-brd g-radius--50 g-padding-x-80--xs" data-toggle="modal" data-target="#myModal">Talk to expert</button>-->
+                     <a href="" style="font-size:20px;" class="text-uppercase s-btn s-btn--white-brd s-btn--md  g-radius--50 g-padding-x-80--xs talkto_expert trackData" data-name="talktoExpert" data-toggle="modal" data-target="#myModal">点击免费申请</a>
+                </span>
             </div>
-        </section>
 
-        <!--========== talk to expert model ==========-->
-        <div id="myModal" class="modal fade" role="dialog" style="display: none;">
-  <div class="modal-dialog">
+           <!-- <div style="margin-top:5%;">
+               <a href="https://weidian.com/item.html?itemID=2135521686" target="_blank" style="color:#fff;padding-bottom:3px; border-bottom:1px solid #fff" target="_blank">点此免费领取</a>
+           </div> -->
+        </div>
+    </div>
+</section>
 
+<!--========== talk to expert model ==========-->
+<div id="myModal" class="modal fade" role="dialog" style="display: none;">
+    <div class="modal-dialog">
     <!-- Modal content-->
-    <div class="modal-content" style="margin-top: 30%;">
+    <div class="modal-content" style="margin-top: 50%;">
         <form method="post" action="{:url('doContacts')}" class="center-block s-promo-block-v2__form g-width-100-percent--xs g-bg-color--dark-light g-padding-x-50--xs g-radius--4 js-ajax-form">
             <div class="g-text-center--xs g-margin-b-40--xs" style="padding-top: 10px;">
                 <h2 class="g-font-size-30--xs g-color--white">
@@ -70,6 +65,8 @@
                 <select name="type" class="form-control s-form-v3__input" required="required">
                     <option value="">请选择产品类别</option>
                     <option value="mpos">申请手机收款宝（个人）</option>
+                    <option value="znpos">申请智能POS（商用）</option>
+                    <option value="superpos">申请超级收款宝（商用）</option>
                     <option value="box">申请收钱宝盒（商用）</option>
                 </select>
             </div>
@@ -86,113 +83,134 @@
             </div>
         </form>
     </div>
-
-  </div>
+    </div>
 </div>
-        <!--========== END PROMO BLOCK ==========-->
+<!--========== END PROMO BLOCK ==========-->
 
-        <!--========== PAGE CONTENT ==========-->
-        <h2 style="text-align: center; background:#149fe6; color:#fff;">拉卡拉手机收款宝</h2>
-<div id="js__scroll-to-section" class="container g-padding-y-80--xs g-padding-y-125--xsm">
-            <div class="row" style="text-align: center;margin-top:30px;">
-                <h2>让收款更便捷</h2>
-                <h6>1000万小微商户的选择<br/>他们都在用 并推荐给更多的人</h6>
-                <div class="col-lg-4">
-                  <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle1.png" alt="Generic placeholder image" width="140" height="140">
-                  <h5>插卡</h5>
-                  <p>移动收款 有卡即付
-                  <br/>支持带有银联标识的借记卡，信用卡，芯片卡
-                  <br/>收款账户自主设定，直接进入个人储蓄账户
-                  </p>
-                  <p><a class="btn btn-default" href="#js__scroll-to-shuaka" role="button">了解更多 »</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                  <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle2.png" alt="Generic placeholder image" width="140" height="140">
-                  <h5>刷卡</h5>
-                  <p>移动收款 有卡即付
-                  <br/>支持带有银联标识的借记卡，信用卡，磁条卡
-                  <br/>收款账户自主设定，直接进入个人储蓄账户
-                  </p>
-                  <p><a class="btn btn-default" href="#js__scroll-to-shuaka" role="button">了解更多 »</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                  <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle3.png" alt="Generic placeholder image" width="140" height="140">
-                  <h5>扫码</h5>
-                  <p>扫码收款 覆盖主流平台
-                  <br/>无需辅助设备 APP内扫码收款
-                  <br/>支持微信等主流支付平台
-                  </p>
-                  <p><a class="btn btn-default" href="#js__scroll-to-saoma" role="button">了解更多 »</a></p>
-                </div><!-- /.col-lg-4 -->
+<div class="container g-padding-y-80--xs g-padding-y-125--xsm">
+    <div class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+        <div class="col-sm-5 g-hor-centered-row__col">
+            <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">拉卡拉手机收款宝</h2>
+            <p>一款全新的移动支付终端，专为满足小微商户的收款需求而设计。</p>
+            <ul>
+                <li>自助设定 收款账户</li>
+                <li>可刷信用卡</li>
+                <li>随身携带 即开即用</li>
+                <li>大额收款</li>
+                <li>费率优</li>
+                <li>单日收款 当日提款</li>
+                <li>单日收款 当日提款</li>
+                <li>免押金/免年费/免服务费</li>
+                <li>蓝牙连接</li>
+            </ul>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 g-hor-centered-row__col">
+            <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row1.png" alt="Flinkhub Image">
+        </div>
+    </div>
 
-              </div>
+    <div id="js__scroll-to-shuaka" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+        <div class="col-sm-5 col-sm-push-7 g-hor-centered-row__col">
+            <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">拉卡拉智能POS</h2>
+            <p>一款基于互联网和云计算的智能POS终端。</p>
+            <ul>
+                <li>银行卡一机受理</li>
+                <li>扫码支付新时尚</li>
+                <li>小额支付挥手买</li>
+                <li>微信支付会员制</li>
+                <li>互联网+时代</li>
+                <li>便捷流程</li>
+                <li>随用随取 资金灵活</li>
+                <li>功能丰富</li>
+                <li>APP下载</li>
+            </ul>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 col-sm-pull-7 g-hor-centered-row__col g-text-left--xs g-text-right--md">
+            <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/znpos.png" alt="Flinkhub Image">
+        </div>
+    </div>
+
+     <div id="js__scroll-to-saoma" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+        <div class="col-sm-5 g-hor-centered-row__col">
+            <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">拉卡拉超级收款宝</h2>
+            <p>一款集全能扫码、云闪付于一体的轻便型两用独立扫码终端</p>
+            <ul>
+                <li>支持主扫被扫</li>
+                <li>红外线精准</li>
+                <li>轻便小巧</li>
+                <li>NFC支付</li>
+                <li>交易报播</li>
+                <li>对账渠道丰富</li>
+                <li>内置安全芯片</li>
+                <li>金融支付认证</li>
+                <li>安全有保障</li>
+            </ul>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 g-hor-centered-row__col">
+            <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/superpos.png" alt="Flinkhub Image">
+        </div>
+    </div>
+
+    <div id="shuaka" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
+        <div class="col-sm-5 col-sm-push-7 g-hor-centered-row__col">
+            <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">拉卡拉收钱宝盒</h2>
+            <p>一款专为中小微商户打造的新一代收银扫码终端</p>
+            <ul>
+                <li>聚合扫码</li>
+                <li>微信 支付宝</li>
+                <li>识别精准</li>
+                <li>扫码更快</li>
+                <li>语音报播</li>
+                <li>对账渠道丰富</li>
+                <li>收款效率高</li>
+                <li>金融支付认证</li>
+                <li>安全有保障</li>
+            </ul>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 col-sm-pull-7 g-hor-centered-row__col g-text-left--xs g-text-right--md">
+            <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/box.png" alt="Flinkhub Image">
+        </div>
+    </div>
 </div>
-<div class="site-wrapper hide">
+<div class="site-wrapper">
     <img src="__TMPL__/public/assets/lblk/images/bottom1.png" class="img-responsive">
 </div>
-<div class="container g-padding-y-80--xs g-padding-y-125--xsm hide">
-            <div class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
-                <div class="col-sm-5 g-hor-centered-row__col">
-                    <ul>
-                        <li>自助设定 收款账户</li>
-                        <li>可刷信用卡</li>
-                        <li>随身携带 即开即用</li>
-                        <li>大额收款</li>
-                        <li>费率优</li>
-                        <li>单日收款 当日提款</li>
-                        <li>单日收款 当日提款</li>
-                        <li>免押金/免年费/免服务费</li>
-                        <li>蓝牙连接</li>
-                    </ul>
-                </div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-5 g-hor-centered-row__col">
-                    <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row0.png" alt="Flinkhub Image">
-                </div>
-            </div>
-
-            <div id="js__scroll-to-shuaka" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
-                <div class="col-sm-5 col-sm-push-7 g-hor-centered-row__col">
-                    <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">刷卡、插卡</h2>
-                      <p>移动收款 有卡即付
-                      <br/>支持带有银联标识的借记卡，信用卡，磁条卡，芯片卡
-                      <br/>收款账户自主设定，直接进入个人储蓄账户
-                      </p>
-                </div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-5 col-sm-pull-7 g-hor-centered-row__col g-text-left--xs g-text-right--md">
-                    <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row1.png" alt="Flinkhub Image">
-                </div>
-            </div>
-
-             <div id="js__scroll-to-saoma" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
-                <div class="col-sm-5 g-hor-centered-row__col">
-                    <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">扫码</h2>
-                     <p>扫码收款 覆盖主流平台
-                      <br/>无需辅助设备 APP内扫码收款
-                      <br/>支持微信等主流支付平台
-                      </p>
-                </div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-5 g-hor-centered-row__col">
-                    <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row2.png" alt="Flinkhub Image">
-                </div>
-            </div>
-
-            <div id="shuaka" class="row g-hor-centered-row--md g-row-col--5 g-margin-b-80--xs g-margin-b-100--md">
-                <div class="col-sm-5 col-sm-push-7 g-hor-centered-row__col">
-                    <h2 class="g-font-size-32--xs g-font-size-36--sm g-margin-b-25--xs">标准D+1自然日到账<br/>交易明细一目了然</h2>
-                      <p>周末节假日正常结算，365天每天到账
-                      <br/>交易明细实时查询，随时到账，资金安全稳定
-                  
-                      </p>
-                </div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-5 col-sm-pull-7 g-hor-centered-row__col g-text-left--xs g-text-right--md">
-                    <img class="img-responsive" src="__TMPL__/public/assets/lblk/images/row3.png" alt="Flinkhub Image">
-                </div>
-            </div>
+<!--========== PAGE CONTENT ==========-->
+<div id="js__scroll-to-section" class="container g-padding-y-80--xs g-padding-y-125--xsm">
+    <div class="row" style="text-align: center;margin-top:30px;">
+        <h2>让收款更便捷</h2>
+        <h6>1000万小微商户的选择<br/>他们都在用 并推荐给更多的人</h6>
+        <div class="col-lg-4">
+            <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle1.png" alt="Generic placeholder image" width="140" height="140">
+            <h5>插卡</h5>
+            <p>移动收款 有卡即付
+                <br/>支持带有银联标识的借记卡，信用卡，芯片卡
+                <br/>收款账户自主设定，直接进入个人储蓄账户
+            </p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle2.png" alt="Generic placeholder image" width="140" height="140">
+            <h5>刷卡</h5>
+            <p>移动收款 有卡即付
+                <br/>支持带有银联标识的借记卡，信用卡，磁条卡
+                <br/>收款账户自主设定，直接进入个人储蓄账户
+            </p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="__TMPL__/public/assets/lblk/images/circle3.png" alt="Generic placeholder image" width="140" height="140">
+            <h5>扫码</h5>
+            <p>扫码收款 覆盖主流平台
+                <br/>无需辅助设备 APP内扫码收款
+                <br/>支持微信等主流支付平台
+            </p>
         </div>
+    </div>
+</div>
+
 <div class="site-wrapper">
     <!--<img src="__TMPL__/public/assets/lblk/images/d+0.jpg" class="img-responsive">-->
     <!--<img src="__TMPL__/public/assets/lblk/images/dangtian.jpg" class="img-responsive">-->
@@ -204,8 +222,8 @@
     <!--<img src="__TMPL__/public/assets/lblk/images/yijiankaitong.jpg" class="img-responsive">-->
     <!--<img src="__TMPL__/public/assets/lblk/images/chanpincanshu.jpg" class="img-responsive">-->
     <!--<img src="__TMPL__/public/assets/lblk/images/zfpz.jpg" class="img-responsive">-->
-    <h2 style="text-align: center; background:#149fe6; color:#fff;">拉卡拉收款宝盒</h2>
-    <img style="width:100%;" src="__TMPL__/public/assets/lblk/images/lkl_box.jpg" class="img-responsive">
+    <!--<h2 style="text-align: center; background:#149fe6; color:#fff;">拉卡拉收款宝盒</h2>-->
+    <!--<img style="width:100%;" src="__TMPL__/public/assets/lblk/images/lkl_box.jpg" class="img-responsive">-->
 </div>
 
 <!-- 公告弹窗-->
