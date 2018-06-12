@@ -9,3 +9,4 @@
 /vendor
 composer*
 /public/upload/
+/public/.*
