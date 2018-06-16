@@ -3,7 +3,6 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li><a href="{:url('admin/member/index')}">用户列表</a></li>
         <li class="active"><a>添加用户</a></li>
     </ul>
     <form method="post" class="form-horizontal  margin-top-20" action="{:url('member/addPost')}">
@@ -29,7 +28,8 @@
        <div class="form-group hide">
             <label for="input-user_type" class="col-sm-2 control-label">用户级别</label>
             <div class="col-md-6 col-sm-10">
-                <input id="input-user_type" type="hidden" name="user_type" value="9">
+                <input id="input-user_type" type="hidden" name="user_type" value="{$type}">
+                <input type="hidden" name="pid" value="{$pid}">
             </div>
         </div>
 

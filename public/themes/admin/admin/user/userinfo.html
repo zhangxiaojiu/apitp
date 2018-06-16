@@ -8,7 +8,7 @@
 		</ul>
 		<form class="form-horizontal js-ajax-form margin-top-20" role="form" method="post" action="{:url('User/userinfoPost')}">
 			<div class="form-group">
-				<label class="col-sm-2 control-label">机构号：</label>
+				<label class="col-sm-2 control-label">用户名</label>
 				<div class="col-md-6 col-sm-10">
 					<input type="text" class="form-control" value="{$user_login}" readonly="readonly">
 				</div>
@@ -17,6 +17,12 @@
 				<label for="input-user-nickname" class="col-sm-2 control-label">{:lang('NICKNAME')}</label>
 				<div class="col-md-6 col-sm-10">
 					<input type="text" class="form-control" id="input-user-nickname" name="user_nickname" value="{$user_nickname}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="input-user-nickname" class="col-sm-2 control-label">手机号</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" id="input-user-nickname" name="mobile" value="{$mobile}">
 				</div>
 			</div>
 			<div class="form-group">

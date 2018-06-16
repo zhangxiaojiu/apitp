@@ -145,11 +145,16 @@ class MemberController extends AdminBaseController
     }
 
     public function add(){
+        $type = input('param.type', 0, 'intval');
+        $uid = session('ADMIN_ID');
+        $this->assign('type',$type);
+        $this->assign('pid',$uid);
         return $this->fetch();
     }
 
     public function addPost(){
         $data['user_type'] = $_POST['user_type'];
+        $data['pid'] = $_POST['pid'];
         $data['create_time'] = time();
 
         if($_POST['user_pass'] != ""){
@@ -332,6 +337,7 @@ class MemberController extends AdminBaseController
      */
     public function syncData(){
         $id = $this->request->param('id',0,'intval');
+        $term = $this->request->param('term','week');
         if($id >= 1){
             $info = UserModel::tb()->where(['id' => $id])->find();
             $code = $info['lkl_org_code'];
@@ -346,6 +352,7 @@ class MemberController extends AdminBaseController
             $pid = $info['id'];
             $ret = MemberService::checkLogin($sid);
             if($ret['retCode'] !== '000000'){
+                p($term);
                 $this->assign('info',$info);
                 return $this->fetch('update_lkl');
             }
@@ -356,11 +363,17 @@ class MemberController extends AdminBaseController
             //同步终端
             MemberService::syncTermina($sid,$code,$pid);
             //同步商户
-            //MemberService::syncMerchant($sid,$code,$pid);
+            MemberService::syncMerchant($sid,$code,$pid);
             //同步月交易
             //MemberService::syncMonthTrade($sid,$code);
             //同步周交易
-            MemberService::syncLastWeekTrade($sid,$code);
+            if($term == 'week'){
+                MemberService::syncLastWeekTrade($sid,$code);    
+            }
+            if($term == 'month'){
+                MemberService::syncMonthTrade($sid,$code);    
+            }
+            
 
             $this->success('同步成功');
         }
