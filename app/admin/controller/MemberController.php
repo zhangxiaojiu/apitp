@@ -114,6 +114,10 @@ class MemberController extends AdminBaseController
         $where['user_status'] = 1;
         $where['user_type'] = 9;
 	$where['pid'] = session('ADMIN_ID');
+        if(session('ADMIN_ID')){
+            $pidArr = MemberService::getPidArr($uid);
+            $where['pid'] = ['IN',$pidArr];
+        }
         if (!empty($request['uid'])) {
             $where['id'] = intval($request['uid']);
         }
