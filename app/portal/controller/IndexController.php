@@ -56,18 +56,24 @@ class IndexController extends HomeBaseController
 
             $conModel = new ContactsModel();
             
-           	$log = $conModel->addContacts($data);
+	    $log = $conModel->addContacts($data);
             switch ($log) {
                 case 0:
                     $this->error("已申请，请耐心等待");
                     break;
                 default :
-                    $param = [
-                        'mobile'=>'13120233222',
-                        'content'=>$data['tel'].$data['name']
-                    ];
-                    newMsg($param);
-                    $this->success('申请成功，工作人员会在一个工作日之内联系您');
+			$user_station = Db::name('user')->where(['id'=>$data['user_id']])->find();
+			if($user_station){
+				$mobile = Db::name('user')->where(['id'=>$user_station['pid']])->value('mobile');
+				if($mobile){
+					$param = [
+						'mobile'=>$mobile,
+						'content'=>$data['tel'].$data['name']
+					];
+					newMsg($param);
+				}
+			}
+			$this->success('申请成功，工作人员会在一个工作日之内联系您');
             }
 
         } else {

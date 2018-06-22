@@ -18,7 +18,7 @@ class ContactsModel extends Model
 	public function addContacts($data)
 	{
 		$conTable = DB::name('contacts');
-		$result = $conTable->where(['tel'=>$data['tel'],'description'=>$data['description']])->find();
+		$result = $conTable->where(['tel'=>$data['tel'],'type'=>$data['type']])->find();
 
 		if (empty($result)) {
 			$conData = array(
