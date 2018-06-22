@@ -12,11 +12,16 @@ namespace app\admin\controller;
 
 use cmf\controller\AdminBaseController;
 use app\portal\model\ContactsModel;
+use app\admin\service\MemberService;
 
 class ContactsController extends AdminBaseController
 {
 	public function index()
 	{
+		if(session('ADMIN_ID')){
+		    $pidArr = MemberService::getPidArr(session('ADMIN_ID'));
+		    $where['user_id'] = ['IN',$pidArr];
+		}
 		$contactsModel = new ContactsModel();
 		$contacts = $contactsModel->select();
 		$this->assign('contacts',$contacts);
@@ -26,8 +31,7 @@ class ContactsController extends AdminBaseController
 	public function delete()
 	{
 		$id = $this->request->param('id', 0, 'intval');
-        ContactsModel::destroy($id);
-
-        $this->success("删除成功！", url("contacts/index"));
+		ContactsModel::destroy($id);
+		$this->success("删除成功！", url("contacts/index"));
 	}
 }
