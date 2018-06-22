@@ -23,7 +23,7 @@ class ContactsController extends AdminBaseController
 		    $where['user_id'] = ['IN',$pidArr];
 		}
 		$contactsModel = new ContactsModel();
-		$contacts = $contactsModel->select();
+		$contacts = $contactsModel->where($where)->select();
 		$this->assign('contacts',$contacts);
 		return $this->fetch();
 	}

@@ -50,6 +50,9 @@ class IndexController extends HomeBaseController
             ]);
 
             $data = $this->request->post();
+	    if($data['user_id'] == 0){
+	    	$data['user_id'] = 4;
+	    }
             if (!$validate->check($data)) {
                 $this->error($validate->getError());
             }
