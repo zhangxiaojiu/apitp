@@ -10,3 +10,8 @@
 composer*
 /public/upload/
 /public/.*
+*.swp
+*.vim*
+cscope*
+tags
+
