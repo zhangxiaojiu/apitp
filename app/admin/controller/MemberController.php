@@ -113,6 +113,7 @@ class MemberController extends AdminBaseController
         $request = input('request.');
         $where['user_status'] = 1;
         $where['user_type'] = 9;
+	$where['pid'] = session('ADMIN_ID');
         if (!empty($request['uid'])) {
             $where['id'] = intval($request['uid']);
         }
