@@ -13,19 +13,15 @@ class IndexController extends HomeBaseController
 {
     //首页
     public function index(){
-        $this->assign('seo','【官网】');
         return $this->fetch();
     }
     public function about(){
-        $this->assign('seo','【官网】');
         return $this->fetch('index');
     }
     public function lianxi(){
-        $this->assign('seo','【官网】');
         return $this->fetch('index');
     }
     public function jiaru(){
-        $this->assign('seo','【官网】');
         return $this->fetch('index');
     }
 }

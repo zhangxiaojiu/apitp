@@ -1,34 +1,42 @@
 <include file="public/head"/>
+<style>
+#back{
+	background:url('__TMPL__/sckmn/public/assets/home/homescreen1.jpg') no-repeat;
+}
+.logo{
+	padding-top:30px; padding-left:20px;
+}
+.logo a{
+	color:#fafafa;font-size:28px; text-decoration:none;
+}
+.logo a img{height:50px;}
+.tag
+{
+	display:block; 
+	margin:20% auto;
+	font-size:66px;
+	text-align:center;
+	color:#fff;
+	text-shadow: 1px 1px white, -1px -1px #444;
+}
+footer{height:200px; adding:25px;text-align: center;}
+footer img{width:150px; margin:0 auto;}
+</style>
 </head>
 <body>
-<nav class="navbar navbar-default kmn-nav">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" onclick="changeColor()">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"><img class="logo" src="__TMPL__/sckmn/public/assets/home/logo.png"> | 科美诺</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">首页</a></li>
-                <li><a href="#about">关于我们</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">合作品牌<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a target="_blank" href="http://lakala.sckemeinuo.com">拉卡拉</a></li>
-                        <li><a target="_blank" href="http://zhonghui.sckemeinuo.com">中汇</a></li>
-                        <li><a target="_blank" href="http://hanyin.sckemeinuo.com">瀚银</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<img class="home-head-img" src="__TMPL__/sckmn/public/assets/home/homescreen.jpg">
+	<div id="back">
+		<div class="logo">
+			<a href="/"><img src="__TMPL__/sckmn/public/assets/home/logowhite.png">
+				科美诺
+			</a>
+		</div>
+		<div class='tag'>
+			<div class='col-lg-3'> </div>
+			<div class='col-xs-12 col-sm-6 col-lg-3'>源于支付</div>
+			<div class='col-xs-12 col-sm-6 col-lg-3'>超越支付</div>
+			<div class='col-lg-3'> </div>
+		</div>
+	</div>
 <div class="container marketing">
     <div class="row" id="about">
         <div class="tac mt50 pd20">
@@ -57,22 +65,33 @@
         </div>
     </div>
 </div>
-<footer class="navbar-nav-color mt50">
-    <p class="fr tac"><img class="img-responsive" style="width:150px;" src="__TMPL__/sckmn/public/assets/home/ercode.jpg" /></p>
+<footer class="mt50">
     <p>© 2018 蜀ICP备17043501号 Ke Mei Nuo Information Technology CO.,LTD </p>
+    <img class="img-responsive" src="__TMPL__/sckmn/public/assets/home/ercode.jpg" />
 </footer>
 <include file="public/foot"/>
 <script>
-    $(window).scroll(function ()
-    {
-        if ($(this).scrollTop() >= 80) {
-            $(".navbar").addClass('navbar-nav-color');
-        }else{
-            $(".navbar").removeClass('navbar-nav-color');
-        }
-    });
+$(function(){
+	var w = window.innerWidth;
+	var h = window.innerHeight;
+	var s = 1.67;
+	autoBack(w,h,s);
 
-    function changeColor(){
-        $('.navbar-nav').addClass('navbar-nav-color');
-    }
+});
+$(window).resize(function ()
+{
+	var w = window.innerWidth;
+	var h = window.innerHeight;
+	var s = 1.67;
+	autoBack(w,h,s);
+});
+	
+function autoBack(w,h,s){
+	$('#back').css({"width":w+'px',"height":h+'px'});
+	if(w/h > s){
+		$('#back').css("background-size","100% auto");		
+	}else{
+		$('#back').css({"background-size":"auto 100%","background-position":"50% 0"});		
+	}	
+}
 </script>
