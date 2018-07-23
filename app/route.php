@@ -27,9 +27,6 @@ $myRoutes = array
         'mylabulaka.com' => 'portal',
         'app.mylabulaka.com' => 'lklrj',
         'app.sckemeinuo.com'      => 'lklrj',
-        'lakala.sckemeinuo.com' => 'sckmn/lakala',
-        'zhonghui.sckemeinuo.com' => 'sckmn/zhonghui',
-        'hanyin.sckemeinuo.com' => 'sckmn/hanyin',
     ],
 );
 return array_merge($runtimeRoutes,$myRoutes);

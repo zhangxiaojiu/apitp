@@ -15,13 +15,4 @@ class IndexController extends HomeBaseController
     public function index(){
         return $this->fetch();
     }
-    public function about(){
-        return $this->fetch('index');
-    }
-    public function lianxi(){
-        return $this->fetch('index');
-    }
-    public function jiaru(){
-        return $this->fetch('index');
-    }
 }
