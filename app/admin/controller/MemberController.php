@@ -66,16 +66,20 @@ class MemberController extends AdminBaseController
     public function index()
     {
         $where   = [];
-        $request = input('request.');
+	$request = input('request.');
         $uid = session('ADMIN_ID');
         $where['user_status'] = 1;
         $where['user_type'] = 10;
         if (!empty($request['uid'])) {
-            $where['id'] = intval($request['uid']);
+	    if($uid == 1){
+		$pidArr = MemberService::getPidArr($request['uid']);
+		$where['pid'] = ['IN',$pidArr];
+	    }else{
+		$where['id'] = intval($request['uid']);
+	    }
         }
 
         if($uid > 1){
-            //$info = Db::name('user')->where(['id' => $uid])->find();
             $pidArr = MemberService::getPidArr($uid);
             $where['pid'] = ['IN',$pidArr];
         }
@@ -87,8 +91,6 @@ class MemberController extends AdminBaseController
             $where['porg_code'] = $porg_code;
         }
         $keywordComplex = [];
-        //$keywordComplex['id'] = $uid;
-        $keywordComplex['user_status'] = 0;
         if (!empty($request['keyword'])) {
             $keyword = $request['keyword'];
 
@@ -98,7 +100,32 @@ class MemberController extends AdminBaseController
         }
         $usersQuery = Db::name('user');
 
-        $list = $usersQuery->where($where)->whereOr($keywordComplex)->order("id DESC")->paginate(10);
+	$list = $usersQuery->where($where)->whereOr($keywordComplex)->order("id DESC")->paginate(10);
+
+	//export
+	if(!empty($request['isout'])){
+	    $olist = $usersQuery->where($where)->whereOr($keywordComplex)->order("id DESC")->select();
+	    foreach ($olist as $v){
+		$row = [];
+		$row[] = $v['user_nickname'];
+		$row[] = $v['mobile'];
+		$row[] = $v['user_address'];
+		$row[] = $v['user_email'];
+		$row[] = $v['lkl_org_code'];
+		$ret[] = $row;
+	    }
+
+	    $fileName = 'lkl'.date('YmdHis').mt_rand(100,999);
+	    $sheetName = "agent";
+	    $title = [
+		"A" => "姓名",
+		"B" => "电话",
+		"C" => "地址",
+		"D" => "邮箱",
+		"E" => "机构号"
+	    ];
+	    phpExcelXlsx($fileName,$sheetName,$title,$ret);
+	}
 
         // 获取分页显示
         $page = $list->render();

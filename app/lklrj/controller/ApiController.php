@@ -16,6 +16,7 @@ use app\lklrj\service\TradeService;
 use app\lklrj\service\UserService;
 use app\user\model\UserModel;
 use cmf\controller\HomeBaseController;
+use think\Db;
 
 class ApiController extends HomeBaseController
 {
@@ -27,6 +28,29 @@ class ApiController extends HomeBaseController
                 $this->error('登录信息过期', url("public/logout"));
             }
         }
+    }
+    /*
+     * sync data page
+     */
+    public function index(){
+        $session_user = session('lkl_user');
+	if(empty($session_user)){
+	    $this->error('登录信息过期', url("public/login"));
+	}
+	$ret = self::checkLogin($session_user['sid']);
+	if($ret['retCode'] !== '000000'){
+	    $this->error('登录信息过期', url("public/login"));
+	}
+	$user = UserModel::tb()->where(['id' => $session_user['id']])->find();
+
+	$ulist = Db::name('user')->where(['pid'=>$session_user['id']])->paginate(10);
+	$mlist = Db::name('merchant')->where(['pid'=>$session_user['id']])->paginate(10);
+
+        $this->assign('user',$user);
+        $this->assign('ulist',$ulist);
+        $this->assign('mlist',$mlist);
+
+        return $this->fetch();
     }
     /*
      * 检查登录状态
@@ -91,22 +115,14 @@ class ApiController extends HomeBaseController
     }
 
     /*
-     * 同步自己代理
+     * 同步代理
      */
-    public function syncMyAgent(){
+    public function syncAgent(){
         $sid = session('lkl_user')['sid'];
         $code = session('lkl_user')['org_code'];
         UserService::syncAgent($sid,$code);
         $this->success('同步成功');
     }
-
-    /*
-     * 同步所有代理商
-     */
-    public function syncAgent(){
-
-    }
-
 
     /*
      * 同步交易记录

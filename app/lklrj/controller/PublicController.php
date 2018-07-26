@@ -62,7 +62,7 @@ class PublicController extends HomeBaseController
             $data['org_name'] = $res['retData']['compOrgName'];
             $data['org_code'] = $res['retData']['compOrgCode'];
             UserService::doLoginUser($data);
-            $this->success($msg,'Index/index');
+            $this->success($msg,'Api/index');
         }else{
             $msg = $res['retMsg'];
         }
@@ -276,6 +276,7 @@ class PublicController extends HomeBaseController
      */
     public function logout(){
         session('user', null);
+        session('lkl_user', null);
         $this->redirect('Public/index');
     }
 

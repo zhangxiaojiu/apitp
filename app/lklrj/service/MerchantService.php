@@ -79,7 +79,10 @@ class MerchantService
      */
     private static function perfectMerchant($list){
         foreach ($list as $v){
-            $info = MerchantModel::tb()->where(['merchant_code' => $v['posmercode']])->find();
+	    $info = MerchantModel::tb()->where(['merchant_code' => $v['posmercode']])->find();
+	    if($info){
+		continue;
+	    }
 
             $data = [
                 'pid' => session('lkl_user')['id'],
@@ -99,12 +102,8 @@ class MerchantService
                 'update_time' => time(),
             ];
 
-            if($info){
-                $data['id'] = $info['id'];
-                MerchantModel::tb()->update($data);
-            }else{
-                MerchantModel::tb()->insert($data);
-            }
+	    MerchantModel::tb()->insert($data);
+	    sleep(1);
         }
     }
 }

@@ -18,9 +18,15 @@ class MerchantController extends AdminBaseController
     public function index(){
         $where   = [];
         $request = input('request.');
+        $uid = session('ADMIN_ID');
 
         if (!empty($request['merchant_code'])) {
-            $where['merchant_code'] = intval($request['merchant_code']);
+	    if($uid == 1){
+		$where['pid'] = intval($request['merchant_code']);
+	    }else{
+		$where['pid'] = $uid;
+		$where['merchant_code'] = intval($request['merchant_code']);
+	    }
         }
         $keywordComplex = [];
         if (!empty($request['keyword'])) {
@@ -31,11 +37,36 @@ class MerchantController extends AdminBaseController
             $keywordComplex['real_name']    = ['like', "%$keyword%"];
         }
 
-        $uid = session('ADMIN_ID');
-        $info = Db::name('user')->where(['id' => $uid])->find();
-        $where['agent_id'] = $info['lkl_org_code'];
+        
+	$list = MerchantModel::tb()->where($where)->whereOr($keywordComplex)->paginate(10);
 
-        $list = MerchantModel::tb()->where($where)->whereOr($keywordComplex)->paginate(10);
+	//export
+	if(!empty($request['isout'])){
+	    $olist =MerchantModel::tb()->where($where)->whereOr($keywordComplex)->select();
+	    foreach ($olist as $v){
+		$row = [];
+		$row[] = $v['real_name'];
+		$row[] = $v['mobile'];
+		$row[] = $v['address'];
+		$row[] = $v['email'];
+		$row[] = $v['merchant_name'];
+		$row[] = $v['merchant_code'];
+		$ret[] = $row;
+	    }
+
+	    $fileName = 'lkl'.date('YmdHis').mt_rand(100,999);
+	    $sheetName = "merchant";
+	    $title = [
+		"A" => "姓名",
+		"B" => "电话",
+		"C" => "地址",
+		"D" => "邮箱",
+		"E" => "商户名",
+		"F" => "商户号"
+	    ];
+	    phpExcelXlsx($fileName,$sheetName,$title,$ret);
+	}
+
         $page = $list->render();
         $this->assign('list', $list);
         $this->assign('page', $page);

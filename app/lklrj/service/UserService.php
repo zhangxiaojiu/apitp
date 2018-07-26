@@ -46,7 +46,7 @@ class UserService
             'sid' => $input['sid'],
             'org_code' => $input['org_code'],
         ];
-        session('user', $lklUser);
+        session('lkl_user', $lklUser);
     }
     /*
      * 获取商户、终端、代理统计
@@ -89,25 +89,35 @@ class UserService
         UserModel::tb()->where(['lkl_org_code'=>session('lkl_user')['org_code']])->update($data);
     }
 
-    private static function getApiAgent($sid,$code){
+    private static function getApiAgent($page,$sid,$code){
         $where = [
             'mark' => 'getSubAgentListAndDetail',
         ];
         $params = [
-            'page' => 1,
-            'pageSize' => 10000,
+            'page' => $page,
+            'pageSize' => 10,
             'isChild' => 1,
             'sessionId' => $sid,
             'compOrgParent' => $code,
         ];
-        $ret = ApiService::getApi($where,$params);
+	$ret = ApiService::getApi($where,$params);
         return $ret;
     }
 
     public static function syncAgent($sid,$code){
-        $ret = self::getApiAgent($sid,$code);
+        $ret = self::getApiAgent(1,$sid,$code);
         if($ret['retCode'] == '000000'){
             self::perfectAgent($ret['retData']['data'],$code);
+	    $total = $ret['retData']['count'];
+	    if($total > 10){
+		$pages = ceil($total/10);
+		for($i=2;$i<=$pages;$i++){
+		    $ret = self::getApiAgent($i,$sid,$code);
+		    if($ret['retCode'] == '000000'){
+			self::perfectAgent($ret['retData']['data'],$code);
+		    }
+		}
+	    }
         }
     }
 
@@ -121,6 +131,9 @@ class UserService
                 continue;
             }
             $info = UserModel::tb()->where(['lkl_org_code' => $v['compOrgCode']])->find();
+	    if($info){
+		continue;
+	    }
 
             $data = [
                 'pid' => session('lkl_user')['id'],
@@ -137,16 +150,9 @@ class UserService
                 'create_time' => time(),
             ];
 
-            if($info){
-                $data['id'] = $info['id'];
-                UserModel::tb()->update($data);
-            }else{
-                UserModel::tb()->insert($data);
-            }
-            $ret = self::getApiAgent(session('lkl_user')['sid'],$v['compOrgCode']);
-            if($ret['retCode'] == '000000' && $ret['retData']['count'] > 1){
-                self::perfectAgent($ret['retData']['data'],$v['compOrgCode']);
-            }
+	    UserModel::tb()->insert($data);
+	    sleep(1);
+	    self::syncAgent(session('lkl_user')['sid'],$v['compOrgCode']);
         }
     }
 }

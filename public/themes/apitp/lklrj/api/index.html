@@ -1,0 +1,77 @@
+<include file="public/head"/>
+<!-- top bar -->
+<div class="top-bar">
+    <a href="{:url('public/logout')}"><span class="glyphicon glyphicon-off fl"></span></a>
+    <a href="#"><span class="glyphicon glyphicon-share fr"></span></a>
+</div>
+<div class="mt50"></div>
+<div class="user-top">
+    <img class="head" src="<empty name='user.avatar'>__TMPL__/lklrj/public/assets/home/head.png<else/>{$user.avatar}</empty>"><br/>
+    <empty name="user.user_nickname">{$wxuser.nickname}<else/>{$user.user_nickname}</empty>(LV{$user.run_level})
+</div>
+<!-- end top bar -->
+<div class="carpet">
+    <a href="javascript:showMerchant();"><div class="one-from-two tac"><span class="glyphicon glyphicon-tags"></span><br>商户</div></a>
+    <a href="javascript:showAgent();"><div class="one-from-two right-line tac"><span class="glyphicon glyphicon-hdd"></span><br>代理</div></a>
+</div>
+<div class='carpet'>
+    <div id='agent' style="display:none;">
+	<a href="{:url('api/syncAgent')}">同步代理</a>
+	<table class='table table-hover table-bordered'>
+	    <tr>
+		<th>🆔</th>
+		<th>名字</th>
+		<th>电话</th>
+		<th>机构码</th>
+	    </tr>
+	    <foreach name='ulist' item='vo'>
+	    <tr>
+		<td>{$vo.id}</td>
+		<td>{$vo.user_nickname}</td>
+		<td>{$vo.mobile}</td>
+		<td>{$vo.lkl_org_code}</td>
+	    </foreach>
+	</table>
+	<div class='pagination'>
+	    {$ulist->render()}
+	</div>
+    </div>
+    <div id='merchant'>
+	<a href="{:url('api/syncMerchant')}">同步商户</a>
+	<table class='table table-hover table-bordered'>
+	    <tr>
+		<th>🆔</th>
+		<th>名字</th>
+		<th>电话</th>
+		<th>email</th>
+	    </tr>
+	    <foreach name='mlist' item='vo'>
+	    <tr>
+		<td>{$vo.id}</td>
+		<td>{$vo.real_name}</td>
+		<td>{$vo.mobile}</td>
+		<td>{$vo.email}</td>
+	    </foreach>
+	</table>
+	<div class='pagination'>
+	    {$mlist->render()}
+	</div>
+    </div>
+    </div>
+</div>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+    function showAgent(){
+	$('#merchant').hide();
+	$('#agent').show();
+    }
+    function showMerchant(){
+	$('#merchant').show();
+	$('#agent').hide();
+    }
+</script>
+</body>
+</html>
