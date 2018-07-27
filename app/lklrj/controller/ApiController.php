@@ -90,7 +90,8 @@ class ApiController extends HomeBaseController
     public function syncMerchant(){
         $id = session('lkl_user')['id'];
         $sid = session('lkl_user')['sid'];
-        MerchantService::syncMerchant($id,$sid);
+	$bid = isset($_GET['id'])?$_GET['id']:0;
+        MerchantService::syncMerchant($id,$sid,$bid);
         $this->success('同步成功');
     }
 

@@ -17,11 +17,14 @@ class MerchantService
     /*
      * 同步商户信息
      */
-    public static function syncMerchant($id,$sid){
+    public static function syncMerchant($id,$sid,$beginId = 0){
         self::syncOneMerchant(session('lkl_user')['org_code'],$sid);
         $where = [
             'pid'=>$id,
-        ];
+	];
+	if($beginId>0){
+	    $where['id'] = ['>=',$beginId];
+	}
         $list = UserModel::tb()->where($where)->select();
         foreach ($list as $v){
             $code = $v['lkl_org_code'];
