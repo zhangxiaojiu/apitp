@@ -92,7 +92,7 @@ class ApiController extends HomeBaseController
         $sid = session('lkl_user')['sid'];
 	$bid = isset($_GET['id'])?$_GET['id']:0;
         MerchantService::syncMerchant($id,$sid,$bid);
-        $this->success('同步成功');
+        $this->success('同步成功','/api');
     }
 
     /*
@@ -122,7 +122,7 @@ class ApiController extends HomeBaseController
         $sid = session('lkl_user')['sid'];
         $code = session('lkl_user')['org_code'];
         UserService::syncAgent($sid,$code);
-        $this->success('同步成功');
+        $this->success('同步成功','/api');
     }
 
     /*
