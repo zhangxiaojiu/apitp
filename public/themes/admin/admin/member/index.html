@@ -27,7 +27,7 @@
                 <th>邮箱</th>
                 <th>姓名</th>
                 <th>手机</th>
-                <th>余额</th>
+                <th>机构号</th>
             </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@
                     </td>
                     <td>{$vo['realname']?$vo['realname']:$vo['user_nickname']}</td>
                     <td>{$vo.mobile}</td>
-                    <td>￥{$vo.coin}</td>
+                    <td>￥{$vo.lkl_org_code}</td>
                     <td class='hide'>
                         <notempty name="vo.user_cardup_pic">
                             <a href="/upload/userinfo/{$vo.user_cardup_pic}" target="_blank"><img style="height:50px; " src="/upload/userinfo/{$vo.user_cardup_pic}"></a>
