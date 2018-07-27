@@ -22,26 +22,26 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>PID</th>
                 <th>商户号</th>
                 <th>商户名</th>
                 <th>机构号</th>
                 <th>经营者</th>
                 <th>手机号</th>
-                <th>{:lang('ACTIONS')}</th>
+                <th>邮箱</th>
             </tr>
             </thead>
             <tbody>
             <foreach name="list" item="vo">
                 <tr>
                     <td>{$vo.id}</td>
+                    <td>{$vo.pid}</td>
                     <td>{$vo.merchant_code}</td>
                     <td>{$vo.merchant_name}</td>
                     <td>{$vo.agent_id}</td>
                     <td>{$vo.real_name}</td>
                     <td>{$vo.mobile}</td>
-                    <td>
-
-                    </td>
+                    <td>{$vo.email}</td>
                 </tr>
             </foreach>
             </tbody>
