@@ -104,7 +104,7 @@ class MemberController extends AdminBaseController
 
 	//export
 	if(!empty($request['isout'])){
-	    $olist = $usersQuery->where($where)->whereOr($keywordComplex)->order("id DESC")->select();
+	    $olist = $usersQuery->where($where)->whereOr($keywordComplex)->select();
 	    foreach ($olist as $v){
 		$row = [];
 		$row[] = $v['user_nickname'];

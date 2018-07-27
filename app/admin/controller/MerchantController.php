@@ -38,7 +38,7 @@ class MerchantController extends AdminBaseController
         }
 
         
-	$list = MerchantModel::tb()->where($where)->whereOr($keywordComplex)->paginate(10);
+	$list = MerchantModel::tb()->where($where)->whereOr($keywordComplex)->order("id DESC")->paginate(10);
 
 	//export
 	if(!empty($request['isout'])){
