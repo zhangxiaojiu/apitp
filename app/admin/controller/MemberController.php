@@ -97,6 +97,7 @@ class MemberController extends AdminBaseController
             $keywordComplex['mobile']    = ['like', "%$keyword%"];
             $keywordComplex['user_nickname'] = ['like', "%$keyword%"];
             $keywordComplex['user_email']    = ['like', "%$keyword%"];
+            $keywordComplex['lkl_org_code']    = ['like', "%$keyword%"];
         }
         $usersQuery = Db::name('user');
 
