@@ -17,8 +17,10 @@ class MerchantService
     /*
      * 同步商户信息
      */
-    public static function syncMerchant($id,$sid,$beginId = 0){
-        self::syncOneMerchant(session('lkl_user')['org_code'],$sid);
+    public static function syncMerchant($id,$sid,$beginId = 0,$isSelf = 1){
+	if($isSelf){
+	    self::syncOneMerchant(session('lkl_user')['org_code'],$sid);
+	}
         $where = [
             'pid'=>$id,
 	];
