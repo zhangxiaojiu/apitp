@@ -20,9 +20,13 @@ $myRoutes = array
 	'share/:id' => 'user/index/index',
     '__domain__'=>[
         'admin.sckemeinuo.com' => 'admin',
-        'admin.mylabulaka.com' => 'admin',
+	'admin.mylabulaka.com' => 'admin',
+
         'www.sckemeinuo.com' => 'sckmn',
-        'sckemeinuo.com' => 'sckmn',
+	'sckemeinuo.com' => 'sckmn',
+	'flm.sckemeinuo.com' => 'sckmn/flm',
+
+	
         'www.mylabulaka.com' => 'portal',
         'mylabulaka.com' => 'portal',
         'app.mylabulaka.com' => 'lklrj',
