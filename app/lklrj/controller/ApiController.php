@@ -43,8 +43,8 @@ class ApiController extends HomeBaseController
 	}
 	$user = UserModel::tb()->where(['id' => $session_user['id']])->find();
 
-	$ulist = Db::name('user')->where(['pid'=>$session_user['id']])->paginate(10);
-	$mlist = Db::name('merchant')->where(['pid'=>$session_user['id']])->paginate(10);
+	$ulist = Db::name('user')->where(['pid'=>$session_user['id']])->order('id desc')->paginate(100);
+	$mlist = Db::name('merchant')->where(['pid'=>$session_user['id']])->order('id desc')->paginate(100);
 
         $this->assign('user',$user);
         $this->assign('ulist',$ulist);
