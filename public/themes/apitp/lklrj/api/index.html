@@ -45,12 +45,14 @@
 		<th>🆔</th>
 		<th>名字</th>
 		<th>电话</th>
+		<th>agent_id</th>
 		<th>时间</th>
 	    </tr>
 	    <foreach name='mlist' item='vo'>
 	    <tr>
 		<td>{$vo.id}</td>
 		<td>{$vo.real_name}</td>
+		<td>{$vo.agent_id}</td>
 		<td>{$vo.mobile}</td>
 		<td>{:date('Y-m-d H:i',$vo['update_time'])}</td>
 	    </foreach>
