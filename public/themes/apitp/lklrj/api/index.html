@@ -23,6 +23,7 @@
 		<th>名字</th>
 		<th>电话</th>
 		<th>机构码</th>
+		<th>时间</th>
 	    </tr>
 	    <foreach name='ulist' item='vo'>
 	    <tr>
@@ -30,6 +31,7 @@
 		<td>{$vo.user_nickname}</td>
 		<td>{$vo.mobile}</td>
 		<td>{$vo.lkl_org_code}</td>
+		<td>{:date('Y-m-d H:i',$vo['create_time'])}</td>
 	    </foreach>
 	</table>
 	<div class='pagination'>
@@ -43,14 +45,14 @@
 		<th>🆔</th>
 		<th>名字</th>
 		<th>电话</th>
-		<th>email</th>
+		<th>时间</th>
 	    </tr>
 	    <foreach name='mlist' item='vo'>
 	    <tr>
 		<td>{$vo.id}</td>
 		<td>{$vo.real_name}</td>
 		<td>{$vo.mobile}</td>
-		<td>{$vo.email}</td>
+		<td>{:date('Y-m-d H:i',$vo['update_time'])}</td>
 	    </foreach>
 	</table>
 	<div class='pagination'>
